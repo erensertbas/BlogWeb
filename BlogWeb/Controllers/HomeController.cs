@@ -17,6 +17,10 @@ namespace BlogWeb.Controllers
         {
             return View();
         }
+        public IActionResult BlogDetail()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
