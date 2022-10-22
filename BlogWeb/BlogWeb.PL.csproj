@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlogWeb.BL\BlogWeb.BL.csproj" />
+    <ProjectReference Include="..\BlogWeb.DL\BlogWeb.DL.csproj" />
+  </ItemGroup>
+
 </Project>
