@@ -27,7 +27,7 @@ namespace BlogWeb.BL.Repository
 
         public void Remove(T entity)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void RemoveRange(IEnumerable<T> entity)
