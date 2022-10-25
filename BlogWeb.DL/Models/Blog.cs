@@ -17,7 +17,9 @@ namespace BlogWeb.DL.Models
         public string BlogTitle { get; set; }
 
         [Required]
-        public string BlogDescription { get; set; }
+        public string Text { get; set; }
+        [Required]
+        public string Text2 { get; set; }
 
         public bool Status { get; set; }
         public DateTime Date { get; set; }
