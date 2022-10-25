@@ -8,6 +8,9 @@ namespace BlogWeb.PL.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
         
+=======
+>>>>>>> Dev-ErenSertbas
     }
 }
