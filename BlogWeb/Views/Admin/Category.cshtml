@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BlogWeb.DL.Models.Category>
+
+@{
+    ViewData["Title"] = "Category";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    int adet = Convert.ToInt16(TempData["CategoryCount"]);
+}
+@if (adet == 0)
+{
+
+    <div class="alert alert-warning" role="alert"> <h6>Henüz Kategori Eklemediniz</h6></div>
+    <a asp-controller="Admin" asp-action="CategoryCreate" class="btn btn-primary mx-2">Hemen Ekle</a>
+}
+
+@foreach (var item in Model)
+{
+      <div class="card-header">
+        Kategoriler
+      </div>
+      <div class="card-body">
+
+        <p class="card-text">@item.CategoryName</p> 
+        <br>
+        <a asp-controller="Admin" asp-action="CategoryEdit" asp-route-id="@item.CategoryId" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
+        <a asp-controller="Admin" asp-action="CategoryDelete" asp-route-id="@item.CategoryId" class="btn btn-danger mx-2">Sil</a>
+      </div>
+}

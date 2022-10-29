@@ -3,31 +3,27 @@
     ViewData["Title"] = "AboutUs";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+    @{
+        int adet= Convert.ToInt16(TempData["AboutUsCount"]); 
+    }
+    @if(adet==0){ 
+        
+        <div class="alert alert-warning" role="alert"> <h6>Hakkımızda mevcut değil.</h6></div>
 
-<h1>AboutUs</h1>
 
-<table class="table table-bordered table-striped" style="width:100%;">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Hakkımızda</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>@item.Id</td>
-            <td width:30%;>@item.Text</td>
-            <td><div class="w-75 btn-group">
-                <a asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2">Edit</a> &nbsp;  / &nbsp;
-                <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2">Delete</a>
-                <a></a>
-            </div></td>
-        </tr>     
-        }
-       
-    </tbody>
+        <a asp-controller="Admin" asp-action="AboutUsCreate" class="btn btn-primary mx-2">Hemen Ekle</a>
+    }
 
-</table>
+@foreach (var item in Model)
+{
+      <div class="card-header">
+        Hakkımızda
+      </div>
+      <div class="card-body">
+
+        <p class="card-text">@item.Text</p> 
+        <br>
+        <a asp-controller="Admin" asp-action="AboutUsEdit" asp-route-id="@item.Id" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
+        <a asp-controller="Admin" asp-action="AboutUsDelete" asp-route-id="@item.Id" class="btn btn-danger mx-2">Sil</a>
+      </div>
+}
