@@ -8,10 +8,16 @@ namespace BlogWeb.BL.Repository.IRepository
 {
     public interface IUnitOfWork
     {
-        //ICategoryRepository Category { get; }
-        // Repositorileri çagır
+        IAboutUsRepository AboutUs { get; }
+        IBlogRepository Blog { get; }
+        ICategoryRepository Category { get; }
+        IContactRepository Contact { get; }
+        IImageRepository Image { get; }
+        IRoleRepository Role { get; }
+        ISubscriberRepository Subscriber { get; }
+        IUserRepository User { get; }
 
-        // void Save();
-    
+        void Save();
+
     }
 }

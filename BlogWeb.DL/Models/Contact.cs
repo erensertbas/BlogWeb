@@ -11,8 +11,12 @@ namespace BlogWeb.DL.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Display(Name = "Telefon")]
         public int Phone { get; set; }
+        [Display(Name = "Mail Adres")]
         public string EmailAddress { get; set; }
+        [Display(Name = "Adres")]
         public string Address { get; set; }
 
     }

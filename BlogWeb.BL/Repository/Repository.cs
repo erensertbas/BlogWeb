@@ -1,4 +1,6 @@
 ﻿using BlogWeb.BL.Repository.IRepository;
+using BlogWeb.DL.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +12,64 @@ namespace BlogWeb.BL.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        public void Add(T entity)
+
+        private readonly ApplicationDbContext db;
+        internal DbSet<T> dbSet;
+        public Repository(ApplicationDbContext db)
         {
-            throw new NotImplementedException();
+            this.db = db;
+            this.dbSet = db.Set<T>();
         }
 
+        public void Add(T entity)
+        {
+            dbSet.Add(entity);
+        }
+        // blog   getAll(blog,category)
+      
         public IEnumerable<T> GetAll(string? includeProperties = null)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = dbSet;
+
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+
+            return query.ToList();
         }
 
         public T GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = dbSet;
+            query = query.Where(filter);
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+            return query.FirstOrDefault();
         }
 
         public void Remove(T entity)
         {
-            //throw new NotImplementedException();
+            dbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entity)
         {
-            throw new NotImplementedException();
+            dbSet.RemoveRange(entity);
         }
+
+        public void Update(T entity)
+        {
+            db.Update(entity);
+        }
+
     }
 }

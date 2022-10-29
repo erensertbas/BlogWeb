@@ -11,6 +11,7 @@ namespace BlogWeb.DL.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name ="Hakkımızda ")]
         public string Text { get; set; }
     }
 }

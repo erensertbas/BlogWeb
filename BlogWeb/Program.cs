@@ -1,3 +1,8 @@
+using BlogWeb.BL.Repository;
+using BlogWeb.BL.Repository.IRepository;
+using BlogWeb.DL.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

@@ -12,6 +12,7 @@ namespace BlogWeb.DL.Models
         [Key]
         public int CategoryId { get; set; }
         [Required]
+        [Display(Name ="Kategori")]
         public string CategoryName { get; set; }
 
     }

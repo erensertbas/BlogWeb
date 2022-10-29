@@ -14,14 +14,24 @@ namespace BlogWeb.DL.Models
         public int BlogId { get; set; }
 
         [Required]
+        [Display(Name = "Blog Başlık ")]
+
         public string BlogTitle { get; set; }
 
         [Required]
+        [Display(Name = "İçerik ")]
+
         public string Text { get; set; }
         [Required]
+        [Display(Name = "İçerik Alt ")]
+
         public string Text2 { get; set; }
 
+        [Display(Name = "Durum ")]
+
         public bool Status { get; set; }
+        [Display(Name = "Tarih ")]
+        
         public DateTime Date { get; set; }
 
         public int UserId { get; set; }

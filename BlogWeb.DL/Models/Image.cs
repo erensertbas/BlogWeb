@@ -12,6 +12,7 @@ namespace BlogWeb.DL.Models
     {
         [Key]
         public int ImageId { get; set; }
+        [Display(Name ="Resim Yolu")]
         public string ImgUrl { get; set; }
 
         public int BlogId { get; set; }

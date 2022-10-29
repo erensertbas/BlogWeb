@@ -67,6 +67,21 @@
             </li>
 
 </ul>
+
+<ul id="sidebar_menu">
+            <li class="mm-active">
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="img/menu-icon/dashboard.svg" alt="">
+                    </div>
+                    <span>Sayfa Düzenle</span>
+                </a>
+                <ul>
+                    <li><a class=" " asp-controller="Admin" asp-action="AboutUs">Hakkımızda</a></li>
+                </ul>
+            </li>
+
+</ul>
 </nav>
 
 <section class="main_content dashboard_part large_header_bg">
@@ -110,8 +125,13 @@
 </div>
 <hr />
 </div>
+<div class="container">
+     @RenderBody() 
 
+    <h1>RENDERBODY BURADA</h1>
 
+</div>
+ 
 
 <div class="footer_part">
 <div class="container-fluid">
@@ -231,7 +251,7 @@ How can I help you?</P>
 </div>
 </div>
 </div>
-    @RenderBody()
+  
 
 <div id="back-top" style="display: none;">
 <a title="Go to Top"href="~/Admin/#">
