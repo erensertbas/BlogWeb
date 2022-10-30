@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<BlogWeb.DL.Models.Category>
-
 @{
     ViewData["Title"] = "Category";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -17,14 +16,14 @@
 
 @foreach (var item in Model)
 {
-      <div class="card-header">
+    <div class="card-header">
         Kategoriler
-      </div>
-      <div class="card-body">
+    </div>
+    <div class="card-body">
 
-        <p class="card-text">@item.CategoryName</p> 
+        <p class="card-text">@item.CategoryName</p>
         <br>
         <a asp-controller="Admin" asp-action="CategoryEdit" asp-route-id="@item.CategoryId" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
         <a asp-controller="Admin" asp-action="CategoryDelete" asp-route-id="@item.CategoryId" class="btn btn-danger mx-2">Sil</a>
-      </div>
+    </div>
 }

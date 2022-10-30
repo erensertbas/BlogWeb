@@ -87,15 +87,36 @@ namespace BlogWeb.PL.Controllers
         #endregion
 
         #region Category
-
+        [HttpGet]
         public IActionResult Category()
         {
-            //IEnumerable<Category> category = _unitOfWork.Category.GetAll();
-            //TempData["CategoryCount"] = category.Count();
-            //return View(category);
+            IEnumerable<Category> categories = _unitOfWork.Category.GetAll();
+            TempData["CategoryCount"] = categories.Count();
+            return View(categories);
+        }
+        public IActionResult CategoryCreate()
+        {
             return View();
+        }
+        [HttpPost]
+        public IActionResult CategoryCreate(Category ct)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Category.Add(ct);
+                _unitOfWork.Save();
+                return RedirectToAction("Category", "Admin");
+            }
+            return View(ct);
         }
 
         #endregion
+
+        public IActionResult Contact()
+        {
+            IEnumerable<Contact> contact = _unitOfWork.Contact.GetAll();
+            TempData["ContactCount"] = contact.Count();
+            return View(contact);
+        }
     }
 }

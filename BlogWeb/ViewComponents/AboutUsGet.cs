@@ -10,9 +10,9 @@ namespace BlogWeb.PL.ViewComponents
         private readonly IUnitOfWork _unitOfWork;
         //public IViewComponentResult Invoke()
         //{
-        //    //AboutUsRepository aboutUsRepository;
-        //    //var about = aboutUsRepository.GetAll();
-        //    //return View(about);
+        //    AboutUsRepository aboutUsRepository=new AboutUsRepository();
+        //    var about = aboutUsRepository.GetAll();
+        //    return View(about);
         //}
     }
 }
