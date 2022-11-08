@@ -17,7 +17,6 @@ namespace BlogWeb.PL.Controllers
         }
 
         #region AboutUs
-
       
         public IActionResult AboutUs()
         {
@@ -46,9 +45,9 @@ namespace BlogWeb.PL.Controllers
             {
                 return NotFound();
             }
-            var CoverTypeFromDbFirst = _unitOfWork.AboutUs.GetFirstOrDefault(u => u.Id == id);
-            if (CoverTypeFromDbFirst == null) { return NotFound(); }
-            return View(CoverTypeFromDbFirst);
+            var AboutUsFromDbFirst = _unitOfWork.AboutUs.GetFirstOrDefault(u => u.Id == id);
+            if (AboutUsFromDbFirst == null) { return NotFound(); }
+            return View(AboutUsFromDbFirst);
         }
         [HttpPost]
         public IActionResult AboutUsEdit(AboutUs ct)
@@ -67,9 +66,9 @@ namespace BlogWeb.PL.Controllers
             {
                 return NotFound();
             }
-            var CoverTypeFromDbFirst = _unitOfWork.AboutUs.GetFirstOrDefault(u => u.Id == id);
-            if (CoverTypeFromDbFirst == null) { return NotFound(); }
-            return View(CoverTypeFromDbFirst);
+            var AboutUsFromDbFirst = _unitOfWork.AboutUs.GetFirstOrDefault(u => u.Id == id);
+            if (AboutUsFromDbFirst == null) { return NotFound(); }
+            return View(AboutUsFromDbFirst);
         }
 
         [HttpPost]
@@ -110,6 +109,54 @@ namespace BlogWeb.PL.Controllers
             return View(ct);
         }
 
+        public IActionResult CategoryEdit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var CategoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u => u.CategoryId == id);
+            if (CategoryFromDbFirst == null) { return NotFound(); }
+            return View(CategoryFromDbFirst);
+        }
+        [HttpPost]
+        public IActionResult CategoryEdit(Category ct)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Category.Update(ct);
+                _unitOfWork.Save();
+                return RedirectToAction("Category");
+            }
+            return View(ct);
+        }
+        public IActionResult CategoryDelete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var CategoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u => u.CategoryId == id);
+            if (CategoryFromDbFirst == null) { return NotFound(); }
+            return View(CategoryFromDbFirst);
+        }
+
+        [HttpPost]
+        public IActionResult CategoryDeletePOST(int? id)
+        {
+            var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.CategoryId == id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.Save();
+            return RedirectToAction("Category");
+        }
+
+
+
+
         #endregion
 
         public IActionResult Contact()
@@ -118,5 +165,20 @@ namespace BlogWeb.PL.Controllers
             TempData["ContactCount"] = contact.Count();
             return View(contact);
         }
+
+
+
+
+        #region Aboneler
+
+        public IActionResult Subscriber()
+        {
+            IEnumerable<Subscriber> subs = _unitOfWork.Subscriber.GetAll();
+            TempData["SubscriberCount"] = subs.Count();
+            return View(subs);
+        }
+
+
+        #endregion
     }
 }
