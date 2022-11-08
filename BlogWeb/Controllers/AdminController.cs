@@ -86,6 +86,11 @@ namespace BlogWeb.PL.Controllers
         #endregion
 
         #region Category
+
+        //public IActionResult Category()
+        //{
+        //    return View();
+        //}
         [HttpGet]
         public IActionResult Category()
         {
