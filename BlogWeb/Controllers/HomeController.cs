@@ -1,4 +1,6 @@
-﻿using BlogWeb.Models;
+﻿using BlogWeb.BL.Repository.IRepository;
+using BlogWeb.DL.Models;
+using BlogWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,10 +9,10 @@ namespace BlogWeb.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IUnitOfWork _unitOfWork;
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
@@ -27,8 +29,17 @@ namespace BlogWeb.Controllers
         }
         public IActionResult About()
         {
-            return View();
+            IEnumerable<AboutUs> aboutus = _unitOfWork.AboutUs.GetAll();
+            TempData["AboutUsCount"] = aboutus.Count();
+            return View(aboutus);
         }
+
+        public PartialViewResult getCategory()
+        {
+          
+            return PartialView();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

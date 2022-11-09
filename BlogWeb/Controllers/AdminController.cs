@@ -1,6 +1,8 @@
 ﻿using BlogWeb.BL.Repository.IRepository;
 using BlogWeb.DL.Models;
+using BlogWeb.DL.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogWeb.PL.Controllers
 {
@@ -109,14 +111,14 @@ namespace BlogWeb.PL.Controllers
             }
             return View(ct);
         }
-
         #endregion
-
+        
         public IActionResult Contact()
         {
             IEnumerable<Contact> contact = _unitOfWork.Contact.GetAll();
             TempData["ContactCount"] = contact.Count();
             return View(contact);
         }
+       
     }
 }

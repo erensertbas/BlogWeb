@@ -8,9 +8,9 @@ namespace BlogWeb.BL.Repository.IRepository
 {
     public interface IUnitOfWork
     {
+        ICategoryRepository Category { get; }
         IAboutUsRepository AboutUs { get; }
         IBlogRepository Blog { get; }
-        ICategoryRepository Category { get; }
         IContactRepository Contact { get; }
         IImageRepository Image { get; }
         IRoleRepository Role { get; }
