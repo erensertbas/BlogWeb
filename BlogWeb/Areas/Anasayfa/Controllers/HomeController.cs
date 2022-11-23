@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace BlogWeb.Controllers
+namespace BlogWeb.PL.Areas.Anasayfa.Controllers
 {
+    [Area("Anasayfa")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

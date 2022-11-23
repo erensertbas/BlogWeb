@@ -1,10 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Default\**" />
+    <Content Remove="Views\Default\**" />
+    <EmbeddedResource Remove="Views\Default\**" />
+    <None Remove="Views\Default\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
@@ -133,10 +140,6 @@
     <None Include="wwwroot\Admin\vendors\verctorMap\jvectormap-us-aea-en.js" />
     <None Include="wwwroot\Admin\vendors\verctorMap\jvectormap-world-mill-en.js" />
     <None Include="wwwroot\Admin\vendors\verctorMap\map-vector.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Default\" />
   </ItemGroup>
 
 </Project>

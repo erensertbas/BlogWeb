@@ -2,8 +2,9 @@
 using BlogWeb.DL.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlogWeb.PL.Controllers
+namespace BlogWeb.PL.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AdminController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -17,7 +18,7 @@ namespace BlogWeb.PL.Controllers
         }
 
         #region AboutUs
-      
+
         public IActionResult AboutUs()
         {
             IEnumerable<AboutUs> aboutus = _unitOfWork.AboutUs.GetAll();
