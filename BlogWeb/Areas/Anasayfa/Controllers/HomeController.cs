@@ -25,6 +25,7 @@ namespace BlogWeb.PL.Areas.Anasayfa.Controllers
 
         public IActionResult Index()
         {
+              //Deneme
             return View();
         }
         public IActionResult BlogDetail()
