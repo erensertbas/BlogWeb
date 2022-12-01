@@ -1,0 +1,24 @@
+﻿@model BlogWeb.DL.Models.Category
+@{
+    ViewData["Title"] = "CategoryEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<form method="post" action="Edit">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h3>Kategorileri Düzenle</h3> <hr />
+        </div>
+       <input asp-for="CategoryId" hidden/>
+
+        <div class="mb-3">
+            <input asp-for="CategoryName" placeholder="Metin Giriniz..." class="form-control" />
+            <span asp-validation-for="CategoryName" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Düzenle</button>
+        <a asp-controller="Admin" asp-action="Category" class="btn btn-secondary" style="width:150px">Geri Dön</a>
+    </div>
+</form>
+
+

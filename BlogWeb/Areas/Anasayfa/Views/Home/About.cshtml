@@ -1,0 +1,183 @@
+﻿@model IEnumerable<BlogWeb.DL.Models.AboutUs>
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="mb-30px">
+    <div class="container">
+        <div class="hero-banner hero-banner--sm">
+            <div class="hero-banner__content">
+                <h1>Hakkımda</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Hakkımda</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="blog-post-area section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="main_blog_details">
+                    <img class="img-fluid" src="img/blog/xblog4.png.pagespeed.ic.Aa4Z_I65nz.webp" alt="">
+                    <a href="#"><h4>Cartridge Is Better Than Ever <br> A Discount Toner</h4></a>
+                    <div class="user_details">
+                        <div class="float-left">
+                            <a href="#">Lifestyle</a>
+                            <a href="#">Gadget</a>
+                        </div>
+                        <div class="float-right mt-sm-0 mt-3">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h5>Mark wiens</h5>
+                                    <p>12 Dec, 2017 11:21 am</p>
+                                </div>
+                                <div class="d-flex">
+                                    <img width="42" height="42" src="data:image/webp;base64,UklGRu4CAABXRUJQVlA4IOICAAAwDQCdASooACgAPm0ukkYkIqGhLjgLMIANiWYAuzL60KaDfhNwPYbzwHR/9SBHyuK/k1tFlTg6c0Dx9PoyRv76O2ut2EaEoU9a7eIq4rrcC7JJqeJ2vfhT5ipbV3YBpTZ3MLsVZ/tZ2T0CX+0aTZd6OAAA/v4yPf6e5Rf3wnlFiZzP/0xL4WhAGlKC2IiPosyEZ92lSgOrnnx4YpV2isE/IVPo2qSOPN/LTBXv6XHbEVmM/F7JbXKfb0Vtn0j7bjBy7l3DDhyyZWOfDd58dL5T1NkK9wDuKycep7G/cmebCnWSAvvj/hgESeE0P2JN/8QfbTsqG/Br0LmaiPr4XE1Ka5wQnPNW6Qgc/WgXf3nAFIqwrz4iTlLrGunVwnpp8pdl5bppZVEpfigkFo4R9S5cc+Qb0lFkvb5YeUEajSw6wvNBbU4n7ieEsrjt2KXdWL9/MdKyWXSJ+YkcQ8oxyqA02+hrU/0UjpcwpY7i+xfWj5ARXR5wV+kdtjVNG/c2GWfNjMwKpBU4WeEqTcZE/ZJF+SrvvKYW73hTibighd/KA9/Tv7BcBscdDScJQWVzPVKV/Lj1aoMnQwqVa2QWftvRfpAhCNdIX7r4uQg1GggK3TPHe+83WeNH3BMEwLP9XPk8HtT6ySwCAyA3CdibC3eF/219sob9zdPZhBXnpFliBVBPaJxWqqcAzBAIKJqTgHIAki/J6dImDGMT/CF5KrB3bGpCEv3m9hr7/H+hPEWtRz8CsLQnQ+iBIpC5PcmNr9WQM+MLKU/J7R0T/bmba1lNR6B/KaXy+JmWHzI4T6/6JGP8yZBvodKf5eVhECvx8Wrygq3X2gUor4ZproPukMGvVk4lEXWr7Um11HKcbYoIiyS1TiE3XU7Cq5w4v6kd/edwfHF+RW++BzNosZJmGi+VbS7qBTw9pHpPz3xYQa/rBt/pr22l2yG4HW6nnW7M8V0V4119tUWhvE1c27Lcgn+9AAA=" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                @foreach (var item in Model)
+                {
+                 <p class="card-text">@item.Text</p>
+                }
+
+            </div>
+
+            <div class="col-lg-4 sidebar-widgets">
+                <div class="widget-wrap">
+                    <div class="single-sidebar-widget popular-post-widget">
+                        <h4 class="single-sidebar-widget__title">Popular Post</h4>
+                        <div class="popular-post-list">
+                            <div class="single-post-list">
+                                <div class="thumb">
+                                    <img class="card-img rounded-0" src="data:image/webp;base64,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" alt="">
+                                    <ul class="thumb-info">
+                                        <li><a href="#">Adam Colinge</a></li>
+                                        <li><a href="#">Dec 15</a></li>
+                                    </ul>
+                                </div>
+                                <div class="details mt-20">
+                                    <a href="blog-single.html">
+                                        <h6>Accused of assaulting flight attendant miktake alaways</h6>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="single-post-list">
+                                <div class="thumb">
+                                    <img class="card-img rounded-0" src="img/blog/thumb/xthumb2.png.pagespeed.ic.NhoTThKAaf.webp" alt="">
+                                    <ul class="thumb-info">
+                                        <li><a href="#">Adam Colinge</a></li>
+                                        <li><a href="#">Dec 15</a></li>
+                                    </ul>
+                                </div>
+                                <div class="details mt-20">
+                                    <a href="blog-single.html">
+                                        <h6>
+                                            Tennessee outback steakhouse the
+                                            worker diagnosed
+                                        </h6>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="single-post-list">
+                                <div class="thumb">
+                                    <img class="card-img rounded-0" src="img/blog/thumb/xthumb3.png.pagespeed.ic.1PKZVuq7fz.webp" alt="">
+                                    <ul class="thumb-info">
+                                        <li><a href="#">Adam Colinge</a></li>
+                                        <li><a href="#">Dec 15</a></li>
+                                    </ul>
+                                </div>
+                                <div class="details mt-20">
+                                    <a href="blog-single.html">
+                                        <h6>
+                                            Tennessee outback steakhouse the
+                                            worker diagnosed
+                                        </h6>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="single-sidebar-widget post-category-widget">
+                        <h4 class="single-sidebar-widget__title">Catgory</h4>
+                        <ul class="cat-list mt-20">
+                            <li>
+                                <a href="#" class="d-flex justify-content-between">
+                                    <p>Technology</p>
+                                    <p>(03)</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex justify-content-between">
+                                    <p>Software</p>
+                                    <p>(09)</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex justify-content-between">
+                                    <p>Lifestyle</p>
+                                    <p>(12)</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex justify-content-between">
+                                    <p>Shopping</p>
+                                    <p>(02)</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex justify-content-between">
+                                    <p>Food</p>
+                                    <p>(10)</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="single-sidebar-widget tag_cloud_widget">
+                        <h4 class="single-sidebar-widget__title">Popular Post</h4>
+                        <ul class="list">
+                            <li>
+                                <a href="#">project</a>
+                            </li>
+                            <li>
+                                <a href="#">love</a>
+                            </li>
+                            <li>
+                                <a href="#">technology</a>
+                            </li>
+                            <li>
+                                <a href="#">travel</a>
+                            </li>
+                            <li>
+                                <a href="#">software</a>
+                            </li>
+                            <li>
+                                <a href="#">life style</a>
+                            </li>
+                            <li>
+                                <a href="#">design</a>
+                            </li>
+                            <li>
+                                <a href="#">illustration</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BlogWeb.DL.Models.Subscriber>
+@{
+    ViewData["Title"] = "Subscriber";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+    @{
+        int adet= Convert.ToInt16(TempData["SubscriberCount"]); 
+    }
+    @if(adet==0){ 
+        <div class="alert alert-warning" role="alert"> <h6>Abone yok</h6></div>
+    }
+
+@foreach (var item in Model)
+{
+      <div class="card-header">
+        Aboneler
+      </div>
+      <div class="card-body">
+
+        <p class="card-text">@item.SubscriberMail</p> 
+        <br>
+        <a asp-controller="Admin" asp-action="AboutUsEdit" asp-route-id="@item.Id" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
+        <a asp-controller="Admin" asp-action="AboutUsDelete" asp-route-id="@item.Id" class="btn btn-danger mx-2">Sil</a>
+      </div>
+}
