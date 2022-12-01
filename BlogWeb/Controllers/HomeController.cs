@@ -1,15 +1,17 @@
-﻿using BlogWeb.BL.Repository.IRepository;
+﻿using BlogWeb.BL.Repository;
+using BlogWeb.BL.Repository.IRepository;
+using BlogWeb.DL.Models;
 using BlogWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace BlogWeb.PL.Areas.Anasayfa.Controllers
+namespace BlogWeb.PL.Controllers
 {
-    [Area("Anasayfa")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IUnitOfWork _unitOfWork;
+        AboutUsRepository aboutUs = new AboutUsRepository();
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -17,7 +19,7 @@ namespace BlogWeb.PL.Areas.Anasayfa.Controllers
 
         public IActionResult Index()
         {
-              //Deneme
+            //Deneme
             return View();
         }
         public IActionResult BlogDetail()
@@ -30,7 +32,8 @@ namespace BlogWeb.PL.Areas.Anasayfa.Controllers
         }
         public IActionResult About()
         {
-            return View();
+            IEnumerable<AboutUs> aboutus = aboutUs.TList();
+            return View(aboutus);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

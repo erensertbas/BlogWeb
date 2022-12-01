@@ -24,6 +24,6 @@
         <p class="card-text">@item.Text</p> 
         <br>
         <a asp-controller="Admin" asp-action="AboutUsEdit" asp-route-id="@item.Id" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
-        <a asp-controller="Admin" asp-action="AboutUsDelete" asp-route-id="@item.Id" class="btn btn-danger mx-2">Sil</a>
+         <a href="~/Admin/AboutUsDelete/@item.Id" class="btn btn-danger">Sil</a>
       </div>
 }

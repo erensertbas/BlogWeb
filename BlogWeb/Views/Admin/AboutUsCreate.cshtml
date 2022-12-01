@@ -1,0 +1,13 @@
+﻿@model BlogWeb.DL.Models.AboutUs
+@{
+    ViewData["Title"] = "AboutUsCreate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("AboutUsCreate", "Admin", FormMethod.Post))
+{
+    <label> Hakkımızda </label>
+    @Html.TextBoxFor(x => x.Text, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info">Ekle</button>
+}

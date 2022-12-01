@@ -9,12 +9,8 @@ using System.Threading.Tasks;
 
 namespace BlogWeb.BL.Repository
 {
-    public class ImageRepository : Repository<Image>, IImageRepository
+    public class ImageRepository : GenericRepository<Image>
     {
-        private ApplicationDbContext db;
-        public ImageRepository(ApplicationDbContext db) : base(db)
-        {
-            this.db = db;
-        }
+        
     }
 }

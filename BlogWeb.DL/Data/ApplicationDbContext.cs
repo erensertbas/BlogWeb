@@ -14,6 +14,7 @@ namespace BlogWeb.DL.Data
         {
 
         }
+
         public DbSet<AboutUs> AboutUs { get; set; }
         public DbSet<Blog> Blog { get; set; }
         public DbSet<Category> Category { get; set; }

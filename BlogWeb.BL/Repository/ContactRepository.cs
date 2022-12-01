@@ -9,12 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlogWeb.BL.Repository
 {
-    public class ContactRepository : Repository<Contact>, IContactRepository
+    public class ContactRepository : GenericRepository<Contact>
     {
-        private ApplicationDbContext _db;
-        public ContactRepository(ApplicationDbContext db) : base(db)
-        {
-            this._db = db;
-        }
     }
 }

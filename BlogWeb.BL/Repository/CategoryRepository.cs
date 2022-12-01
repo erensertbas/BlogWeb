@@ -9,12 +9,8 @@ using System.Threading.Tasks;
 
 namespace BlogWeb.BL.Repository
 {
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class CategoryRepository : GenericRepository<Category>
     {
-        private ApplicationDbContext db;
-        public CategoryRepository(ApplicationDbContext db) : base(db)
-        {
-            this.db = db;
-        }
+      
     }
 }
