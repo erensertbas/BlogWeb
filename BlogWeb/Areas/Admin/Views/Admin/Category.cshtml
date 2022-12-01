@@ -11,19 +11,35 @@
 {
 
     <div class="alert alert-warning" role="alert"> <h6>Henüz Kategori Eklemediniz</h6></div>
-}
-    <a asp-controller="Admin" asp-action="CategoryCreate" class="btn btn-primary mx-2">Hemen Ekle</a>
+} 
+<table class="table table-bordered table-striped" style="width:100%;">
+    <thead class="thead-dark">
+    <tr>
+        <th>No</th>
+        <th>Kategori Adı</th>
+      
+    </tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.CategoryId</td>
+            <td width:50%;>@item.CategoryName</td>           
+            <td>
+                <div class="btn-group">
+                        <a asp-controller="CategoryEdit" asp-action="Edit" asp-route-id="@item.CategoryId" style="color:white;border-radius:2px;" class="btn btn-primary">Edit</a> &nbsp;  / &nbsp;
+                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.CategoryId" style="color:white; border-radius:2px;" class="btn btn-danger">Delete</a>
+                    <a></a>
+                </div>
+            </td>
+        </tr>
+    }
 
-@foreach (var item in Model)
-{
-    <div class="card-header">
-        Kategoriler
-    </div>
-    <div class="card-body">
+</tbody>
 
-        <p class="card-text">@item.CategoryName</p>
-        <br>
-        <a asp-controller="Admin" asp-action="CategoryEdit" asp-route-id="@item.CategoryId" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
-        <a asp-controller="Admin" asp-action="CategoryDelete" asp-route-id="@item.CategoryId" class="btn btn-danger mx-2">Sil</a>
-    </div>
-}
+</table>
+
+<a asp-controller="Admin" asp-action="CategoryCreate" class="btn btn-success" style="color:white; border-radius:2px;">Hemen Ekle</a>
+
+

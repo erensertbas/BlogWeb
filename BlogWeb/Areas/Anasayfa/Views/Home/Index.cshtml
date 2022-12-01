@@ -1,6 +1,8 @@
-﻿@{
+﻿@model List<BlogWeb.DL.Models.Category>
+@{
    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
     <main class="site-main">
 
@@ -254,7 +256,7 @@
                                 </div>
                             </div>
                             <!--Category-->
-                           @await Component.InvokeAsync("CategoryGet")
+                           @await Html.PartialAsync("categoryGet")
                            
                             <div class="single-sidebar-widget tag_cloud_widget">
                                 <h4 class="single-sidebar-widget__title">Popular Post</h4>

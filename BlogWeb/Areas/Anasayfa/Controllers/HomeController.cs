@@ -1,4 +1,5 @@
-﻿using BlogWeb.Models;
+﻿using BlogWeb.BL.Repository.IRepository;
+using BlogWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,7 +9,7 @@ namespace BlogWeb.PL.Areas.Anasayfa.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        private readonly IUnitOfWork _unitOfWork;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
