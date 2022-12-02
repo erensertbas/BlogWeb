@@ -1,0 +1,22 @@
+﻿@model BlogWeb.DL.Models.Contact
+@{
+    ViewData["Title"] = "ContactCreate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("ContactCreate", "Admin", FormMethod.Post))
+{
+
+    <label> Mail Adres </label>
+    @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control" })
+    <br />
+    <label> Telefon </label>
+    @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+    <br />
+    <label> Adres </label>
+    @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+    <br />
+
+    <button class="btn btn-info">Ekle</button>
+}
+

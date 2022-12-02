@@ -17,7 +17,7 @@ namespace BlogWeb.DL.Models
         public DbSet<AboutUs> AboutUs { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Category> Categorys { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Contact> Contact { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Role> Roles { get; set; }

@@ -9,6 +9,7 @@ namespace BlogWeb.PL.Controllers
     {
         BlogRepository blog = new BlogRepository();
         AboutUsRepository aboutUs = new AboutUsRepository();
+        ContactRepository contact = new ContactRepository();
         public IActionResult Index()
         {
             return View();
@@ -78,6 +79,74 @@ namespace BlogWeb.PL.Controllers
             return RedirectToAction("AboutUs");
         }
         #endregion
+
+
+        #region Contact
+
+        public IActionResult Contact()
+        {
+            IEnumerable<Contact> _contact = contact.TList();
+            TempData["ContactCount"] = _contact.Count();
+            return View(_contact);
+        }
+        public IActionResult ContactCreate()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ContactCreate(Contact ct)
+        {
+            if (ModelState.IsValid)
+            {
+                contact.TAdd(ct);
+                return RedirectToAction("Contact");
+            }
+            return View();
+        }
+        public IActionResult ContactEdit(int id)
+        {
+            var x = contact.TGet(id);
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ContactEdit(Contact ct)
+        {
+            var x = contact.TGet(ct.Id);
+            if (ModelState.IsValid)
+            {
+                contact.TUpdate(ct);
+                return RedirectToAction("Contact");
+            }
+            return View(ct);
+        }
+        public IActionResult ContactDelete(int id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var ContactFromDbFirst = contact.TGet(id);
+            if (ContactFromDbFirst == null) { return NotFound(); }
+            return View(ContactFromDbFirst);
+        }
+
+        [HttpPost]
+        public IActionResult ContactDeletePOST(int id)
+        {
+            var x = contact.TGet(id);
+            if (x == null)
+            {
+                return NotFound();
+            }
+            contact.TDelete(x);
+            return RedirectToAction("Contact");
+        }
+        #endregion
+
 
     }
 }
