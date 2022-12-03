@@ -10,6 +10,7 @@ namespace BlogWeb.PL.Controllers
         BlogRepository blog = new BlogRepository();
         AboutUsRepository aboutUs = new AboutUsRepository();
         ContactRepository contact = new ContactRepository();
+        CategoryRepository category = new CategoryRepository();
         public IActionResult Index()
         {
             return View();
@@ -145,6 +146,94 @@ namespace BlogWeb.PL.Controllers
             contact.TDelete(x);
             return RedirectToAction("Contact");
         }
+        #endregion
+
+        #region Category
+
+        public IActionResult Category()
+        {
+            IEnumerable<Category> categories = category.TList();
+            TempData["CategoryCount"] = categories.Count();
+
+            return View(categories);
+        }
+        [HttpPost]
+        public IActionResult CategoryEdit(Category cat)
+        {
+            var x = category.TGet(cat.CategoryId);
+            if (ModelState.IsValid)
+            {
+                x.CategoryName = cat.CategoryName;
+                x.CategoryId = cat.CategoryId;
+                category.TUpdate(x);
+                return RedirectToAction("Category");
+            }
+            return View("CategoryEdit");
+          
+
+        }
+
+        public IActionResult CategoryDelete(int id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categoryFromDbFirst = category.TGet(id);
+            if (categoryFromDbFirst == null) { return NotFound(); }
+            return View(categoryFromDbFirst);
+        }
+
+        [HttpPost]
+        public IActionResult CategoryDeletePOST(int id)
+        {
+            var x = category.TGet(id);
+            if (x == null)
+            {
+                return NotFound();
+            }
+            category.TDelete(x);
+            return RedirectToAction("Category");
+        }
+        public IActionResult CategoryCreate()
+        {
+         
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CategoryCreate(Category ca)
+        {
+            if (ModelState.IsValid)
+            {
+                category.TAdd(ca);
+                return RedirectToAction("Category");
+            }
+            return View();
+        }
+
+        //public IActionResult DeleteCategory(int id)
+        //{
+        //    var x = category.TGet(id);
+        //    if (x == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    category.TDelete(x);
+        //    return RedirectToAction("Category");
+        //}
+
+        public IActionResult GetCategory(int id)
+        {
+            var x = category.TGet(id);
+            Category ct = new Category()
+            {
+                CategoryName = x.CategoryName,
+                CategoryId = x.CategoryId,
+              
+            };
+            return View(ct);
+        }
+
         #endregion
 
 

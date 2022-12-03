@@ -28,16 +28,17 @@
             <td width:50%;>@item.CategoryName</td>           
             <td>
                 <div class="btn-group">
-                        <a asp-controller="CategoryEdit" asp-action="Edit" asp-route-id="@item.CategoryId" style="color:white;border-radius:2px;" class="btn btn-primary">Edit</a> &nbsp;  / &nbsp;
-                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.CategoryId" style="color:white; border-radius:2px;" class="btn btn-danger">Delete</a>
-                    <a></a>
+                        <a href="/Admin/CategoryEdit/@item.CategoryId" class="btn btn-success">Düzenle</a>  &nbsp;  / &nbsp;
+                        <a href="/Admin/CategoryDelete/@item.CategoryId" class="btn btn-danger">Sil</a>
+                        
+                    
                 </div>
             </td>
         </tr>
     }
 
 </tbody>
-
+  
 </table>
 
 <a asp-controller="Admin" asp-action="CategoryCreate" class="btn btn-success" style="color:white; border-radius:2px;">Hemen Ekle</a>
