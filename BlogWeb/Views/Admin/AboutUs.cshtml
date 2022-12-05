@@ -9,21 +9,40 @@
     @if(adet==0){ 
         
         <div class="alert alert-warning" role="alert"> <h6>Hakkımızda mevcut değil.</h6></div>
-
-
         <a asp-controller="Admin" asp-action="AboutUsCreate" class="btn btn-primary mx-2">Hemen Ekle</a>
     }
 
 @foreach (var item in Model)
 {
-      <div class="card-header">
-        Hakkımızda
-      </div>
-      <div class="card-body">
+      
+      <div class="card-body" style="max-width:85%;">
 
         <p class="card-text">@item.Text</p> 
         <br>
-        <a asp-controller="Admin" asp-action="AboutUsEdit" asp-route-id="@item.Id" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
-         <a href="~/Admin/AboutUsDelete/@item.Id" class="btn btn-danger">Sil</a>
+        <a asp-controller="Admin" asp-action="GetAbout" asp-route-id="@item.Id" class="btn btn-secondary mx-1">Düzenle</a>
+        <a onclick="deneme(@item.Id)" class="btn btn-danger">Sil</a>
       </div>
 }
+
+<script>
+    function deneme(id) {
+        swal({
+            title: "Emin misiniz?",
+            text: "Hakkımızda bilgisini silmek için emin misiniz?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.replace('/Admin/AboutUsDelete/' + id),
+                        swal("Poof! Hakkımızda Silindi!", {
+                            icon: "success",
+                        });
+                } 
+            });
+    }
+
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

@@ -12,27 +12,31 @@ namespace BlogWeb.DL.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        [Display(Name = "Ad")]
+        [Display(Name = "İsim")]
+        [Required(ErrorMessage = "İsim Boş Geçilemez!")]
+
         [MinLength(3, ErrorMessage = "Ad 3-15 karakter uzunluğunda olmalı"), MaxLength(15)]
         public string Firstname { get; set; }
-        [Required]
-        [Display(Name = "Soyad")]
+        [Required(ErrorMessage = "Soyisim Boş Geçilemez!")]
+
+        [Display(Name = "Soyisim")]
         [MinLength(3, ErrorMessage = "Soyad 2-15 karakter uzunluğunda olmalı"), MaxLength(15)]
 
         public string Lastname { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Mail Adresi Boş Geçilemez!")]
+
         [Display(Name = "Mail Adresi")]
         public string Email { get; set; }
         public Boolean Status { get; set; }
         [Required]
         [Display(Name = "Konu")]
-        [MinLength(10, ErrorMessage = "Mesaj konusu 10-25 karakter uzunluğunda olmalı"), MaxLength(25)]
+        [MinLength(10, ErrorMessage = "Mesaj konusu 10-50 karakter uzunluğunda olmalı"), MaxLength(50)]
         public string Topic { get; set; }
-        [MinLength(10, ErrorMessage = "Mesaj içeriği 10-100 karakter uzunluğunda olmalı"), MaxLength(100)]
+        [MinLength(10, ErrorMessage = "Mesaj içeriği en az 10 karakter uzunluğunda olmalı")]
         [Display(Name = "Mesaj İçeriği")]
         [Required]
         public string Content { get; set; }
+        
         
     }
 }

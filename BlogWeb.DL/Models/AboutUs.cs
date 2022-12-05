@@ -11,7 +11,8 @@ namespace BlogWeb.DL.Models
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name ="Hakkımızda ")]
+        [Required(ErrorMessage = "Hakkımızda Boş Geçilemez!")]
+        [Display(Name ="Hakkımızda")]
         public string Text { get; set; }
     }
 }

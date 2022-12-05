@@ -19,11 +19,35 @@
         İletişim
     </div>
     <div class="card-body">
+        <p class="card-text">@item.Address</p>
         <p class="card-text">@item.EmailAddress</p>
         <p class="card-text">@item.Phone</p>
-        <p class="card-text">@item.Address</p>
         <br>
-        <a asp-controller="Admin" asp-action="ContactEdit" asp-route-id="@item.Id" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
-        <a asp-controller="Admin" asp-action="ContactDelete" asp-route-id="@item.Id" class="btn btn-primary mx-2">Sil</a> &nbsp; 
+        <a asp-controller="Admin" asp-action="GetContact" asp-route-id="@item.Id" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
+        <a onclick="deneme(@item.Id)" class="btn btn-primary mx-2">Sil</a> &nbsp; 
     </div>
 }
+
+<script>
+    function deneme(id) {
+        swal({
+            title: "Emin misiniz?",
+            text: "İletişim bilgisini silmek için emin misiniz?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.replace('/Admin/ContactDelete/' + id),
+                        swal("Poof! İletişim Bilgileri Silindi!", {
+                            icon: "success",
+                        });
+                } 
+            });
+    }
+
+
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

@@ -11,7 +11,7 @@ namespace BlogWeb.DL.Models
     {
         [Key]
         public int CategoryId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Kategori Boş Geçilemez!")]
         [Display(Name ="Kategori")]
         public string CategoryName { get; set; }
 

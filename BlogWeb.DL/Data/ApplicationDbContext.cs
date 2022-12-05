@@ -14,13 +14,12 @@ namespace BlogWeb.DL.Data
         {
 
         }
-
         public DbSet<AboutUs> AboutUs { get; set; }
         public DbSet<Blog> Blog { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Contact> Contact { get; set; }
-        public DbSet<Image> Image { get; set; }
         public DbSet<Role> Role { get; set; }
+        public DbSet<Message> Message { get; set; }
         public DbSet<Subscriber> Subscriber { get; set; }
         public DbSet<User> User { get; set; }
 

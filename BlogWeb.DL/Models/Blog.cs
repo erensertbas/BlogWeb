@@ -13,32 +13,27 @@ namespace BlogWeb.DL.Models
         [Key]
         public int BlogId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Blog Başlık Boş Geçilemez!")]
         [Display(Name = "Blog Başlık ")]
-
         public string BlogTitle { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Blog İçerik Boş Geçilemez!")]
         [Display(Name = "İçerik ")]
-
         public string Text { get; set; }
+        public string ImageUrl { get; set; }
+
         [Required]
-        [Display(Name = "İçerik Alt ")]
-
-        public string Text2 { get; set; }
-
-        [Display(Name = "Durum ")]
-
         public bool Status { get; set; }
+
         [Display(Name = "Tarih ")]
-        
         public DateTime Date { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]
-      //  [ValidateNever]
+        //  [ValidateNever]
         public User _User { get; set; }
 
+        [Required(ErrorMessage = "Kategori Boş Geçilemez!")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         //[ValidateNever]

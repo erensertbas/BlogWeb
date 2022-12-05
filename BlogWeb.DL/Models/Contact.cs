@@ -13,9 +13,14 @@ namespace BlogWeb.DL.Models
         public int Id { get; set; }
 
         [Display(Name = "Telefon")]
-        public int Phone { get; set; }
-        [Display(Name = "Mail Adres")]
+        [MaxLength(11)]
+        [RegularExpression(@"^(05(\d{9}))$", ErrorMessage = "Geçersiz Telefon Numarası!")]
+        public string Phone { get; set; }
+        [Display(Name = "Mail Adresi")]
+        [Required(ErrorMessage = "Mail Adresi Boş Geçilemez!")]
+
         public string EmailAddress { get; set; }
+        [Required(ErrorMessage = "Adres Boş Geçilemez!")]
         [Display(Name = "Adres")]
         public string Address { get; set; }
 

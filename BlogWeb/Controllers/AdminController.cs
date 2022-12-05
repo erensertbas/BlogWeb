@@ -2,6 +2,7 @@
 using BlogWeb.BL.Repository.IRepository;
 using BlogWeb.DL.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogWeb.PL.Controllers
 {
@@ -11,10 +12,77 @@ namespace BlogWeb.PL.Controllers
         AboutUsRepository aboutUs = new AboutUsRepository();
         ContactRepository contact = new ContactRepository();
         CategoryRepository category = new CategoryRepository();
+        Context context = new Context();
         public IActionResult Index()
         {
             return View();
         }
+
+        #region Blog
+
+        public IActionResult Blogs()
+        {
+            IEnumerable<Blog> _blog = blog.TList();
+            TempData["BlogCount"] = _blog.Count();
+            return View(_blog);
+        }
+        public IActionResult BlogCreate()
+        {
+            List<SelectListItem> values = (from x in context.Category.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text = x.CategoryName,
+                                               Value = x.CategoryId.ToString(),
+                                           }).ToList();
+            ViewBag.v = values;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult BlogCreate(Blog bg)
+        {
+            if (ModelState.IsValid)
+            {
+                blog.TAdd(bg);
+                return RedirectToAction("Blogs");
+            }
+            /*
+@Html.DropDownListFor(x=>x.CategoryId,(List<SelectListItem>) ViewBag.v,new { @class="form-control"})             
+             */
+            return View();
+        }
+        public IActionResult GetBlog(int id)
+        {
+            var x = blog.TGet(id);
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            return View(x);
+        }
+        [HttpPost]
+        public IActionResult BlogEdit(Blog bg) //view yok
+        {
+            var x = blog.TGet(bg.BlogId);
+            //if (ModelState.IsValid)
+            //{
+            //    x.Text = ct.Text;
+            //    aboutUs.TUpdate(x);
+            //    return RedirectToAction("AboutUs");
+            //}
+            return View();
+        }
+        public IActionResult BlogDelete(int id) // view yok
+        {
+            var x = blog.TGet(id);
+            if (x == null)
+            {
+                return NotFound();
+            }
+            blog.TDelete(x);
+            return RedirectToAction("Blogs");
+        }
+        #endregion
+
         #region AboutUs
 
         public IActionResult AboutUs()
@@ -37,14 +105,14 @@ namespace BlogWeb.PL.Controllers
             }
             return View();
         }
-        public IActionResult AboutUsEdit(int id)
+        public IActionResult GetAbout(int id)
         {
             var x = aboutUs.TGet(id);
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            return View();
+            return View(x);
         }
         [HttpPost]
         public IActionResult AboutUsEdit(AboutUs ct)
@@ -52,24 +120,13 @@ namespace BlogWeb.PL.Controllers
             var x = aboutUs.TGet(ct.Id);
             if (ModelState.IsValid)
             {
-                aboutUs.TUpdate(ct);
+                x.Text = ct.Text;
+                aboutUs.TUpdate(x);
                 return RedirectToAction("AboutUs");
             }
-            return View(ct);
+            return View();
         }
         public IActionResult AboutUsDelete(int id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var AboutUsFromDbFirst = aboutUs.TGet(id);
-            if (AboutUsFromDbFirst == null) { return NotFound(); }
-            return View(AboutUsFromDbFirst);
-        }
-
-        [HttpPost]
-        public IActionResult AboutUsDeletePOST(int id)
         {
             var x = aboutUs.TGet(id);
             if (x == null)
@@ -104,14 +161,14 @@ namespace BlogWeb.PL.Controllers
             }
             return View();
         }
-        public IActionResult ContactEdit(int id)
+        public IActionResult GetContact(int id)
         {
             var x = contact.TGet(id);
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            return View();
+            return View(x);
         }
         [HttpPost]
         public IActionResult ContactEdit(Contact ct)
@@ -119,24 +176,15 @@ namespace BlogWeb.PL.Controllers
             var x = contact.TGet(ct.Id);
             if (ModelState.IsValid)
             {
-                contact.TUpdate(ct);
+                x.Address = ct.Address;
+                x.EmailAddress = ct.EmailAddress;
+                x.Phone = ct.Phone;
+                contact.TUpdate(x);
                 return RedirectToAction("Contact");
             }
-            return View(ct);
+            return View();
         }
         public IActionResult ContactDelete(int id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var ContactFromDbFirst = contact.TGet(id);
-            if (ContactFromDbFirst == null) { return NotFound(); }
-            return View(ContactFromDbFirst);
-        }
-
-        [HttpPost]
-        public IActionResult ContactDeletePOST(int id)
         {
             var x = contact.TGet(id);
             if (x == null)
@@ -146,6 +194,8 @@ namespace BlogWeb.PL.Controllers
             contact.TDelete(x);
             return RedirectToAction("Contact");
         }
+
+
         #endregion
 
         #region Category
@@ -157,47 +207,9 @@ namespace BlogWeb.PL.Controllers
 
             return View(categories);
         }
-        [HttpPost]
-        public IActionResult CategoryEdit(Category cat)
-        {
-            var x = category.TGet(cat.CategoryId);
-            if (ModelState.IsValid)
-            {
-                x.CategoryName = cat.CategoryName;
-                x.CategoryId = cat.CategoryId;
-                category.TUpdate(x);
-                return RedirectToAction("Category");
-            }
-            return View("CategoryEdit");
-          
 
-        }
-
-        public IActionResult CategoryDelete(int id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var categoryFromDbFirst = category.TGet(id);
-            if (categoryFromDbFirst == null) { return NotFound(); }
-            return View(categoryFromDbFirst);
-        }
-
-        [HttpPost]
-        public IActionResult CategoryDeletePOST(int id)
-        {
-            var x = category.TGet(id);
-            if (x == null)
-            {
-                return NotFound();
-            }
-            category.TDelete(x);
-            return RedirectToAction("Category");
-        }
         public IActionResult CategoryCreate()
         {
-         
             return View();
         }
         [HttpPost]
@@ -210,31 +222,43 @@ namespace BlogWeb.PL.Controllers
             }
             return View();
         }
-
-        //public IActionResult DeleteCategory(int id)
-        //{
-        //    var x = category.TGet(id);
-        //    if (x == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    category.TDelete(x);
-        //    return RedirectToAction("Category");
-        //}
+        public IActionResult CategoryDelete(int id)
+        {
+            var x = category.TGet(id);
+            if (x == null)
+            {
+                return NotFound();
+            }
+            category.TDelete(x);
+            return RedirectToAction("Category");
+        }
 
         public IActionResult GetCategory(int id)
         {
             var x = category.TGet(id);
-            Category ct = new Category()
+            if (id == null || id == 0)
             {
-                CategoryName = x.CategoryName,
-                CategoryId = x.CategoryId,
-              
-            };
-            return View(ct);
+                return NotFound();
+            }
+            return View(x);
+        }
+
+        [HttpPost]
+        public IActionResult CategoryEdit(Category cat)
+        {
+            var x = category.TGet(cat.CategoryId);
+            if (ModelState.IsValid)
+            {
+                x.CategoryName = cat.CategoryName;
+                x.CategoryId = cat.CategoryId;
+                category.TUpdate(x);
+                return RedirectToAction("Category");
+            }
+            return View();
         }
 
         #endregion
+
 
 
     }

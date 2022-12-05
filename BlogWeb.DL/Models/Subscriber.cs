@@ -12,7 +12,7 @@ namespace BlogWeb.DL.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Mail Adresi Boş Geçilemez!")]
         public string SubscriberMail { get; set; }
     }
 }
