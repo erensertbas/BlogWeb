@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
-<html lang="zxx">
+<html>
 
-<!-- Mirrored from demo.dashboardpack.com/sales-html/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Oct 2022 16:40:52 GMT -->
 <head>
 
     <meta charset="utf-8" />
@@ -9,7 +8,34 @@
     <title>Sales</title>
 
 
-    <link rel="stylesheet" href="~/Admin/css/bootstrap1.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    @*  Yazı fontu için*@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria&family=Open+Sans:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+
+    @*    Gelişmiş textarea
+    *@
+
+
+
+       
+    @*    Gelişmiş textarea
+    *@
+
+    <style>
+        * {
+            font-family: 'Alexandria', sans-serif;
+        }
+    </style>
+
+
+    <link rel="stylesheet" href="~/css/bootstrap.css" />  @*eklendi*@
+
+    @*<link rel="stylesheet" href="~/Admin/css/bootstrap1.min.css" />*@
     <link rel="stylesheet" href="~/Admin/vendors/themefy_icon/themify-icons.css" />
 
     <link rel="stylesheet" href="~/Admin/vendors/niceselect/css/nice-select.css" />
@@ -55,7 +81,7 @@
             <li class="mm-active">
                 <a class="has-arrow" aria-expanded="false">
                     <div class="icon_menu">
-                       @* <img src="img/menu-icon/dashboard.svg" alt="">*@
+                        @* <img src="img/menu-icon/dashboard.svg" alt="">*@
                     </div>
                     <span>Makaleler</span>
                 </a>
@@ -68,7 +94,7 @@
             <li class="">
                 <a class="has-arrow" aria-expanded="false">
                     <div class="icon_menu">
-                       @* <img src="img/menu-icon/dashboard.svg" alt="">*@
+                        @* <img src="img/menu-icon/dashboard.svg" alt="">*@
                     </div>
                     <span>Sayfa Düzenle</span>
                 </a>
@@ -100,12 +126,12 @@
                         </div>
                         <div class="serach_field-area d-flex align-items-center">
                             @*<div class="search_inner">
-                                <form action="#">
-                                    <div class="search_field">
-                                        <input type="text" placeholder="Ara">
-                                    </div>
-                                    <button type="submit"> <img src="~/Admin/img/icon/icon_search.svg" alt=""> </button>
-                                </form>
+                            <form action="#">
+                            <div class="search_field">
+                            <input type="text" placeholder="Ara">
+                            </div>
+                            <button type="submit"> <img src="~/Admin/img/icon/icon_search.svg" alt=""> </button>
+                            </form>
                             </div>
                             <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>*@
                         </div>
@@ -133,16 +159,16 @@
             @RenderBody()
         </div>
 
-       @* <div class="footer_part" >
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer_iner text-center">
-                            <p>2022 © Bütün Hakları Saklıdır - Designed by <a href="~/Admin/#"> <i class="ti-heart"></i> </a><a href="~/Admin/#"> ErdoSoft</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        @* <div class="footer_part" >
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-lg-12">
+        <div class="footer_iner text-center">
+        <p>2022 © Bütün Hakları Saklıdır - Designed by <a href="~/Admin/#"> <i class="ti-heart"></i> </a><a href="~/Admin/#"> ErdoSoft</a></p>
+        </div>
+        </div>
+        </div>
+        </div>
         </div>*@
     </section>
 
@@ -212,7 +238,6 @@
     <script src="~/Admin/js/custom.js"></script>
 </body>
 
-<!-- Mirrored from demo.dashboardpack.com/sales-html/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Oct 2022 16:41:27 GMT -->
 </html>
 
 

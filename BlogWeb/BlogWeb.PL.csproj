@@ -143,4 +143,8 @@
     <None Include="wwwroot\Admin\vendors\verctorMap\map-vector.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\blogimg\" />
+  </ItemGroup>
+
 </Project>

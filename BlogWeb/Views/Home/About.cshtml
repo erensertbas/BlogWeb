@@ -25,30 +25,11 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="main_blog_details">
-                    <img class="img-fluid" src="img/blog/xblog4.png.pagespeed.ic.Aa4Z_I65nz.webp" alt="">
-                    <a href="#"><h4>Cartridge Is Better Than Ever <br> A Discount Toner</h4></a>
-                    <div class="user_details">
-                        <div class="float-left">
-                            <a href="#">Lifestyle</a>
-                            <a href="#">Gadget</a>
-                        </div>
-                        <div class="float-right mt-sm-0 mt-3">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5>Mark wiens</h5>
-                                    <p>12 Dec, 2017 11:21 am</p>
-                                </div>
-                                <div class="d-flex">
-                                    <img width="42" height="42" src="data:image/webp;base64,UklGRu4CAABXRUJQVlA4IOICAAAwDQCdASooACgAPm0ukkYkIqGhLjgLMIANiWYAuzL60KaDfhNwPYbzwHR/9SBHyuK/k1tFlTg6c0Dx9PoyRv76O2ut2EaEoU9a7eIq4rrcC7JJqeJ2vfhT5ipbV3YBpTZ3MLsVZ/tZ2T0CX+0aTZd6OAAA/v4yPf6e5Rf3wnlFiZzP/0xL4WhAGlKC2IiPosyEZ92lSgOrnnx4YpV2isE/IVPo2qSOPN/LTBXv6XHbEVmM/F7JbXKfb0Vtn0j7bjBy7l3DDhyyZWOfDd58dL5T1NkK9wDuKycep7G/cmebCnWSAvvj/hgESeE0P2JN/8QfbTsqG/Br0LmaiPr4XE1Ka5wQnPNW6Qgc/WgXf3nAFIqwrz4iTlLrGunVwnpp8pdl5bppZVEpfigkFo4R9S5cc+Qb0lFkvb5YeUEajSw6wvNBbU4n7ieEsrjt2KXdWL9/MdKyWXSJ+YkcQ8oxyqA02+hrU/0UjpcwpY7i+xfWj5ARXR5wV+kdtjVNG/c2GWfNjMwKpBU4WeEqTcZE/ZJF+SrvvKYW73hTibighd/KA9/Tv7BcBscdDScJQWVzPVKV/Lj1aoMnQwqVa2QWftvRfpAhCNdIX7r4uQg1GggK3TPHe+83WeNH3BMEwLP9XPk8HtT6ySwCAyA3CdibC3eF/219sob9zdPZhBXnpFliBVBPaJxWqqcAzBAIKJqTgHIAki/J6dImDGMT/CF5KrB3bGpCEv3m9hr7/H+hPEWtRz8CsLQnQ+iBIpC5PcmNr9WQM+MLKU/J7R0T/bmba1lNR6B/KaXy+JmWHzI4T6/6JGP8yZBvodKf5eVhECvx8Wrygq3X2gUor4ZproPukMGvVk4lEXWr7Um11HKcbYoIiyS1TiE3XU7Cq5w4v6kd/edwfHF+RW++BzNosZJmGi+VbS7qBTw9pHpPz3xYQa/rBt/pr22l2yG4HW6nnW7M8V0V4119tUWhvE1c27Lcgn+9AAA=" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <h2>
                         @foreach (var item in Model)
                         {
-                            @item.Text
+                             @Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Text))
+                          @*  @item.Text*@
                         }
                     </h2>
                 </div>

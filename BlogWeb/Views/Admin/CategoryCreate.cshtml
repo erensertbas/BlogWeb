@@ -5,28 +5,25 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>CategoryCreate</h1>
+<h1>Kategori Ekle</h1>
 
-<h4>Category</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CategoryCreate" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
+
             <div class="form-group">
-                <label asp-for="CategoryName" class="control-label"></label>
-                <input asp-for="CategoryName" class="form-control" />
-                <span asp-validation-for="CategoryName" class="text-danger"></span>
+                <input asp-for="CategoryName" class="form-control" placeholder="Kategori Adı" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span> <br />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Ekle" class="btn btn-success" />
+                <a asp-action="Category" asp-controller="Admin" class="btn btn-secondary">Geri Dön</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Category" asp-controller="Admin">Geri Dön</a>
-</div>
 

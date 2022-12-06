@@ -2,6 +2,7 @@
 using BlogWeb.BL.Repository.IRepository;
 using BlogWeb.DL.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogWeb.PL.Controllers
@@ -13,11 +14,18 @@ namespace BlogWeb.PL.Controllers
         ContactRepository contact = new ContactRepository();
         CategoryRepository category = new CategoryRepository();
         Context context = new Context();
+
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public AdminController(IWebHostEnvironment webHostEnvironment)
+        {
+                _webHostEnvironment = webHostEnvironment;
+        }
         public IActionResult Index()
         {
             return View();
         }
-
+       
         #region Blog
 
         public IActionResult Blogs()
@@ -38,16 +46,42 @@ namespace BlogWeb.PL.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult BlogCreate(Blog bg)
+        public IActionResult BlogCreate(Blog bg, IFormFile file)
         {
+            bg.UserId = 1;
+            bg.Status = true;
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(wwwRootPath, @"images\products");
+                    var extension = Path.GetExtension(file.FileName);
+
+                    if (bg.ImageUrl != null)
+                    {
+                        var oldImagePath = Path.Combine(wwwRootPath, bg.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    {
+                        file.CopyTo(fileStreams);
+                    }
+
+                    bg.ImageUrl = @"\images\blogimg\" + fileName + extension;
+
+                }
+                
+                //bg.CategoryId = 15;
                 blog.TAdd(bg);
                 return RedirectToAction("Blogs");
             }
-            /*
-@Html.DropDownListFor(x=>x.CategoryId,(List<SelectListItem>) ViewBag.v,new { @class="form-control"})             
-             */
+         
             return View();
         }
         public IActionResult GetBlog(int id)
@@ -101,6 +135,7 @@ namespace BlogWeb.PL.Controllers
             if (ModelState.IsValid)
             {
                 aboutUs.TAdd(ct);
+                TempData["EklemeSonuc"] = 1; 
                 return RedirectToAction("AboutUs");
             }
             return View();
@@ -122,6 +157,7 @@ namespace BlogWeb.PL.Controllers
             {
                 x.Text = ct.Text;
                 aboutUs.TUpdate(x);
+                TempData["GüncellemeSonuc"] = 1;
                 return RedirectToAction("AboutUs");
             }
             return View();
@@ -157,6 +193,7 @@ namespace BlogWeb.PL.Controllers
             if (ModelState.IsValid)
             {
                 contact.TAdd(ct);
+                TempData["EklemeSonuc"] = 1;
                 return RedirectToAction("Contact");
             }
             return View();
@@ -180,6 +217,7 @@ namespace BlogWeb.PL.Controllers
                 x.EmailAddress = ct.EmailAddress;
                 x.Phone = ct.Phone;
                 contact.TUpdate(x);
+                TempData["GüncellemeSonuc"] = 1;
                 return RedirectToAction("Contact");
             }
             return View();
@@ -218,6 +256,7 @@ namespace BlogWeb.PL.Controllers
             if (ModelState.IsValid)
             {
                 category.TAdd(ca);
+                TempData["EklemeSonuc"] = 1;
                 return RedirectToAction("Category");
             }
             return View();
@@ -252,6 +291,7 @@ namespace BlogWeb.PL.Controllers
                 x.CategoryName = cat.CategoryName;
                 x.CategoryId = cat.CategoryId;
                 category.TUpdate(x);
+                TempData["GüncellemeSonuc"] = 1;
                 return RedirectToAction("Category");
             }
             return View();

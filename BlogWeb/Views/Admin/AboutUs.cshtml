@@ -3,25 +3,47 @@
     ViewData["Title"] = "AboutUs";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-    @{
-        int adet= Convert.ToInt16(TempData["AboutUsCount"]); 
-    }
-    @if(adet==0){ 
-        
-        <div class="alert alert-warning" role="alert"> <h6>Hakkımızda mevcut değil.</h6></div>
-        <a asp-controller="Admin" asp-action="AboutUsCreate" class="btn btn-primary mx-2">Hemen Ekle</a>
-    }
+@{
+    int adet = Convert.ToInt16(TempData["AboutUsCount"]);
+    int EklemeSonuc = Convert.ToInt16(TempData["EklemeSonuc"]);
+    int GüncellemeSonuc = Convert.ToInt16(TempData["GüncellemeSonuc"]);
+}
+@if (adet == 0)
+{
+    <div class="alert alert-dismissible alert-warning">
+        <h4 class="alert-heading">Uyarı!</h4>
+        <p class="mb-0" style="color:black;">Henüz Hakkımızda Eklemediniz.</p>
+    </div>
+
+    <a asp-controller="Admin" asp-action="AboutUsCreate" class="btn btn-success mx-2">Hemen Ekle</a>
+}
+
+
+@if (EklemeSonuc == 1)
+{
+    <div class="alert alert-dismissible alert-success">
+        @*<button type="button" class="btn-close" data-bs-dismiss="alert"></button>*@
+        <strong>Ekleme Başarılı!</strong> <p> Hakkımızda Başarılı Bir şekilde Eklendi</p>
+    </div>
+}
+@if (GüncellemeSonuc == 1)
+{
+    <div class="alert alert-dismissible alert-success">
+        <strong>Güncelleme Başarılı!</strong> <p> Hakkımızda Başarılı Bir Şekilde Güncellendi</p>
+    </div>
+}
 
 @foreach (var item in Model)
 {
-      
-      <div class="card-body" style="max-width:85%;">
 
-        <p class="card-text">@item.Text</p> 
+    <div class="card-body" style="max-width:85%;">
+      
+        @Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Text))
+
         <br>
-        <a asp-controller="Admin" asp-action="GetAbout" asp-route-id="@item.Id" class="btn btn-secondary mx-1">Düzenle</a>
+        <a asp-controller="Admin" asp-action="GetAbout" asp-route-id="@item.Id" class="btn btn-warning mx-1">Düzenle</a>
         <a onclick="deneme(@item.Id)" class="btn btn-danger">Sil</a>
-      </div>
+    </div>
 }
 
 <script>
@@ -39,10 +61,12 @@
                         swal("Poof! Hakkımızda Silindi!", {
                             icon: "success",
                         });
-                } 
+                }
             });
     }
 
 </script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+

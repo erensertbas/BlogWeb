@@ -4,19 +4,23 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="col-md-6">
+    <h4>İletişim Bilgisi Ekle</h4> <br />
 @using (Html.BeginForm("ContactCreate", "Admin", FormMethod.Post))
 {
 
-    <label> Mail Adres </label>
-    @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.EmailAddress, new {placeholder="Mail Adresi" , @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.EmailAddress, "", new { @class = "text-danger" })
+
     <br />
-    <label> Telefon </label>
-    @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.Phone, new {placeholder="Telefon Numarası" ,@class = "form-control" })
+
     <br />
-    <label> Adres </label>
-    @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.Address, new {placeholder="Adres" , @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Address, "", new { @class = "text-danger" })
+
     <br />
 
-    <button class="btn btn-info">Ekle</button>
+    <button class="btn btn-success">Ekle</button>
 }
-
+</div>
