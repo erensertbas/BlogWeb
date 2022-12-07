@@ -1,7 +1,7 @@
 ﻿@model BlogWeb.DL.Models.Blog
 
 @{
-    ViewData["Title"] = "BlogCreate";
+    ViewData["Title"] = "Makale Paylaş";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -9,8 +9,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="BlogCreate">
+        <form asp-action="BlogCreate" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input asp-for="BlogId" hidden />
+            <input asp-for="ImageUrl" hidden />
+
 
             <div class="form-group">
 
@@ -25,8 +29,9 @@
 
             <div class="mb-3">
                 <label asp-for="ImageUrl"></label>
-                <input type="file" name="file" />
+                <input type="file" accept="image/*" id="uploadBox" name="file" />
             </div>
+
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Status" />

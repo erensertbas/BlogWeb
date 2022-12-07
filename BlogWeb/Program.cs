@@ -31,10 +31,10 @@ app.UseAuthorization();
 
 #region HomeController
 
-//app.MapControllerRoute(
-//     name: "Anasayfa",
-//     pattern: "Anasayfa",
-//    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional});
+app.MapControllerRoute(
+     name: "Anasayfa",
+     pattern: "Anasayfa",
+    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
 
 app.MapControllerRoute(
      name: "Contact",

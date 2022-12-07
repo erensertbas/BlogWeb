@@ -5,8 +5,7 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Sales</title>
-
+    <title>@ViewData["Title"]</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,15 +15,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria&family=Open+Sans:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
 
-
-    @*    Gelişmiş textarea
-    *@
-
-
-
-       
-    @*    Gelişmiş textarea
-    *@
 
     <style>
         * {
@@ -81,7 +71,6 @@
             <li class="mm-active">
                 <a class="has-arrow" aria-expanded="false">
                     <div class="icon_menu">
-                        @* <img src="img/menu-icon/dashboard.svg" alt="">*@
                     </div>
                     <span>Makaleler</span>
                 </a>
@@ -94,7 +83,6 @@
             <li class="">
                 <a class="has-arrow" aria-expanded="false">
                     <div class="icon_menu">
-                        @* <img src="img/menu-icon/dashboard.svg" alt="">*@
                     </div>
                     <span>Sayfa Düzenle</span>
                 </a>
@@ -102,7 +90,7 @@
                     <li><a href="/YoneticiHakkimizda">Hakkımızda</a></li>
                 </ul>
                 <ul>
-                    <li><a asp-controller="Admin" asp-action="Category">Kategoriler</a></li>
+                    <li><a href="/YoneticiHakkimizda">Kategoriler</a></li>
                 </ul>
                 <ul>
                     <li><a asp-controller="Admin" asp-action="Contact">İletişim</a></li>

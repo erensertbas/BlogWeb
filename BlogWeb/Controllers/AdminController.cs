@@ -78,7 +78,6 @@ namespace BlogWeb.PL.Controllers
 
                 }
 
-                //bg.CategoryId = 15;
                 blog.TAdd(bg);
                 return RedirectToAction("Blogs");
             }
