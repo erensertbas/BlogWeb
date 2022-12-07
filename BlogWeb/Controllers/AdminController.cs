@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogWeb.PL.Controllers
 {
+  
     public class AdminController : Controller
     {
         BlogRepository blog = new BlogRepository();
@@ -19,13 +20,13 @@ namespace BlogWeb.PL.Controllers
 
         public AdminController(IWebHostEnvironment webHostEnvironment)
         {
-                _webHostEnvironment = webHostEnvironment;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
             return View();
         }
-       
+
         #region Blog
 
         public IActionResult Blogs()
@@ -76,12 +77,12 @@ namespace BlogWeb.PL.Controllers
                     bg.ImageUrl = @"\images\blogimg\" + fileName + extension;
 
                 }
-                
+
                 //bg.CategoryId = 15;
                 blog.TAdd(bg);
                 return RedirectToAction("Blogs");
             }
-         
+
             return View();
         }
         public IActionResult GetBlog(int id)
@@ -135,7 +136,7 @@ namespace BlogWeb.PL.Controllers
             if (ModelState.IsValid)
             {
                 aboutUs.TAdd(ct);
-                TempData["EklemeSonuc"] = 1; 
+                TempData["EklemeSonuc"] = 1;
                 return RedirectToAction("AboutUs");
             }
             return View();

@@ -41,7 +41,7 @@
         @Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Text))
 
         <br>
-        <a asp-controller="Admin" asp-action="GetAbout" asp-route-id="@item.Id" class="btn btn-warning mx-1">Düzenle</a>
+            <a href="/HakkimizdaDuzenle/@item.Id" class="btn btn-warning mx-1">Düzenle</a>
         <a onclick="deneme(@item.Id)" class="btn btn-danger">Sil</a>
     </div>
 }
