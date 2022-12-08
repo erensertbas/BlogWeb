@@ -51,6 +51,8 @@ namespace BlogWeb.PL.Controllers
         {
             bg.UserId = 1;
             bg.Status = true;
+            bg.ImageUrl = file.FileName;
+        
             if (ModelState.IsValid)
             {
                 string wwwRootPath = _webHostEnvironment.WebRootPath;

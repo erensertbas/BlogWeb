@@ -78,6 +78,10 @@ app.MapControllerRoute(
     name: "AboutUs",
     pattern: "YoneticiHakkimizda",
    defaults: new { controller = "Admin", action = "AboutUs", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "AboutUsEdit",
+//    pattern: "HakkimizdaDuzenle",
+//   defaults: new { contrtoller = "Admin", action = "AboutUsEdit", id = UrlParameter.Optional });
 
 app.MapControllerRoute(
     name: "AboutUsCreate",
@@ -93,6 +97,26 @@ app.MapControllerRoute(
     name: "AboutUsDelete",
     pattern: "{HakkimizdaSil}/{id}",
    defaults: new { controller = "Admin", action = "AboutUsDelete", id = UrlParameter.Optional });
+
+app.MapControllerRoute(
+    name: "YoneticiKategori",
+    pattern: "YoneticiKategori",
+   defaults: new { controller = "Admin", action = "Category", id = UrlParameter.Optional });
+
+app.MapControllerRoute(
+    name: "CategoryCreate",
+    pattern: "KategoriOlustur",
+   defaults: new { controller = "Admin", action = "CategoryCreate", id = UrlParameter.Optional });
+
+app.MapControllerRoute(
+    name: "CategoryDelete",
+    pattern: "{KategoriSi}l/{id}",
+   defaults: new { controller = "Admin", action = "CategoryDelete", id = UrlParameter.Optional });
+
+app.MapControllerRoute(
+    name: "GetCategory",
+    pattern: "{KategoriDuzenle}/{id}",
+   defaults: new { controller = "Admin", action = "GetCategory", id = UrlParameter.Optional });
 
 #endregion
 
