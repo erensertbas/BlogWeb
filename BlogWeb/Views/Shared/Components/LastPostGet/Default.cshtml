@@ -1,0 +1,23 @@
+﻿@model IEnumerable<BlogWeb.DL.Models.Blog>
+
+<section>
+    <div class="container">
+        <div class="owl-carousel owl-theme blog-slider">
+            @foreach (var item in Model)
+            {
+                <div class="card blog__slide text-center">
+                    <div class="blog__slide__img">
+                        <img class="card-img rounded-0" src="~/images/@item.ImageUrl" style="height:200px;" alt="">
+                    </div>
+                    <div class="blog__slide__content">
+                        <a class="blog__slide__label" href="~/Home/HomeCategory/@item.CategoryId">@item.CategoryId</a>
+                        <h3><a href="~/Home/BlogDetail/@item.BlogId">@item.BlogTitle</a></h3>
+                        <p>@item.Date.ToShortDateString()</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+

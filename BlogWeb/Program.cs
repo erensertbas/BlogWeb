@@ -31,92 +31,97 @@ app.UseAuthorization();
 
 #region HomeController
 
-app.MapControllerRoute(
-     name: "Anasayfa",
-     pattern: "Anasayfa",
-    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//     name: "Anasayfa",
+//     pattern: "Anasayfa",
+//    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-     name: "Contact",
-     pattern: "Iletisim",
-    defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//     name: "Contact",
+//     pattern: "Iletisim",
+//    defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-     name: "About",
-     pattern: "Hakkimizda",
-    defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//     name: "About",
+//     pattern: "Hakkimizda",
+//    defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional });
+
+//app.MapControllerRoute(
+//     name: "BlogDetail",
+//     pattern: "{Makale-Detay}/{id}",
+//    defaults: new { controller = "Home", action = "BlogDetail", id = UrlParameter.Optional });
 
 #endregion
 
 #region AdminController
-app.MapControllerRoute(
-    name: "Index",
-    pattern: "Yonetici",
-   defaults: new { controller = "Admin", action = "Index", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "Index",
+//    pattern: "Yonetici",
+//   defaults: new { controller = "Admin", action = "Index", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "Blogs",
-    pattern: "Makaleler",
-   defaults: new { controller = "Admin", action = "Blogs", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "Blogs",
+//    pattern: "Makaleler",
+//   defaults: new { controller = "Admin", action = "Blogs", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "BlogCreate",
-    pattern: "MakaleOlustur",
-   defaults: new { controller = "Admin", action = "BlogCreate", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "BlogCreate",
+//    pattern: "MakaleOlustur",
+//   defaults: new { controller = "Admin", action = "BlogCreate", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "GetBlog",
-    pattern: "{MakaleDuzenle}/{id}",
-   defaults: new { controller = "Admin", action = "GetBlog", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "GetBlog",
+//    pattern: "{MakaleDuzenle}/{id}",
+//   defaults: new { controller = "Admin", action = "GetBlog", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "BlogDelete",
-    pattern: "{MakaleSil}/{id}",
-   defaults: new { controller = "Admin", action = "BlogDelete", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "BlogDelete",
+//    pattern: "{MakaleSil}/{id}",
+//   defaults: new { controller = "Admin", action = "BlogDelete", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "AboutUs",
-    pattern: "YoneticiHakkimizda",
-   defaults: new { controller = "Admin", action = "AboutUs", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "AboutUs",
+//    pattern: "YoneticiHakkimizda",
+//   defaults: new { controller = "Admin", action = "AboutUs", id = UrlParameter.Optional });
 //app.MapControllerRoute(
 //    name: "AboutUsEdit",
 //    pattern: "HakkimizdaDuzenle",
 //   defaults: new { contrtoller = "Admin", action = "AboutUsEdit", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "AboutUsCreate",
-    pattern: "HakkimizdaOlustur",
-   defaults: new { controller = "Admin", action = "AboutUsCreate", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "AboutUsCreate",
+//    pattern: "HakkimizdaOlustur",
+//   defaults: new { controller = "Admin", action = "AboutUsCreate", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "GetAbout",
-    pattern: "{HakkimizdaDuzenle}/{id}",
-   defaults: new { controller = "Admin", action = "GetAbout", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "GetAbout",
+//    pattern: "{HakkimizdaDuzenle}/{id}",
+//   defaults: new { controller = "Admin", action = "GetAbout", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "AboutUsDelete",
-    pattern: "{HakkimizdaSil}/{id}",
-   defaults: new { controller = "Admin", action = "AboutUsDelete", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "AboutUsDelete",
+//    pattern: "{HakkimizdaSil}/{id}",
+//   defaults: new { controller = "Admin", action = "AboutUsDelete", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "YoneticiKategori",
-    pattern: "YoneticiKategori",
-   defaults: new { controller = "Admin", action = "Category", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "YoneticiKategori",
+//    pattern: "YoneticiKategori",
+//   defaults: new { controller = "Admin", action = "Category", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "CategoryCreate",
-    pattern: "KategoriOlustur",
-   defaults: new { controller = "Admin", action = "CategoryCreate", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "CategoryCreate",
+//    pattern: "KategoriOlustur",
+//   defaults: new { controller = "Admin", action = "CategoryCreate", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "CategoryDelete",
-    pattern: "{KategoriSi}l/{id}",
-   defaults: new { controller = "Admin", action = "CategoryDelete", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "CategoryDelete",
+//    pattern: "{KategoriSi}l/{id}",
+//   defaults: new { controller = "Admin", action = "CategoryDelete", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-    name: "GetCategory",
-    pattern: "{KategoriDuzenle}/{id}",
-   defaults: new { controller = "Admin", action = "GetCategory", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "GetCategory",
+//    pattern: "{KategoriDuzenle}/{id}",
+//   defaults: new { controller = "Admin", action = "GetCategory", id = UrlParameter.Optional });
 
 #endregion
 
@@ -124,10 +129,10 @@ app.MapControllerRoute(
 
 app.UseEndpoints(endpoints =>
 {
-    app.MapControllerRoute(
-     name: "default",
-     pattern: "default",
-    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+    //app.MapControllerRoute(
+    // name: "default",
+    // pattern: "default",
+    //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
 
     // endpoints.MapControllerRoute(
     //   name: "areas",
@@ -135,9 +140,9 @@ app.UseEndpoints(endpoints =>
     // );
 
 
-    // app.MapControllerRoute(
-    //name: "default",
-    //pattern: "{controller=Home}/{action=Index}/{id?}");
+    app.MapControllerRoute(
+   name: "default",
+   pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
 app.Run();

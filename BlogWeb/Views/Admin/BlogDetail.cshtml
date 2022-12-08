@@ -1,0 +1,26 @@
+﻿@model BlogWeb.DL.Models.Blog
+@{
+    ViewData["Title"] = "BlogDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="card mb-3">
+    <h3 class="card-header">@Model.BlogTitle</h3>
+    <div class="card-body">
+        <img class="card-img-top" style="max-height:300px;" src="~/images/@Model.ImageUrl">
+    </div>
+
+    <div class="card-body">
+        <p class="card-text">@Html.Raw(System.Web.HttpUtility.HtmlDecode(@Model.Text))</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@Model.CategoryId</li>
+        <li class="list-group-item">@Model.UserId</li>
+        <li class="list-group-item">@Model.Status</li>
+    </ul>
+    <div class="card-footer text-muted">
+        @Model.Date
+    </div>
+</div>

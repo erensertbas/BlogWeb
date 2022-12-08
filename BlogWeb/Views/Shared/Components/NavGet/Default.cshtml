@@ -1,0 +1,9 @@
+﻿@model IEnumerable<BlogWeb.DL.Models.Category>
+
+<a href="~/sensive/#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kategoriler</a>
+<ul class="dropdown-menu">
+    @foreach (var item in Model)
+    {
+    <li class="nav-item"><a class="nav-link" href="~/Home/HomeCategory/@item.CategoryId">@item.CategoryName</a></li>
+    }
+</ul>

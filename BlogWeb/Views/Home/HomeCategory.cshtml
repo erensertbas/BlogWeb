@@ -1,0 +1,152 @@
+﻿@model IEnumerable<BlogWeb.DL.Models.Blog>
+@{
+    ViewData["Title"] = "Kategori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="mb-30px">
+    <div class="container">
+        <div class="hero-banner hero-banner--sm">
+            <div class="hero-banner__content">
+                <h1>@TempData["Kategori"]</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="~/Home/Index">Anasayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@TempData["Kategori"]</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6">
+                        <div class="single-recent-blog-post card-view">
+                            <div class="thumb">
+                                <img class="card-img rounded-0" src="~/images/@item.ImageUrl">
+                                <ul class="thumb-info">
+                                    <li><a><i class="ti-user"></i>@item.UserId</a></li>
+                                    <li><a><i class="ti-themify-favicon"></i>@item.CategoryId</a></li>
+                                </ul>
+                            </div>
+                            <div class="details mt-20">
+                                <a href="~/Home/BlogDetail/@item.BlogId">
+                                    <h3>
+                                        @item.BlogTitle
+                                    </h3>
+                                </a>
+                                @if (item.Text.Length > 200)
+                                {
+                                    @* @(item.Text.Substring(0, 247) + "..." + "  ")*@
+                                    <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text.Substring(0, 197) + " ..." + "  "))</p>
+                                }
+                                else
+                                {
+                                    <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Text))</p>
+                                }
+
+                                <a class="button" href="~/Home/BlogDetail/@item.BlogId">Daha Fazla <i class="ti-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a href="#" class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">
+                                        <i class="ti-angle-left"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item">
+                                <a href="#" class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">
+                                        <i class="ti-angle-right"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 sidebar-widgets">
+            <div class="widget-wrap">
+
+                <div class="single-sidebar-widget popular-post-widget">
+                    <h4 class="single-sidebar-widget__title">Popular Post</h4>
+                    <div class="popular-post-list">
+                        <div class="single-post-list">
+                            <div class="thumb">
+                                <img class="card-img rounded-0" src="img/blog/thumb/thumb1.png" alt="">
+                                <ul class="thumb-info">
+                                    <li><a href="#">Adam Colinge</a></li>
+                                    <li><a href="#">Dec 15</a></li>
+                                </ul>
+                            </div>
+                            <div class="details mt-20">
+                                <a href="blog-single.html">
+                                    <h6>Accused of assaulting flight attendant miktake alaways</h6>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="single-post-list">
+                            <div class="thumb">
+                                <img class="card-img rounded-0" src="img/blog/thumb/thumb2.png" alt="">
+                                <ul class="thumb-info">
+                                    <li><a href="#">Adam Colinge</a></li>
+                                    <li><a href="#">Dec 15</a></li>
+                                </ul>
+                            </div>
+                            <div class="details mt-20">
+                                <a href="blog-single.html">
+                                    <h6>
+                                        Tennessee outback steakhouse the
+                                        worker diagnosed
+                                    </h6>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="single-post-list">
+                            <div class="thumb">
+                                <img class="card-img rounded-0" src="img/blog/thumb/thumb3.png" alt="">
+                                <ul class="thumb-info">
+                                    <li><a href="#">Adam Colinge</a></li>
+                                    <li><a href="#">Dec 15</a></li>
+                                </ul>
+                            </div>
+                            <div class="details mt-20">
+                                <a href="blog-single.html">
+                                    <h6>
+                                        Tennessee outback steakhouse the
+                                        worker diagnosed
+                                    </h6>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @await Component.InvokeAsync("CategoryGet")
+
+            </div>
+        </div>
+    </div>
+
+</div>

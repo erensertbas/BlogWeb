@@ -1,0 +1,17 @@
+﻿@model BlogWeb.DL.Models.Subscriber
+
+@{
+    Layout = null;
+}
+
+<h6>Abone Olun</h6>
+<p>Gelişmelerden haberdar olmak için abone olun</p>
+<div class="" id="mc_embed_signup">
+    <form target="_blank"  asp-action="SubscriberAdd" method="post" class="form-inline">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="d-flex flex-row">
+            <input class="form-control" asp-for="SubscriberMail" placeholder="Mail Adresinizi Giriniz" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
+            <button class="click-btn btn btn-default" type="submit"><span class="lnr lnr-arrow-right"></span></button>
+        </div>
+    </form>
+</div>

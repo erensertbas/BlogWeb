@@ -1,6 +1,6 @@
 ﻿@model BlogWeb.DL.Models.Message
 @{
-    ViewData["Title"] = "Contact";
+    ViewData["Title"] = "İletişim";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var contacts = (List<BlogWeb.DL.Models.Contact>)ViewBag.Contact;
 }
@@ -9,11 +9,11 @@
     <div class="container">
         <div class="hero-banner hero-banner--sm">
             <div class="hero-banner__content">
-                <h1>Contact Us</h1>
+                <h1>İletişim</h1>
                 <nav aria-label="breadcrumb" class="banner-breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                        <li class="breadcrumb-item"><a href="/Anasayfa">Anasayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">İletişim</li>
                     </ol>
                 </nav>
             </div>
@@ -23,68 +23,38 @@
 
 <section class="section-margin--small section-margin">
     <div class="container">
-          @foreach (var item in contacts)
-         { 
-        <div class="d-none d-sm-block mb-5 pb-4">
-                <iframe src="https://maps.google.com/maps?width=100%25&amp;hl=en&amp;q=@item.Address; t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="1100" height="600" style="border: 2px solid #ff9907;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-lg-3 mb-4 mb-md-0">
-                                
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-home"></i></span>
-                    <div class="media-body">
-                        <h3>Adres </h3>
-                        <p>@item.Address</p>
+        @foreach (var item in contacts)
+        {
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-home"></i></span>
+                        <div class="media-body">
+                            <h3>Adres </h3>
+                            <p>@item.Address</p>
+                        </div>
                     </div>
+
                 </div>
-             @*   <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-headphone"></i></span>
-                    <div class="media-body">
-                        <h3><a href="tel:454545654">00 (440) 9865 562</a></h3>
-                        <p>Mon to Fri 9am to 6pm</p>
-                    </div>
-                </div>*@
-                <br>
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-email"></i></span>
-                    <div class="media-body">
-                        <h3>Mail Adresi</h3>
+
+                <div class="col-md-6">
+
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-email"></i></span>
+                        <div class="media-body">
+                            <h3>Mail Adresi</h3>
                             <p><a style="color:#797979" href="mailto:@item.EmailAddress">@item.EmailAddress</a></p>
+                        </div>
                     </div>
+
                 </div>
-             
+
             </div>
-          @* iletişim formu*@
-            <div class="col-md-8 col-lg-9">
-                <form  class="form-contact contact_form" method="post" id="contactForm" novalidate="">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="form-group">
-                                <input class="form-control" name="Firstname" id="Firstname" type="text" placeholder="Adınızı girin">
-                            </div>  
-                            <div class="form-group">
-                                <input class="form-control" name="Lastname" id="Lastname" type="text" placeholder="Soyadınızı girin">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" name="Email" id="Email" type="email" placeholder="Mail adresinizi girin">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" name="Topic" id="Topic" type="text" placeholder="Konu başlığı girin">
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="form-group">
-                                <textarea class="form-control different-control w-100" name="Content" id="Content" cols="30" rows="5" placeholder="İçerik girin"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group text-center text-md-right mt-3">
-                        <button type="submit" class="button button--active button-contactForm">Mesaj Gönder</button>
-                    </div>
-                </form>
+            <div class="d-none d-sm-block mb-5 pb-4">
+                <iframe src="https://maps.google.com/maps?width=100%25&amp;hl=en&amp;q=@item.Address; t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="1100" height="600" style="border: 2px solid #ff9907;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-        </div>
+
         }
     </div>
 </section>

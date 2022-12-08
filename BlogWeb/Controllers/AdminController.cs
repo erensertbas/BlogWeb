@@ -35,6 +35,12 @@ namespace BlogWeb.PL.Controllers
             TempData["BlogCount"] = _blog.Count();
             return View(_blog);
         }
+        public IActionResult BlogDetail(int id)
+        {
+            var result = blog.TGet(id);
+            return View(result);
+        }
+
         public IActionResult BlogCreate()
         {
             List<SelectListItem> values = (from x in context.Category.ToList()
@@ -46,41 +52,31 @@ namespace BlogWeb.PL.Controllers
             ViewBag.v = values;
             return View();
         }
+
         [HttpPost]
-        public IActionResult BlogCreate(Blog bg, IFormFile file)
+        public IActionResult BlogCreate(BlogEkle b)
         {
-            bg.UserId = 1;
-            bg.Status = true;
-            bg.ImageUrl = file.FileName;
-        
+            Blog bl = new Blog();
             if (ModelState.IsValid)
             {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (file != null)
+                if (b.ImageUrl != null)
                 {
-                    string fileName = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(wwwRootPath, @"images\products");
-                    var extension = Path.GetExtension(file.FileName);
-
-                    if (bg.ImageUrl != null)
-                    {
-                        var oldImagePath = Path.Combine(wwwRootPath, bg.ImageUrl.TrimStart('\\'));
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
-                    }
-
-                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                    {
-                        file.CopyTo(fileStreams);
-                    }
-
-                    bg.ImageUrl = @"\images\blogimg\" + fileName + extension;
-
+                    var extension = Path.GetExtension(b.ImageUrl.FileName);
+                    var newImageName = Guid.NewGuid() + extension;
+                    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", newImageName);
+                    var stream = new FileStream(location, FileMode.Create);
+                    b.ImageUrl.CopyTo(stream);
+                    bl.ImageUrl = newImageName;
                 }
+                bl.BlogTitle = b.BlogTitle;
+                bl.Text = b.Text;
+                bl.Status = b.Status;
+                bl.Date = b.Date;
+                bl.UserId = 1;
+                bl.CategoryId = b.CategoryId;
 
-                blog.TAdd(bg);
+                TempData["EklemeSonuc"] = 1;
+                blog.TAdd(bl);
                 return RedirectToAction("Blogs");
             }
 

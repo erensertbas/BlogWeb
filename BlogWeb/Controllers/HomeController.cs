@@ -13,12 +13,16 @@ using Org.BouncyCastle.Crypto.Macs;
 
 namespace BlogWeb.PL.Controllers
 {
-   
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         AboutUsRepository aboutUs = new AboutUsRepository();
         ContactRepository contact = new ContactRepository();
+        CategoryRepository category = new CategoryRepository();
+        BlogRepository blog = new BlogRepository();
+       // SubscriberRepository subscriber = new BL.Repository.SubscriberRepository();
+        Context c = new Context();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -27,19 +31,49 @@ namespace BlogWeb.PL.Controllers
 
         public IActionResult Index()
         {
-
             return View();
         }
-        public IActionResult BlogDetail()
+        public IActionResult SubscriberAdd()
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult SubscriberAdd(Subscriber sub)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //    aboutUs.TAdd();
+            //    TempData["EklemeSonuc"] = 1;
+            //    return RedirectToAction("AboutUs");
+            //}
+            return View();
+        }
+        public IActionResult BlogDetail(int id)
+        {
+            var result = blog.TGet(id);
+            return View(result);
+        }
+
+        public ActionResult HomeCategory(int id)
+        {
+            var cat = category.TGet(id).CategoryName;
+            TempData["Kategori"] = cat;
+
+            var result = c.Blog.Where(x => x.CategoryId == id).ToList();
+            // var result = c.Blog.Distinct().OrderByDescending(d => d.Date);
+            if (result.Count() > 0)
+            {
+                return View(result.Distinct().OrderByDescending(d=>d.Date));
+            }
+
+            return RedirectToAction("Index");
+        }
+
 
         [HttpGet]
         public IActionResult Contact()
         {
             IEnumerable<Contact> _contact = contact.TList();
-            TempData["ContactCount"] = _contact.Count();
 
             ViewBag.Contact = _contact;
             return View();
