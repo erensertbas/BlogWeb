@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogWeb.PL.Controllers
 {
-  
+
     public class AdminController : Controller
     {
         BlogRepository blog = new BlogRepository();
         AboutUsRepository aboutUs = new AboutUsRepository();
         ContactRepository contact = new ContactRepository();
         CategoryRepository category = new CategoryRepository();
+        UserRepository user = new UserRepository();
         Context context = new Context();
 
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -26,6 +27,39 @@ namespace BlogWeb.PL.Controllers
         {
             return View();
         }
+
+
+        #region Profil 
+
+        public IActionResult Profil(int id)
+        {
+            var result = user.TGet(id);
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            return View(result);
+        }
+        [HttpPost]
+        public IActionResult ProfilEdit(User us)
+        {
+            var x = user.TGet(us.UserId);
+            if (ModelState.IsValid)
+            {
+                x.FirstName = us.FirstName;
+                x.LastName = us.LastName;
+                x.Email = us.Email;
+                x.Password = us.Password;
+                x.RoleId = 1;
+                user.TUpdate(x);
+                TempData["GüncellemeSonuc"] = 1;
+                return RedirectToAction("Contact");
+            }
+            return View();
+        }
+
+
+        #endregion
 
         #region Blog
 

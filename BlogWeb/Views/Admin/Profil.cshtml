@@ -1,0 +1,47 @@
+﻿@model BlogWeb.DL.Models.User
+@{
+    ViewData["Title"] = "Profil";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@{
+    int GüncellemeSonuc = Convert.ToInt16(TempData["GüncellemeSonuc"]);
+}
+
+@if (GüncellemeSonuc == 1)
+{
+    <div class="alert alert-dismissible alert-success">
+        <strong>Güncelleme Başarılı!</strong> <p>Kullanıcı Başarılı Bir Şekilde Güncellendi </p>
+    </div>
+}
+<h1>Admin Profil</h1>
+
+<form method="post" asp-action="ProfilEdit">
+    <div class="p-3 mt-4">
+        <div class="col-md-6">
+            <input asp-for="UserId" hidden />
+
+            <div class="mb-3">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-warning">Profil Güncelle</button>
+           
+        </div>
+
+    </div>
+</form>
+
