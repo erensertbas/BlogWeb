@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlogWeb.BL.Repository
 {
-    internal class SubscriberRepository : GenericRepository<Subscriber>
+    public class SubscriberRepository : GenericRepository<Subscriber>
     {
        
     }

@@ -151,4 +151,8 @@
     <None Include="wwwroot\Admin\vendors\verctorMap\map-vector.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Home\Components\" />
+  </ItemGroup>
+
 </Project>

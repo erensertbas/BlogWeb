@@ -21,7 +21,7 @@ namespace BlogWeb.PL.Controllers
         ContactRepository contact = new ContactRepository();
         CategoryRepository category = new CategoryRepository();
         BlogRepository blog = new BlogRepository();
-       // SubscriberRepository subscriber = new BL.Repository.SubscriberRepository();
+        SubscriberRepository subscriber = new SubscriberRepository();
         Context c = new Context();
 
         public HomeController(ILogger<HomeController> logger)
@@ -40,12 +40,12 @@ namespace BlogWeb.PL.Controllers
         [HttpPost]
         public IActionResult SubscriberAdd(Subscriber sub)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    aboutUs.TAdd();
-            //    TempData["EklemeSonuc"] = 1;
-            //    return RedirectToAction("AboutUs");
-            //}
+            if (ModelState.IsValid)
+            {
+                subscriber.TAdd(sub);
+                TempData["EklemeSonuc"] = 1;
+                return RedirectToAction("Index");
+            }
             return View();
         }
         public IActionResult BlogDetail(int id)
@@ -83,29 +83,29 @@ namespace BlogWeb.PL.Controllers
         public IActionResult Contact(Message model)
         {
 
-            if (ModelState.IsValid)
-            {
-                MimeMessage mimeMessage = new MimeMessage();
+            //if (ModelState.IsValid)
+            //{
+            //    MimeMessage mimeMessage = new MimeMessage();
 
-                MailboxAddress mailboxAddressFrom = new MailboxAddress("Destek", "cutopya@gmail.com");
+            //    MailboxAddress mailboxAddressFrom = new MailboxAddress("Destek", "cutopya@gmail.com");
 
-                mimeMessage.From.Add(mailboxAddressFrom);
+            //    mimeMessage.From.Add(mailboxAddressFrom);
 
-                MailboxAddress mailboxAddressTo = new MailboxAddress("Admin", "info@cutopya.com");
-                mimeMessage.To.Add(mailboxAddressTo);
+            //    MailboxAddress mailboxAddressTo = new MailboxAddress("Admin", "info@cutopya.com");
+            //    mimeMessage.To.Add(mailboxAddressTo);
 
-                var bodyBuilder = new BodyBuilder();
-                bodyBuilder.TextBody = "Maili Gönderen : " + model.Firstname + " " + model.Lastname + "\n" + " Maili : " + model.Email + "\n" + model.Content;
-                mimeMessage.Body = bodyBuilder.ToMessageBody();
+            //    var bodyBuilder = new BodyBuilder();
+            //    bodyBuilder.TextBody = "Maili Gönderen : " + model.Firstname + " " + model.Lastname + "\n" + " Maili : " + model.Email + "\n" + model.Content;
+            //    mimeMessage.Body = bodyBuilder.ToMessageBody();
 
-                mimeMessage.Subject = model.Topic;
+            //    mimeMessage.Subject = model.Topic;
 
-                SmtpClient client = new SmtpClient();
-                client.Connect("smtp.gmail.com", 25, false);
-                client.Authenticate("cutopya@gmail.com", "zstvndudhopkukec");
-                client.Send(mimeMessage);
-                client.Disconnect(true);
-            }
+            //    SmtpClient client = new SmtpClient();
+            //    client.Connect("smtp.gmail.com", 25, false);
+            //    client.Authenticate("cutopya@gmail.com", "zstvndudhopkukec");
+            //    client.Send(mimeMessage);
+            //    client.Disconnect(true);
+            //}
             return View();
         }
         public IActionResult About()
