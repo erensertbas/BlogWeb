@@ -21,7 +21,7 @@ namespace BlogWeb.DL.Data
         public DbSet<Role> Role { get; set; }
         public DbSet<Message> Message { get; set; }
         public DbSet<Subscriber> Subscriber { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<UserModel> User { get; set; }
 
 
     }

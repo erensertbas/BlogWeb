@@ -31,7 +31,7 @@ namespace BlogWeb.DL.Models
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         //  [ValidateNever]
-        public User _User { get; set; }
+        public UserModel _User { get; set; }
 
         [Required(ErrorMessage = "Kategori Boş Geçilemez!")]
         public int CategoryId { get; set; }

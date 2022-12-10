@@ -15,7 +15,7 @@ namespace BlogWeb.DL.Models
         [DataMember]
         public Category _category { get; set; }
         [DataMember]
-        public User _user { get; set; }
+        public UserModel _user { get; set; }
     }
     
 }

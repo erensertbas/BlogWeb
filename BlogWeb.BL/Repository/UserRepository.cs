@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlogWeb.BL.Repository
 {
-    public class UserRepository:GenericRepository<User>
+    public class UserRepository:GenericRepository<UserModel>
     {
        
     }

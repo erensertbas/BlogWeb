@@ -9,15 +9,20 @@
   <ItemGroup>
     <Compile Remove="Areas\**" />
     <Compile Remove="Views\Default\**" />
+    <Compile Remove="Views\Home\Components\**" />
     <Content Remove="Areas\**" />
     <Content Remove="Views\Default\**" />
+    <Content Remove="Views\Home\Components\**" />
     <EmbeddedResource Remove="Areas\**" />
     <EmbeddedResource Remove="Views\Default\**" />
+    <EmbeddedResource Remove="Views\Home\Components\**" />
     <None Remove="Areas\**" />
     <None Remove="Views\Default\**" />
+    <None Remove="Views\Home\Components\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Firebase.Auth" Version="1.0.0" />
     <PackageReference Include="MailKit" Version="3.4.3" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
@@ -152,7 +157,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Home\Components\" />
+    <Content Update="Views\Home\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

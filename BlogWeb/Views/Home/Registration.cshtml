@@ -1,0 +1,83 @@
+﻿@model BlogWeb.DL.Models.UserModel
+@{
+    ViewData["Title"] = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet" />
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
+      rel="stylesheet" />
+
+
+
+
+<div class="row m-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+
+        <!-- Pills content -->
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                <form asp-action="Registration">
+                    <div class="text-center mb-3">
+                        <p>Kayıt Ol</p>
+                    </div>
+                    <br />
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input asp-for="FirstName" type="text" class="form-control" />
+                        <label class="form-label" >İsim</label>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input asp-for="LastName" type="text" class="form-control" />
+                        <label class="form-label">Soyisim</label>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input asp-for="Email" type="email" class="form-control" />
+                        <label class="form-label" >Mail Adresi</label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input asp-for="Password" type="password" id="loginPassword" class="form-control" />
+                        <label class="form-label">Şifre</label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                    </div>
+
+                    <!-- 2 column grid layout -->
+                    <div class="row mb-4">
+                        <div class="col-md-4 d-flex ">
+                            <!-- Simple link -->
+                            <a href="~/User/SignIn">Hesabım var</a>
+                        </div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Kayıt Ol</button>
+                </form>
+            </div>
+
+        </div>
+        <!-- Pills content -->
+
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+

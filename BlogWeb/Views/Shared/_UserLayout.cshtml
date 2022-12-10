@@ -61,7 +61,7 @@
 
     <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
         <div class="logo d-flex justify-content-between">
-            <a href="~/Admin/index-2.html"><img src="~/Admin/img/logo.png" alt=""></a>
+            <a href="~/Home/Index"><h3>Anasayfa</h3></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
             </div>
@@ -76,29 +76,8 @@
                 <ul>
                     <li><a href="/Makaleler">Makalelerim</a></li>
                     <li><a href="/MakaleOlustur">Makale Yayınla</a></li>
-
                 </ul>
             </li>
-            <li class="">
-                <a class="has-arrow" aria-expanded="false">
-                    <div class="icon_menu">
-                    </div>
-                    <span>Sayfa Düzenle</span>
-                </a>
-                <ul>
-                    <li><a href="/YoneticiHakkimizda">Hakkımızda</a></li>
-                </ul>
-                <ul>
-                    <li><a href="/YoneticiKategori">Kategoriler</a></li>
-                </ul>
-                <ul>
-                    <li><a href="/YoneticiKategori">İletişim</a></li>
-                </ul>
-                <ul>
-                    <li><a asp-controller="Admin" asp-action="Subscriber">Aboneler</a></li>
-                </ul>
-            </li>
-
         </ul>
     </nav>
 
@@ -112,15 +91,6 @@
                             <i class="ti-menu"></i>
                         </div>
                         <div class="serach_field-area d-flex align-items-center">
-                            @*<div class="search_inner">
-                            <form action="#">
-                            <div class="search_field">
-                            <input type="text" placeholder="Ara">
-                            </div>
-                            <button type="submit"> <img src="~/Admin/img/icon/icon_search.svg" alt=""> </button>
-                            </form>
-                            </div>
-                            <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>*@
                         </div>
                         <div class="header_right d-flex justify-content-between align-items-center">
 
@@ -128,10 +98,10 @@
                                 <img src="~/Admin/img/client_img.png" alt="#">
                                 <div class="profile_info_iner">
                                     <div class="profile_author_name">
-                                        <p>Admin</p>
+                                        <p>@TempData["username"]</p>
                                     </div>
                                     <div class="profile_info_details">
-                                        <a href="~/Admin/Profil/1">Profilim </a>
+                                        <a href="~/User/Profil">Profilim </a>
                                         <a href="~/Home/LogOut">Log Out </a>
                                     </div>
                                 </div>

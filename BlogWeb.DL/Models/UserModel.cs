@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlogWeb.DL.Models
 {
-    public class User
+    public class UserModel
     {
         [Key]
         public int UserId { get; set; }

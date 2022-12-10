@@ -1,6 +1,7 @@
 using BlogWeb.BL.Repository;
 using BlogWeb.BL.Repository.IRepository;
 using BlogWeb.DL.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Web.Mvc;
@@ -9,10 +10,32 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
+{
+    x.Cookie.Name = "NetCoreMvc.Auth";
+    x.AccessDeniedPath = "/User/Index";
+    x.LoginPath = "/Home/SignIn";
+});
+
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});  // burasý
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 var app = builder.Build();
+
+
+//builder.Services.AddMvc(); //eklendi izinsiz yönlendirme olmasýn diye
+
+
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -26,6 +49,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();  // burasý
+app.UseAuthentication();// eklendi 
+
 
 app.UseAuthorization();
 

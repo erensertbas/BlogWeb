@@ -4,10 +4,11 @@ using BlogWeb.DL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlogWeb.PL.Controllers
 {
-
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         BlogRepository blog = new BlogRepository();
@@ -34,7 +35,7 @@ namespace BlogWeb.PL.Controllers
             int TotalSubscriber = subscribers.Count();
             ViewBag.totatSubscriber = TotalSubscriber;
 
-            IEnumerable<User> users = user.TList();
+            IEnumerable<UserModel> users = user.TList();
             int TotalUser = users.Count();
             ViewBag.totalUser = TotalUser;
             return View();
@@ -53,7 +54,7 @@ namespace BlogWeb.PL.Controllers
             return View(result);
         }
         [HttpPost]
-        public IActionResult ProfilEdit(User us)
+        public IActionResult ProfilEdit(UserModel us)
         {
             var x = user.TGet(us.UserId);
             if (ModelState.IsValid)
