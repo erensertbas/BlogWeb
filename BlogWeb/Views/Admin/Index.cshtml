@@ -1,6 +1,41 @@
 ﻿
 @{
-    ViewData["Title"] = "Yönetici";
+    ViewData["Title"] = "Anasayfa";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+  <div class="row">
+<div class="col-md-4">
+    <div class="card mb-3 widget-chart">
+        <div class="icon-wrapper rounded-circle">
+            <div class="icon-wrapper-bg bg-primary"></div>
+            <i class="ti-book text-edit"></i>
+        </div>
+        <div class="widget-numbers"><span>@ViewBag.totalBlog</span></div>
+        <div class="widget-subheading">Toplam Yayınlanan Makale Sayısı</div>
+     
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card mb-3 widget-chart">
+        <div class="icon-wrapper rounded-circle">
+            <div class="icon-wrapper-bg bg-danger"></div>
+                <i class="ti-face-smile text-danger"></i>
+        </div>
+        <div class="widget-numbers"><span>@ViewBag.totatSubscriber</span></div>
+        <div class="widget-subheading">Toplam Abone Sayısı</div>
+    
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card mb-3 widget-chart">
+        <div class="icon-wrapper rounded-circle">
+            <div class="icon-wrapper-bg bg-info"></div>
+                <i class="ti-pencil-alt text-info"></i>
+        </div>
+        <div class="widget-numbers"><span>@ViewBag.totalUser</span></div>
+        <div class="widget-subheading">Toplam Yazar Sayısı</div>
+  
+    </div>
+</div>
+</div>

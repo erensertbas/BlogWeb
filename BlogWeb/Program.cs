@@ -31,25 +31,25 @@ app.UseAuthorization();
 
 #region HomeController
 
-app.MapControllerRoute(
-     name: "Anasayfa",
-     pattern: "Anasayfa",
-    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//     name: "Anasayfa",
+//     pattern: "Anasayfa",
+//    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-     name: "Contact",
-     pattern: "Iletisim",
-    defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//     name: "Contact",
+//     pattern: "Iletisim",
+//    defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-     name: "About",
-     pattern: "Hakkimizda",
-    defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//     name: "About",
+//     pattern: "Hakkimizda",
+//    defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
-     name: "BlogDetail",
-     pattern: "{Makale-Detay}/{id}",
-    defaults: new { controller = "Home", action = "BlogDetail", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//     name: "BlogDetail",
+//     pattern: "{Makale-Detay}/{id}",
+//    defaults: new { controller = "Home", action = "BlogDetail", id = UrlParameter.Optional });
 
 #endregion
 

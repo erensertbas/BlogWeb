@@ -15,6 +15,7 @@ namespace BlogWeb.PL.Controllers
         ContactRepository contact = new ContactRepository();
         CategoryRepository category = new CategoryRepository();
         UserRepository user = new UserRepository();
+        SubscriberRepository subscriber = new SubscriberRepository();       
         Context context = new Context();
 
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -25,6 +26,17 @@ namespace BlogWeb.PL.Controllers
         }
         public IActionResult Index()
         {
+            IEnumerable<Blog> blogs = blog.TList();
+            int Totalblog = blogs.Count();
+            ViewBag.totalBlog = Totalblog;
+
+            IEnumerable<Subscriber> subscribers = subscriber.TList();
+            int TotalSubscriber = subscribers.Count();
+            ViewBag.totatSubscriber = TotalSubscriber;
+
+            IEnumerable<User> users = user.TList();
+            int TotalUser = users.Count();
+            ViewBag.totalUser = TotalUser;
             return View();
         }
 
