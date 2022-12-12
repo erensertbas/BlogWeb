@@ -141,8 +141,11 @@ namespace BlogWeb.PL.Controllers
         public IActionResult SignIn()
         {
             ClaimsPrincipal claimUser = HttpContext.User;
+
             if (claimUser.Identity.IsAuthenticated)
             {
+                //var result = HttpContext.Session.GetInt32("_UserToken").Value;
+                //HttpContext.Session.SetInt32("UserID", result);
                 return RedirectToAction("Index", "Admin");
             }
             return View();
@@ -151,67 +154,60 @@ namespace BlogWeb.PL.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn(UserModel loginModel)
         {
-            try
-            {
-                //log in an existing user
-                var fbAuthLink = await auth
-                                .SignInWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
-
-                string token = fbAuthLink.FirebaseToken;
-                //save the token to a session variable
-                if (token != null)
+                try
                 {
-                    var result = c.User.Where(x => x.Email == loginModel.Email).FirstOrDefault();
+                    //log in an existing user
+                    var fbAuthLink = await auth
+                                    .SignInWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
 
-                    //new Claim(ClaimTypes.Role, "Admin")
-
-                    if (result.RoleId == 1)
+                    string token = fbAuthLink.FirebaseToken;
+                    //save the token to a session variable
+                    if (token != null)
                     {
-                        List<Claim> claimss = new List<Claim>()
+                        var result = c.User.Where(x => x.Email == loginModel.Email).FirstOrDefault();
+
+                        if (result.RoleId == 1)
+                        {
+                            List<Claim> claimss = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier, loginModel.Email),
                         new Claim(ClaimTypes.Role, "Admin")
                     };
-                        ClaimsIdentity claimsIdentitys = new ClaimsIdentity(claimss, CookieAuthenticationDefaults.AuthenticationScheme);
-                        AuthenticationProperties propertiess = new AuthenticationProperties()
-                        {
-                            AllowRefresh = true,
-                        };
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentitys), propertiess);
+                            ClaimsIdentity claimsIdentitys = new ClaimsIdentity(claimss, CookieAuthenticationDefaults.AuthenticationScheme);
+                            AuthenticationProperties propertiess = new AuthenticationProperties()
+                            {
+                                AllowRefresh = true,
+                            };
+                            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentitys), propertiess);
 
-                    }
-                    else
-                    {
-                        List<Claim> claims = new List<Claim>()
+                        }
+                        else
+                        {
+                            List<Claim> claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier, loginModel.Email),
                         new Claim(ClaimTypes.Role, "User")
                     };
-                        ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                        AuthenticationProperties properties = new AuthenticationProperties()
-                        {
-                            AllowRefresh = true,
-                        };
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
+                            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                            AuthenticationProperties properties = new AuthenticationProperties()
+                            {
+                                AllowRefresh = true,
+                            };
+                            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
+                        }
+
+                        HttpContext.Session.SetInt32("_UserToken", result.RoleId);
+
+                        return RedirectToAction("Index");
                     }
 
-
-
-
-                  
-                    HttpContext.Session.SetInt32("_UserToken", result.UserId);
-                    return RedirectToAction("Index", "Admin");
                 }
-
-            }
-            catch (FirebaseAuthException ex)
-            {
-                var firebaseEx = JsonConvert.DeserializeObject<FirebaseError>(ex.ResponseData);
-
-                TempData["Error"] = "Mail adresi veya şifre hatalı!";
-                return View(loginModel);
-            }
-
+                catch (FirebaseAuthException ex)
+                {
+                    var firebaseEx = JsonConvert.DeserializeObject<FirebaseError>(ex.ResponseData);
+                    TempData["Error"] = "Mail adresi veya şifre hatalı!";
+                    return View(loginModel);
+                }
             return View();
         }
 
@@ -251,14 +247,7 @@ namespace BlogWeb.PL.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
         #endregion
-
-
-
-
-
-
 
     }
 }

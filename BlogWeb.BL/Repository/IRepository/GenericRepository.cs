@@ -17,6 +17,10 @@ namespace BlogWeb.BL.Repository.IRepository
         {
             return c.Set<T>().ToList();
         }
+        public List<T> TList(string p)
+        {
+            return c.Set<T>().Include(p).ToList();
+        }
 
         public void TAdd(T t)
         {
@@ -38,9 +42,6 @@ namespace BlogWeb.BL.Repository.IRepository
             return c.Set<T>().Find(id);
         }
 
-        public List<T> TList(string p)
-        {
-            return c.Set<T>().Include(p).ToList();
-        }
+       
     }
 }

@@ -16,9 +16,12 @@ namespace BlogWeb.PL.ViewComponents
             //return View(_blog);
             //IEnumerable<Blog> _blog = blog.TList();
 
+            //var resultt = blog.TList("Category");
             //var result = blog.TList().ToPagedList(page,4);
 
             var result = c.Blog.Distinct().OrderByDescending(d => d.Date);
+
+
             // güncelden eskiye doğru
 
             //var result = blog.TList();

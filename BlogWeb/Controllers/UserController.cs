@@ -17,7 +17,19 @@ namespace BlogWeb.PL.Controllers
         Context c = new Context();
         UserRepository user = new UserRepository();
 
+       
         public IActionResult Index()
+        {
+
+            //if (HttpContext.Session.GetInt32("_UserToken") != null)
+            //{
+            //    var userid = HttpContext.Session.GetInt32("_UserToken").Value;
+            //    var result = user.TGet(userid);
+            //    //TempData["username"] = result.FirstName;
+            //}
+            return View();
+        }
+        public IActionResult Blogs()
         {
             if (HttpContext.Session.GetInt32("_UserToken") != null)
             {
@@ -25,10 +37,12 @@ namespace BlogWeb.PL.Controllers
                 var result = user.TGet(userid);
                 TempData["username"] = result.FirstName;
 
+                return View();
+                // sayfa açılacak
+
             }
             return View();
         }
-
 
 
 

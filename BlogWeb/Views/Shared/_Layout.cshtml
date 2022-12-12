@@ -30,9 +30,9 @@
                         <ul class="nav navbar-nav menu_nav justify-content-center">
                             <li class="nav-item"><a class="nav-link" href="/Anasayfa">Anasayfa</a></li>
                             <li class="nav-item submenu dropdown">
-                                 @await Component.InvokeAsync("NavGet")
+                                @await Component.InvokeAsync("NavGet")
                             </li>
-                           
+
                             <li class="nav-item"><a class="nav-link" href="/Hakkimizda">Hakkımızda</a></li>
                             <li class="nav-item"><a class="nav-link" href="/Iletisim">İletişim</a></li>
                             <li class="nav-item submenu dropdown">
@@ -63,40 +63,40 @@
 
     <footer class="footer-area section-padding" style="padding:0px 0px;">
         <div class="container">
-            <div class="row">             
-                      @*  @await Component.InvokeAsync("AboutGet")  *@   
-                        
-            @*    <div class="col-lg-5  col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        @await Component.InvokeAsync("SubscriberGet")
-                        
-                    </div>
+            <div class="row">
+                @*  @await Component.InvokeAsync("AboutGet")  *@
+
+                @*    <div class="col-lg-5  col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                @await Component.InvokeAsync("SubscriberGet")
+
+                </div>
                 </div>*@
-            @*    <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-footer-widget">
-                        <h6>Bizi Takip Edin</h6>
-                      
-                        <div class="footer-social d-flex align-items-right">
-                            <a href="#">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="https://instagram.com/cutopya?igshid=YmMyMTA2M2Y=">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                    
-                        </div>
-                    </div>
+                @*    <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                <h6>Bizi Takip Edin</h6>
+
+                <div class="footer-social d-flex align-items-right">
+                <a href="#">
+                <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#">
+                <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com/cutopya?igshid=YmMyMTA2M2Y=">
+                <i class="fab fa-instagram"></i>
+                </a>
+
+                </div>
+                </div>
                 </div>*@
             </div>
             <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
                 <p class="footer-text m-0" style="padding-top:30px; padding-bottom:15px;">
-                    Copyright ©<script>document.write(new Date().getFullYear());</script> All rights reserved 
+                    Copyright ©<script>document.write(new Date().getFullYear());</script> All rights reserved
                 </p>
             </div>
-       
+
         </div>
     </footer>
 
