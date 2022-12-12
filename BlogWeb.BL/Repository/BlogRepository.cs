@@ -1,6 +1,7 @@
 ﻿using BlogWeb.BL.Repository.IRepository;
 using BlogWeb.DL.Data;
 using BlogWeb.DL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,6 @@ namespace BlogWeb.BL.Repository
         //{
         //    this._db = db;
         //}
-        
+
     }
 }

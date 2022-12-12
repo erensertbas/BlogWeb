@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogWeb.PL.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    //[Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         BlogRepository blog = new BlogRepository();
@@ -78,8 +79,10 @@ namespace BlogWeb.PL.Controllers
 
         public IActionResult Blogs()
         {
-            IEnumerable<Blog> _blog = blog.TList();
+            //IEnumerable<Blog> _blog = blog.TList();
+            IEnumerable<Blog> _blog = context.Blog.Include(x => x._Category);
             TempData["BlogCount"] = _blog.Count();
+
             return View(_blog);
         }
         public IActionResult BlogDetail(int id)
