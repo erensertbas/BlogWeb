@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BlogWeb.PL.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
+
     public class AdminController : Controller
     {
         BlogRepository blog = new BlogRepository();
@@ -16,7 +17,7 @@ namespace BlogWeb.PL.Controllers
         ContactRepository contact = new ContactRepository();
         CategoryRepository category = new CategoryRepository();
         UserRepository user = new UserRepository();
-        SubscriberRepository subscriber = new SubscriberRepository();       
+        SubscriberRepository subscriber = new SubscriberRepository();
         Context context = new Context();
 
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -27,6 +28,10 @@ namespace BlogWeb.PL.Controllers
         }
         public IActionResult Index()
         {
+            var userId = HttpContext.Session.GetInt32("_UserToken");
+            var degerler = context.User.FirstOrDefault(x => x.UserId == userId);
+            ViewBag.user = degerler;
+
             IEnumerable<Blog> blogs = blog.TList();
             int Totalblog = blogs.Count();
             ViewBag.totalBlog = Totalblog;
@@ -46,12 +51,15 @@ namespace BlogWeb.PL.Controllers
 
         public IActionResult Profil(int id)
         {
-            var result = user.TGet(id);
-            if (id == null || id == 0)
+            if (id == 0)
             {
                 return NotFound();
+
             }
-            return View(result);
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("_UserToken"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+            return View(degerler);
         }
         [HttpPost]
         public IActionResult ProfilEdit(UserModel us)

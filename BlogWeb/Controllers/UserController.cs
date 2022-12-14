@@ -20,13 +20,10 @@ namespace BlogWeb.PL.Controllers
        
         public IActionResult Index()
         {
+            var userId = HttpContext.Session.GetInt32("_UserToken");
+            var degerler = c.User.FirstOrDefault(x => x.UserId == userId);
+            ViewBag.user = degerler;
 
-            //if (HttpContext.Session.GetInt32("_UserToken") != null)
-            //{
-            //    var userid = HttpContext.Session.GetInt32("_UserToken").Value;
-            //    var result = user.TGet(userid);
-            //    //TempData["username"] = result.FirstName;
-            //}
             return View();
         }
         public IActionResult Blogs()
@@ -40,6 +37,37 @@ namespace BlogWeb.PL.Controllers
                 return View();
                 // sayfa açılacak
 
+            }
+            return View();
+        }
+
+        public IActionResult Profil(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+
+            }
+            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("_UserToken"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+            
+            return View(degerler);
+        }
+        [HttpPost]
+        public IActionResult ProfilEdit(UserModel us)
+        {
+            var x = user.TGet(us.UserId);
+            if (ModelState.IsValid)
+            {
+                x.FirstName = us.FirstName;
+                x.LastName = us.LastName;
+                x.Email = us.Email;
+                x.Password = us.Password;
+                x.RoleId = 1;
+                user.TUpdate(x);
+                TempData["GüncellemeSonuc"] = 1;
+                return RedirectToAction("Contact");
             }
             return View();
         }

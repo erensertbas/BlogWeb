@@ -2,6 +2,8 @@ using BlogWeb.BL.Repository;
 using BlogWeb.BL.Repository.IRepository;
 using BlogWeb.DL.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Web.Mvc;
@@ -10,20 +12,32 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession();
+
+builder.Services.AddMvc(config=>
+{
+    var policy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+
+});
+
+ builder.Services.AddMvc(); //eklendi izinsiz yönlendirme olmasýn diye
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
 {
     x.Cookie.Name = "NetCoreMvc.Auth";
     x.AccessDeniedPath = "/User/Index";
-    x.LoginPath = "/Home/SignIn";
+    x.LoginPath = "/Login/SignIn";
 });
 
-
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});  // burasý
+//builder.Services.AddSession(options =>
+//{
+//    options.IdleTimeout = TimeSpan.FromSeconds(10);
+//    options.Cookie.HttpOnly = true;
+//    options.Cookie.IsEssential = true;
+//});  // burasý
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
@@ -31,7 +45,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 var app = builder.Build();
 
 
-//builder.Services.AddMvc(); //eklendi izinsiz yönlendirme olmasýn diye
+
 
 
 
