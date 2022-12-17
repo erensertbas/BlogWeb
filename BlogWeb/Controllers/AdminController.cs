@@ -9,12 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogWeb.PL.Controllers
 {
-<<<<<<< HEAD
+
     [Authorize(Roles = "Admin")]
 
-=======
-    //[Authorize(Roles ="Admin")]
->>>>>>> a97ad58b51f639e1848a65626a641393b07f9350
+
     public class AdminController : Controller
     {
         BlogRepository blog = new BlogRepository();

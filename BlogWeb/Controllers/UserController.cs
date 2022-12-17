@@ -14,7 +14,6 @@ namespace BlogWeb.PL.Controllers
     //[Authorize(Roles = "User")]
     public class UserController : Controller
     {
-        BlogRepository blog = new BlogRepository();
 
         FirebaseAuthProvider auth;
         Context c = new Context();
@@ -29,32 +28,16 @@ namespace BlogWeb.PL.Controllers
             var degerler = user.TGet(userId);
             ViewBag.user = degerler;
 
-<<<<<<< HEAD
-=======
-           // return View(db.Blogs.Where(x => x.UserId == "Sessiondan gelen user id si").ToList());
 
->>>>>>> a97ad58b51f639e1848a65626a641393b07f9350
             return View();
         }
         public IActionResult Blogs()
         {
-            //if (HttpContext.Session.GetInt32("_UserToken") != null)
-            //{
-            //    var userid = HttpContext.Session.GetInt32("_UserToken").Value;
-            //    var result = user.TGet(userid);
-            //    TempData["username"] = result.FirstName;
-
-            //    return View();
-            //    // sayfa açılacak
-
-            //}
-<<<<<<< HEAD
-            return View();
-=======
+        
             var userId = HttpContext.Session.GetInt32("_UserToken");
             var userBlog = blog.TList(x => x.UserId == userId);
             return View(userBlog);
->>>>>>> Dev-ErenSertbas
+
         }
 
         public IActionResult Profil(int id)
