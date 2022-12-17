@@ -22,7 +22,11 @@
         <div class="col-md-6">
             <input asp-for="UserId" hidden />
             <input asp-for="RoleId" hidden />
-
+          
+            <div class="mb-3">
+                <input asp-for="_Role.RoleName" value="@ViewBag.role.RoleName" class="form-control" hidden/>
+                <span asp-validation-for="_Role.RoleName" class="text-danger"></span>
+            </div>
             <div class="mb-3">
                 <input asp-for="FirstName" value="@ViewBag.user.FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
