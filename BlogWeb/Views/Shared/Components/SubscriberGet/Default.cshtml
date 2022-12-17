@@ -1,8 +1,17 @@
 ﻿@model BlogWeb.DL.Models.Subscriber
+@{
+    int EklemeSonuc = Convert.ToInt16(TempData["EklemeSonuc"]);
+}
 
-<h6>Abone Olun</h6>
-<p>Gelişmelerden haberdar olmak için abone olun</p>
-<div class="" id="mc_embed_signup">
+@if (EklemeSonuc == 1)
+{
+    <div class="alert alert-dismissible alert-success">
+        <strong>Kayıt Başarılı!</strong> <p>Artık Sende Bir Cütopya Abonesi Oldun </p>
+    </div>
+}
+<div class="single-sidebar-widget tag_cloud_widget">
+    <h4 class="single-sidebar-widget__title">Abone Olun</h4>
+    <p>Gelişmelerden haberdar olmak için abone olun</p>
     <form target="_blank" asp-controller="Home" asp-action="SubscriberAdd" method="post" class="form-inline">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="d-flex flex-row">

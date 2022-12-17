@@ -18,6 +18,7 @@ namespace BlogWeb.PL.Controllers
         CategoryRepository category = new CategoryRepository();
         UserRepository user = new UserRepository();
         SubscriberRepository subscriber = new SubscriberRepository();
+        RoleRepository  role = new RoleRepository();    
         Context context = new Context();
 
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -31,6 +32,7 @@ namespace BlogWeb.PL.Controllers
             var userId = HttpContext.Session.GetInt32("_UserToken");
             var degerler = context.User.FirstOrDefault(x => x.UserId == userId);
             ViewBag.user = degerler;
+            
 
             IEnumerable<Blog> blogs = blog.TList();
             int Totalblog = blogs.Count();
@@ -48,7 +50,7 @@ namespace BlogWeb.PL.Controllers
 
 
         #region Profil 
-
+        [HttpGet]
         public IActionResult Profil(int id)
         {
             if (id == 0)
@@ -58,6 +60,8 @@ namespace BlogWeb.PL.Controllers
             }
             int userId = Convert.ToInt32(HttpContext.Session.GetInt32("_UserToken"));
             var degerler = user.TGet(userId);
+            var roles = role.TGet(degerler.RoleId);
+            ViewBag.role= roles;
             ViewBag.user = degerler;
             return View(degerler);
         }
@@ -65,6 +69,7 @@ namespace BlogWeb.PL.Controllers
         public IActionResult ProfilEdit(UserModel us)
         {
             var x = user.TGet(us.UserId);
+            int id = us.UserId;
             if (ModelState.IsValid)
             {
                 x.FirstName = us.FirstName;
@@ -74,7 +79,8 @@ namespace BlogWeb.PL.Controllers
                 x.RoleId = 1;
                 user.TUpdate(x);
                 TempData["GüncellemeSonuc"] = 1;
-                return RedirectToAction("Contact");
+                return RedirectToAction("Profil",new {id});
+              
             }
             return View();
         }
