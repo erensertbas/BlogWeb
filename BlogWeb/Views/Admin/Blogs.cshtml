@@ -42,7 +42,9 @@
                 {
                     <th scope="row">@Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Text))</th>
                 }
-                <td>@item.CategoryId</td>
+                <td>@item._Category.CategoryName</td>
+         
+
                 <td>@item.Date.ToShortDateString()</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
