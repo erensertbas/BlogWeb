@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BlogWeb.DL.Models.Blog>
+﻿@using BlogWeb.DL.Models
+@model IEnumerable<BlogWeb.DL.Models.Blog>
 
 <section>
     <div class="container">
@@ -10,7 +11,16 @@
                         <img class="card-img rounded-0" src="~/images/@item.ImageUrl" style="height:200px;" alt="">
                     </div>
                     <div class="blog__slide__content">
-                        <a class="blog__slide__label" href="~/Home/HomeCategory/@item.CategoryId">@item.CategoryId</a>
+                        <a class="blog__slide__label" href="~/Home/HomeCategory/@item.CategoryId">
+
+                            @{
+                                Context c = new Context();
+                                var result1 = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();
+                            }
+                            @result1.CategoryName 
+
+                          
+                        </a>
                         <h3><a href="~/Home/BlogDetail/@item.BlogId">@item.BlogTitle</a></h3>
                         <p>@item.Date.ToShortDateString()</p>
                     </div>

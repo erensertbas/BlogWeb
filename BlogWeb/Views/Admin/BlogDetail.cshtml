@@ -1,4 +1,5 @@
-﻿@model BlogWeb.DL.Models.Blog
+﻿@using BlogWeb.DL.Models
+@model BlogWeb.DL.Models.Blog
 @{
     ViewData["Title"] = "BlogDetail";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -16,11 +17,38 @@
         <p class="card-text">@Html.Raw(System.Web.HttpUtility.HtmlDecode(@Model.Text))</p>
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">@Model.CategoryId</li>
-        <li class="list-group-item">@Model.UserId</li>
-        <li class="list-group-item">@Model.Status</li>
+        <li class="list-group-item">
+            @{
+                Context c = new Context();
+                var result = c.Category.Where(x => x.CategoryId == @Model.CategoryId).FirstOrDefault();
+            }
+            @result.CategoryName
+
+
+        </li>
+        <li class="list-group-item">
+          @{
+               
+                var result1 = c.User.Where(x => x.UserId == @Model.UserId).FirstOrDefault();
+            }
+            @result1.FirstName @result1.LastName
+
+        
+        </li>
+        <li class="list-group-item">
+            @if (@Model.Status==true)
+            {
+                <p>Yayında</p>
+            }
+            else
+            {
+                 <p>Onay Bekliyor</p>   
+            }
+
+
+        </li>
     </ul>
     <div class="card-footer text-muted">
-        @Model.Date
+        @Model.Date.ToShortDateString()
     </div>
 </div>

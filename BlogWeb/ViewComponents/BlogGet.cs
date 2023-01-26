@@ -19,7 +19,7 @@ namespace BlogWeb.PL.ViewComponents
             //var resultt = blog.TList("Category");
             //var result = blog.TList().ToPagedList(page,4);
 
-            var result = c.Blog.Distinct().OrderByDescending(d => d.Date);
+            var result = c.Blog.Distinct().OrderByDescending(d => d.Date).Where(x=>x.Status==true);
 
 
             // güncelden eskiye doğru

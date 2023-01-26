@@ -35,6 +35,7 @@ namespace BlogWeb.PL.Controllers
         FirebaseAuthProvider auth;
         UserRepository user = new UserRepository();
 
+
         public IActionResult Index()
         {
             return View();
@@ -142,15 +143,27 @@ namespace BlogWeb.PL.Controllers
         #region Login Register LogOut
         public IActionResult SignIn()
         {
-            ClaimsPrincipal claimUser = HttpContext.User;
+            //ClaimsPrincipal claimUser = HttpContext.User;
 
-            if (claimUser.Identity.IsAuthenticated)
-            {
-                //var result = HttpContext.Session.GetInt32("_UserToken").Value;
-                //HttpContext.Session.SetInt32("UserID", result);
-                return RedirectToAction("Index", "Admin");
-            }
+            //if (claimUser.Identity.IsAuthenticated)
+            //{
+            //    //var result = HttpContext.Session.GetInt32("_UserToken").Value;
+            //    //HttpContext.Session.SetInt32("UserID", result);
+            //    return RedirectToAction("Index", "Admin");
+            //}
             return View();
+        }
+
+
+        public void SetCookie(string key, string id)
+        {
+            HttpContext.Response.Cookies.Append(key, id);
+        }
+
+        public string GetCookie(string key)
+        {
+            HttpContext.Request.Cookies.TryGetValue(key, out string id);
+            return id;
         }
 
         [HttpPost]
@@ -170,7 +183,11 @@ namespace BlogWeb.PL.Controllers
                     var userIdentity = new ClaimsIdentity(claims, "a");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(userIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
-                    HttpContext.Session.SetInt32("_UserToken", dataValue.UserId);
+
+                   //HttpContext.Session.SetInt32("_UserToken", dataValue.UserId);
+
+                    SetCookie("userId", dataValue.UserId.ToString());
+
                     return RedirectToAction("Index", "Admin");
                 }
                 else
@@ -183,7 +200,8 @@ namespace BlogWeb.PL.Controllers
                     var userIdentity = new ClaimsIdentity(claims, "a");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(userIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
-                    HttpContext.Session.SetInt32("_UserToken", dataValue.UserId);
+                   // HttpContext.Session.SetInt32("_UserToken", dataValue.UserId);
+                    SetCookie("userId", dataValue.UserId.ToString());
                     return RedirectToAction("Index", "User");
                 }
 

@@ -13,7 +13,7 @@ namespace BlogWeb.PL.ViewComponents
             //var result = c.Blog.Distinct().OrderByDescending(d => d.Date);
             var data = (from d in c.Blog
                         orderby d.BlogId descending
-                        select d).Take(3);
+                        select d).Take(3).Where(x=>x.Status==true);
             return View(data.ToList());
         }
     }

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<BlogWeb.DL.Models.Blog>
+@using BlogWeb.DL.Models
 @using X.PagedList;
 @using X.PagedList.Mvc.Core;
 @*@model IPagedList<BlogWeb.DL.Models.Blog>*@
@@ -9,9 +10,29 @@
         <div class="thumb">
             <a href="~/MakaleDetay/@item.BlogId"> <img class="img-fluid" src="~/images/@item.ImageUrl"> </a>
             <ul class="thumb-info">
-                <li><a><i class="ti-user"></i>@item.UserId</a></li>
+                <li>
+                    <a>
+                        <i class="ti-user"></i>
+                        @{
+                            Context c = new Context();
+                            var result1 = c.User.Where(x => x.UserId == @item.UserId).FirstOrDefault();
+                        }
+                        @result1.FirstName @result1.LastName
+
+                    </a>
+                </li>
                 <li><a><i class="ti-notepad"></i>@item.Date.ToShortDateString()</a></li>
-                <li><a href="~/Home/HomeCategory/@item.CategoryId"><i class="ti-themify-favicon"></i> @item.CategoryId</a></li>
+                <li>
+                    <a href="~/Home/HomeCategory/@item.CategoryId">
+                        <i class="ti-themify-favicon"></i>
+                        @{
+                         
+                            var result = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();
+                        }
+                        @result.CategoryName
+
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="details mt-20">

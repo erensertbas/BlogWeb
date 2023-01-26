@@ -15,7 +15,7 @@
         <strong>Güncelleme Başarılı!</strong> <p>Kullanıcı Başarılı Bir Şekilde Güncellendi </p>
     </div>
 }
-<h1>Admin Profil</h1>
+<h1>@ViewBag.user.FirstName Profil</h1>
 
 <form method="post" asp-action="ProfilEdit" asp-controller="User">
     <div class="p-3 mt-4">
@@ -39,8 +39,12 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input asp-for="Password" value="@ViewBag.user.Password" type="password" class="form-control" />
+                <input asp-for="Password" id="password" value="@ViewBag.user.Password" type="password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
+
+                <span>
+                <label>Şifreyi Göster</label> <input type="checkbox" onclick="SifreGoster()"   />
+                </span>
             </div>
             <button type="submit" class="btn btn-warning">Profil Güncelle</button>
 
@@ -49,3 +53,12 @@
     </div>
 </form>
 
+
+
+<script>
+    function SifreGoster() {
+        var element = document.getElementById('password');
+        element.type = (element.type == 'password' ? 'text' : 'password');
+    }
+
+</script>

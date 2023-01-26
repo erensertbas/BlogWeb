@@ -1,21 +1,24 @@
 ﻿@using BlogWeb.DL.Models
 @model IEnumerable<BlogWeb.DL.Models.Blog>
 @{
-    ViewData["Title"] = "Blogs";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    ViewData["Title"] = "ApproveBlog";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Makaleler</h1>
+<h1>Makale Onayla</h1>
+
+
 @{
-    int EklemeSonuc = Convert.ToInt16(TempData["EklemeSonuc"]);
+    int OnaylamaSonuc = Convert.ToInt16(TempData["OnaylamaSonuc"]);
 }
 
-@if (EklemeSonuc == 1)
+@if (OnaylamaSonuc == 1)
 {
     <div class="alert alert-dismissible alert-success">
-        <strong>Ekleme Başarılı!</strong> <p> Makale Başarılı Bir şekilde Yayınlandı!</p>
+        <strong>Onaylama Başarılı!</strong> <p> Makale Başarılı Bir şekilde Onaylandı</p>
     </div>
 }
+
 
 <table class="table table-hover">
 
@@ -27,6 +30,7 @@
             <th scope="col">Kategori</th>
 
             <th scope="col">Tarih</th>
+            <th scope="col">Durum</th>
             <th scope="col">İşlem</th>
         </tr>
     </thead>
@@ -46,7 +50,7 @@
                     <th scope="row">@Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Text))</th>
                 }
                 <td>
-                    
+
                     @{
                         Context c = new Context();
                         var result = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();
@@ -56,10 +60,20 @@
                 </td>
                 <td>@item.Date.ToShortDateString()</td>
                 <td>
+                    @if (item.Status == false)
+                    {
+                        <p> Onaylanmadı</p>
+                    }
+                    else
+                    {
+                        <p> Onaylandı</p>
+                    }
+                </td>
+                <td>
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                        <a class="btn btn-info" href="~/User/BlogDetail/@item.BlogId">Detay</a>
-                        <a class="btn btn-warning" href="~/User/GetBlog/@item.BlogId">Güncelle</a>
-                        <a class="btn btn-danger" onclick="deneme(@item.BlogId)">Sil</a>
+                        <a class="btn btn-info" href="~/Admin/BlogDetail/@item.BlogId">Detay</a>
+                        <a class="btn btn-warning" onclick="onayla(@item.BlogId)">Onayla</a>
+                         
                     </div>
                 </td>
             </tr>
@@ -86,6 +100,25 @@
                 }
             });
     }
+
+     function onayla(id) {
+        swal({
+            title: "Emin misiniz?",
+            text: "Makaleyi yayınını onaylamak için emin misiniz?",
+            icon: "info",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.replace('/Admin/ApproveBlog/' + id),
+                        swal("Makale Onaylandı!", {
+                            icon: "success",
+                        });
+                }
+            });
+    }
+
 
 </script>
 

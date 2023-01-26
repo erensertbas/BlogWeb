@@ -14,10 +14,25 @@ namespace BlogWeb.PL.Controllers
         private readonly ILogger<LoginController> _logger;
         UserRepository user = new UserRepository();
         FirebaseAuthProvider auth;
+
+
+        public void SetCookie(string key, string id)
+        {
+            HttpContext.Response.Cookies.Append(key, id);
+        }
+
+        public string GetCookie(string key)
+        {
+            HttpContext.Request.Cookies.TryGetValue(key, out string id);
+            return id;
+        }
+
+
         public IActionResult SignIn()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> SignIn(UserModel model)
         {
@@ -34,8 +49,12 @@ namespace BlogWeb.PL.Controllers
                     };
                     var userIdentity = new ClaimsIdentity(claims,"a");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(userIdentity);
-                    await HttpContext.SignInAsync(claimsPrincipal);                
-                   return RedirectToAction("Index","Admin");
+                    await HttpContext.SignInAsync(claimsPrincipal);
+
+                    SetCookie("userId", dataValue.UserId.ToString());
+
+
+                    return RedirectToAction("Index","Admin");
                 }
                 else
                 {

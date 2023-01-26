@@ -37,6 +37,35 @@
                             <li class="nav-item"><a class="nav-link" href="/Iletisim">İletişim</a></li>
                             <li class="nav-item submenu dropdown">
                                 <a href="~/sensive/#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i></a>
+
+                                @*@if (User.Identity.IsAuthenticated)
+                                {
+                                <ul>
+                                <li><a asp-action="Index" asp-controller="Admin" class="btn header-btn">Panele Git</a></li>
+                                </ul>
+
+                                @* if (User.IsInRole("1"))
+                                {
+                                <ul>
+                                <li><a asp-action="Index" asp-controller="Admin" class="btn header-btn">Panele Git</a></li>
+                                </ul>
+                                }
+                                if (User.IsInRole("2"))
+                                {
+                                <ul>
+                                <li><a asp-action="Index" asp-controller="User" class="btn header-btn">Profilim</a></li>
+                                <li><a asp-action="LogOut" asp-controller="User">Çıkış Yap</a></li>
+                                </ul>
+                                }
+                                }
+                                else
+                                {
+                                <ul>
+                                <li class="nav-item"><a class="nav-link" href="~/Home/SignIn">Giriş Yap</a></li>
+                                </ul>
+                                }
+
+                                *@
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link" href="~/Home/SignIn">Giriş Yap</a></li>
                                     <li class="nav-item"><a class="nav-link" href="~/Home/Registration">Kayıt Ol</a></li>

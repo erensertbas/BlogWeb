@@ -11,8 +11,6 @@ namespace BlogWeb.PL.Controllers
 {
 
     [Authorize(Roles = "Admin")]
-
-
     public class AdminController : Controller
     {
         BlogRepository blog = new BlogRepository();
@@ -21,21 +19,27 @@ namespace BlogWeb.PL.Controllers
         CategoryRepository category = new CategoryRepository();
         UserRepository user = new UserRepository();
         SubscriberRepository subscriber = new SubscriberRepository();
-        RoleRepository  role = new RoleRepository();    
+        RoleRepository role = new RoleRepository();
         Context context = new Context();
 
         private readonly IWebHostEnvironment _webHostEnvironment;
-
         public AdminController(IWebHostEnvironment webHostEnvironment)
         {
             _webHostEnvironment = webHostEnvironment;
+
         }
+        public string GetCookie(string key)
+        {
+            HttpContext.Request.Cookies.TryGetValue(key, out string id);
+            return id;
+        }
+
         public IActionResult Index()
         {
-            var userId = HttpContext.Session.GetInt32("_UserToken");
-            var degerler = context.User.FirstOrDefault(x => x.UserId == userId);
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
             ViewBag.user = degerler;
-            
+
 
             IEnumerable<Blog> blogs = blog.TList();
             int Totalblog = blogs.Count();
@@ -51,26 +55,65 @@ namespace BlogWeb.PL.Controllers
             return View();
         }
 
+        public IActionResult ApproveBlogList()
+        {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            var userBlog = blog.TList(x => x.Status == false);
+            return View(userBlog);
+        }
+
+        
+        public IActionResult ApproveBlog(int id)
+        {
+          
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            var x = blog.TGet(id);
+            if (x == null)
+            {
+                return NotFound();
+            }
+            x.Status = true;
+            blog.TUpdate(x);
+            TempData["OnaylamaSonuc"] = 1;
+            return RedirectToAction("ApproveBlogList");
+       
+        }
+
 
         #region Profil 
         [HttpGet]
         public IActionResult Profil(int id)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+
             if (id == 0)
             {
                 return NotFound();
 
             }
-            int userId = Convert.ToInt32(HttpContext.Session.GetInt32("_UserToken"));
-            var degerler = user.TGet(userId);
+          
             var roles = role.TGet(degerler.RoleId);
-            ViewBag.role= roles;
+            ViewBag.role = roles;
             ViewBag.user = degerler;
             return View(degerler);
         }
         [HttpPost]
         public IActionResult ProfilEdit(UserModel us)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+
             var x = user.TGet(us.UserId);
             int id = us.UserId;
             if (ModelState.IsValid)
@@ -82,8 +125,8 @@ namespace BlogWeb.PL.Controllers
                 x.RoleId = 1;
                 user.TUpdate(x);
                 TempData["GüncellemeSonuc"] = 1;
-                return RedirectToAction("Profil",new {id});
-              
+                return RedirectToAction("Profil", new { id });
+
             }
             return View();
         }
@@ -95,20 +138,32 @@ namespace BlogWeb.PL.Controllers
 
         public IActionResult Blogs()
         {
-            //IEnumerable<Blog> _blog = blog.TList();
-            IEnumerable<Blog> _blog = context.Blog.Include(x => x._Category);
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+
+            IEnumerable<Blog> _blog = context.Blog.Include(x => x._Category).Where(x=>x.UserId==userId);
             TempData["BlogCount"] = _blog.Count();
 
             return View(_blog);
         }
         public IActionResult BlogDetail(int id)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var result = blog.TGet(id);
             return View(result);
         }
 
         public IActionResult BlogCreate()
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             List<SelectListItem> values = (from x in context.Category.ToList()
                                            select new SelectListItem
                                            {
@@ -122,6 +177,10 @@ namespace BlogWeb.PL.Controllers
         [HttpPost]
         public IActionResult BlogCreate(BlogEkle b)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             Blog bl = new Blog();
             if (ModelState.IsValid)
             {
@@ -150,6 +209,10 @@ namespace BlogWeb.PL.Controllers
         }
         public IActionResult GetBlog(int id)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = blog.TGet(id);
             if (id == null || id == 0)
             {
@@ -160,6 +223,10 @@ namespace BlogWeb.PL.Controllers
         [HttpPost]
         public IActionResult BlogEdit(Blog bg) //view yok
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = blog.TGet(bg.BlogId);
             //if (ModelState.IsValid)
             //{
@@ -171,6 +238,10 @@ namespace BlogWeb.PL.Controllers
         }
         public IActionResult BlogDelete(int id) // view yok
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = blog.TGet(id);
             if (x == null)
             {
@@ -185,17 +256,29 @@ namespace BlogWeb.PL.Controllers
 
         public IActionResult AboutUs()
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             IEnumerable<AboutUs> aboutus = aboutUs.TList();
             TempData["AboutUsCount"] = aboutus.Count();
             return View(aboutus);
         }
         public IActionResult AboutUsCreate()
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             return View();
         }
         [HttpPost]
         public IActionResult AboutUsCreate(AboutUs ct)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             if (ModelState.IsValid)
             {
                 aboutUs.TAdd(ct);
@@ -206,6 +289,10 @@ namespace BlogWeb.PL.Controllers
         }
         public IActionResult GetAbout(int id)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = aboutUs.TGet(id);
             if (id == null || id == 0)
             {
@@ -216,6 +303,10 @@ namespace BlogWeb.PL.Controllers
         [HttpPost]
         public IActionResult AboutUsEdit(AboutUs ct)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = aboutUs.TGet(ct.Id);
             if (ModelState.IsValid)
             {
@@ -228,6 +319,10 @@ namespace BlogWeb.PL.Controllers
         }
         public IActionResult AboutUsDelete(int id)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = aboutUs.TGet(id);
             if (x == null)
             {
@@ -243,17 +338,29 @@ namespace BlogWeb.PL.Controllers
 
         public IActionResult Contact()
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             IEnumerable<Contact> _contact = contact.TList();
             TempData["ContactCount"] = _contact.Count();
             return View(_contact);
         }
         public IActionResult ContactCreate()
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             return View();
         }
         [HttpPost]
         public IActionResult ContactCreate(Contact ct)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             if (ModelState.IsValid)
             {
                 contact.TAdd(ct);
@@ -264,6 +371,10 @@ namespace BlogWeb.PL.Controllers
         }
         public IActionResult GetContact(int id)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = contact.TGet(id);
             if (id == null || id == 0)
             {
@@ -274,6 +385,10 @@ namespace BlogWeb.PL.Controllers
         [HttpPost]
         public IActionResult ContactEdit(Contact ct)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = contact.TGet(ct.Id);
             if (ModelState.IsValid)
             {
@@ -288,6 +403,10 @@ namespace BlogWeb.PL.Controllers
         }
         public IActionResult ContactDelete(int id)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = contact.TGet(id);
             if (x == null)
             {
@@ -304,6 +423,10 @@ namespace BlogWeb.PL.Controllers
 
         public IActionResult Category()
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             IEnumerable<Category> categories = category.TList();
             TempData["CategoryCount"] = categories.Count();
 
@@ -312,11 +435,19 @@ namespace BlogWeb.PL.Controllers
 
         public IActionResult CategoryCreate()
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             return View();
         }
         [HttpPost]
         public IActionResult CategoryCreate(Category ca)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             if (ModelState.IsValid)
             {
                 category.TAdd(ca);
@@ -327,6 +458,10 @@ namespace BlogWeb.PL.Controllers
         }
         public IActionResult CategoryDelete(int id)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = category.TGet(id);
             if (x == null)
             {
@@ -338,6 +473,10 @@ namespace BlogWeb.PL.Controllers
 
         public IActionResult GetCategory(int id)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = category.TGet(id);
             if (id == null || id == 0)
             {
@@ -349,6 +488,10 @@ namespace BlogWeb.PL.Controllers
         [HttpPost]
         public IActionResult CategoryEdit(Category cat)
         {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
             var x = category.TGet(cat.CategoryId);
             if (ModelState.IsValid)
             {
