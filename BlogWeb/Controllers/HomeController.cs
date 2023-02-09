@@ -69,6 +69,10 @@ namespace BlogWeb.PL.Controllers
         public IActionResult BlogDetail(int id)
         {
             var result = blog.TGet(id);
+            var categoryName = category.TGet(result.CategoryId).CategoryName;
+            var userName = user.TGet(result.UserId);
+            ViewBag.userName = userName.FirstName + userName.LastName;
+            ViewBag.categoryName = categoryName;
             return View(result);
         }
 

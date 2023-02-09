@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogWeb.PL.ViewComponents
 {
-    public class LastPostGet : ViewComponent
+    public class RecentArticlesGet : ViewComponent
     {
         BlogRepository blog = new BlogRepository();
         Context c = new Context();
@@ -12,8 +12,8 @@ namespace BlogWeb.PL.ViewComponents
         {
             //var result = c.Blog.Distinct().OrderByDescending(d => d.Date);
             var data = (from d in c.Blog
-                        orderby d.BlogId descending
-                        select d).Take(5).Where(x=>x.Status==true);
+                        orderby d.Date descending
+                        select d).Take(3).Where(x => x.Status == true);
             return View(data.ToList());
         }
     }

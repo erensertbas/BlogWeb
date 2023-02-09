@@ -1,0 +1,29 @@
+﻿@using BlogWeb.DL.Models
+@model IEnumerable<BlogWeb.DL.Models.Blog>
+
+<div class="popular-post-list">
+    @foreach (var item in Model)
+    {
+        <div class="single-post-list">
+            <div class="thumb">
+                <img class="card-img rounded-0" src="~/images/@item.ImageUrl" alt="">
+                <ul class="thumb-info">
+                    @{
+                        Context c = new Context();
+                        var result1 = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();                  
+                    }                 
+                    <li><a href="">@result1.CategoryName</a></li>
+                    <li><a href="">@item.Date.ToShortDateString()</a></li>
+                </ul>
+            </div>
+            <div class="details mt-20">
+                <a href="~/Home/BlogDetail/@item.BlogId">
+                    <h6>@item.BlogTitle</h6>
+                </a>
+              
+            </div>
+        </div>
+    }
+   
+  
+</div>
