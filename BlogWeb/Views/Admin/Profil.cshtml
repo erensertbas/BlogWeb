@@ -39,9 +39,11 @@
                 <input asp-for="Email" value="@ViewBag.user.Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="mb-3">
-                <input asp-for="Password" value="@ViewBag.user.Password" type="password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="mb-3">             
+                <input asp-for="Password" id="password" value="@ViewBag.user.Password" type="password" class="form-control" />
+                <label>Şifreyi Göster</label> <i class="fa fa-eye-slash" onclick="SifreGoster()"></i>                                
+                <span asp-validation-for="Password" class="text-danger"></span>            
+              
             </div>
             <button type="submit" class="btn btn-warning">Profil Güncelle</button>
            
@@ -49,4 +51,10 @@
 
     </div>
 </form>
+<script>
+    function SifreGoster() {
+        var element = document.getElementById('password');
+        element.type = (element.type == 'password' ? 'text' : 'password');
+    }
 
+</script>

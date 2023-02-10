@@ -1,32 +1,23 @@
-﻿@model IEnumerable<BlogWeb.DL.Models.Blog>
+﻿
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-@foreach (var item in Model)
-{
-    <div class="card mb-3" style="max-width:850px; ">
-        <img src="~/images/@item.ImageUrl" style="max-height:300px" /> 
-      
-        <div class="card-body">
-        @if (item.Text.Length > 50)
-        {
-                <p class="card-text">@Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text.Substring(0, 47) + " ..." + "  "))   <a  href="~/User/BlogDetail/@item.BlogId">Detay</a> </p> 
-        }
-        else
-        {
-                <p class="card-text">@Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Text))</p>
-        }
-        </div>
-       @* <ul class="list-group list-group-flush">
-            <li class="list-group-item">@item.</li>
-        </ul>*@
-      
-        <div class="card-footer text-muted">
-        @item.Date.ToShortDateString()
+<div class="row">
+    <h3>Hoşgeldin @ViewBag.user.FirstName</h3>
+    <div class="col-md-4">
+        <div class="card mb-3 widget-chart">
+            <div class="icon-wrapper rounded-circle">
+                <div class="icon-wrapper-bg bg-primary"></div>
+                <i class="ti-book text-edit"></i>
+            </div>
+            <div class="widget-numbers"><span>@ViewBag.userBlogCount</span></div>
+            <div class="widget-subheading">Toplam Yayınladığınız Makale Sayısı</div>
+
         </div>
     </div>
-}
+  
+</div>
 

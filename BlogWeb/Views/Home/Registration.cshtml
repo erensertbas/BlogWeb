@@ -16,7 +16,6 @@
 
 
 <div class="row m-5">
-    <div class="col-md-4"></div>
     <div class="col-md-4">
 
 
@@ -53,10 +52,13 @@
 
                     <!-- Password input -->
                     <div class="form-outline mb-4">
-                        <input asp-for="Password" type="password" id="loginPassword" class="form-control" />
+                        <input asp-for="Password" type="password" id="password" class="form-control" />
                         <label class="form-label">Şifre</label>
                         <span asp-validation-for="Password" class="text-danger"></span>
 
+                    </div>
+                    <div class="form-outline mb-4">
+                        <label>Şifreyi Göster</label> <i class="fa fa-eye-slash" onclick="SifreGoster()"></i>
                     </div>
 
                     <!-- 2 column grid layout -->
@@ -76,8 +78,16 @@
         <!-- Pills content -->
 
     </div>
-    <div class="col-md-4"></div>
+    
 </div>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+
+<script>
+    function SifreGoster() {
+        var element = document.getElementById('password');
+        element.type = (element.type == 'password' ? 'text' : 'password');
+    }
+
+</script>
 

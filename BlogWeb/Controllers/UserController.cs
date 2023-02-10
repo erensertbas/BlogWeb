@@ -37,6 +37,7 @@ namespace BlogWeb.PL.Controllers
             ViewBag.userId = userId;
 
             var userBlog = blog.TList(x => x.UserId == userId);
+            ViewBag.userBlogCount=userBlog.Count();
             return View(userBlog);
         }
         public IActionResult Blogs()

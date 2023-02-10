@@ -40,11 +40,9 @@
             </div>
             <div class="mb-3">
                 <input asp-for="Password" id="password" value="@ViewBag.user.Password" type="password" class="form-control" />
+                <label>Şifreyi Göster</label> <i class="fa fa-eye-slash" onclick="SifreGoster()"></i>
                 <span asp-validation-for="Password" class="text-danger"></span>
 
-                <span>
-                <label>Şifreyi Göster</label> <input type="checkbox" onclick="SifreGoster()"   />
-                </span>
             </div>
             <button type="submit" class="btn btn-warning">Profil Güncelle</button>
 

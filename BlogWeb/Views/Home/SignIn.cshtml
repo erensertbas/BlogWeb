@@ -34,25 +34,30 @@
                     <br />
                     <!-- Email input -->
                     <div class="form-outline mb-4">
+                       
                         <input asp-for="Email" type="email" class="form-control" />
-                        <label class="form-label" >Mail Adresi</label>
+                        <label class="form-label">Mail Adresi</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline mb-4">
-                        <input asp-for="Password" type="password" id="loginPassword" class="form-control" />
+                       
+                        <input asp-for="Password" type="password" id="password" class="form-control" />                       
                         <label class="form-label">Şifre</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <label>Şifreyi Göster</label> <i class="fa fa-eye-slash" onclick="SifreGoster()"></i>
                     </div>
 
                     <!-- 2 column grid layout -->
                     <div class="row mb-4">
                         <div class="col-md-8 d-flex ">
                             <!-- Simple link -->
-                            <p>Henüz üye olmadın mı?</p>&nbsp; <a href="~/User/Registration"> Hemen kayıt ol</a>
+                            <p>Henüz üye olmadın mı?</p>&nbsp; <a href="~/Home/Registration"> Hemen kayıt ol</a>
                         </div>
                         <div class="col-md-4 d-flex ">
                             <!-- Simple link -->
-                            <a href="#!">Şifremi unuttum</a>
+                            <a href="~/Home/ForgotMyPassword">Şifremi unuttum</a>
                         </div>
                     </div>
 
@@ -69,3 +74,10 @@
 </div>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
+        <script>
+    function SifreGoster() {
+        var element = document.getElementById('password');
+        element.type = (element.type == 'password' ? 'text' : 'password');
+    }
+
+</script>
