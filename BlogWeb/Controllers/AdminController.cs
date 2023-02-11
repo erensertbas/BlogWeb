@@ -27,7 +27,10 @@ namespace BlogWeb.PL.Controllers
         {
             _webHostEnvironment = webHostEnvironment;
 
+     
+
         }
+      
         public string GetCookie(string key)
         {
             HttpContext.Request.Cookies.TryGetValue(key, out string id);
@@ -54,38 +57,7 @@ namespace BlogWeb.PL.Controllers
             ViewBag.totalUser = TotalUser;
             return View();
         }
-
-        public IActionResult ApproveBlogList()
-        {
-            int userId = Convert.ToInt16(GetCookie("userId"));
-            var degerler = user.TGet(userId);
-            ViewBag.user = degerler;
-
-            var userBlog = blog.TList(x => x.Status == false);
-            return View(userBlog);
-        }
-
-        
-        public IActionResult ApproveBlog(int id)
-        {
-          
-            int userId = Convert.ToInt16(GetCookie("userId"));
-            var degerler = user.TGet(userId);
-            ViewBag.user = degerler;
-
-            var x = blog.TGet(id);
-            if (x == null)
-            {
-                return NotFound();
-            }
-            x.Status = true;
-            blog.TUpdate(x);
-            TempData["OnaylamaSonuc"] = 1;
-            return RedirectToAction("ApproveBlogList");
-       
-        }
-
-
+   
         #region Profil 
         [HttpGet]
         public IActionResult Profil(int id)
@@ -249,6 +221,35 @@ namespace BlogWeb.PL.Controllers
             }
             blog.TDelete(x);
             return RedirectToAction("Blogs");
+        }
+        public IActionResult ApproveBlogList()
+        {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            var userBlog = blog.TList(x => x.Status == false);
+            return View(userBlog);
+        }
+
+
+        public IActionResult ApproveBlog(int id)
+        {
+
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            var x = blog.TGet(id);
+            if (x == null)
+            {
+                return NotFound();
+            }
+            x.Status = true;
+            blog.TUpdate(x);
+            TempData["OnaylamaSonuc"] = 1;
+            return RedirectToAction("ApproveBlogList");
+
         }
         #endregion
 
@@ -507,6 +508,87 @@ namespace BlogWeb.PL.Controllers
         #endregion
 
 
+        #region Subsricer
+        public IActionResult Subscriber()
+        {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            IEnumerable<Subscriber> result = subscriber.TList();
+            TempData["SubscriberCount"]=result.Count();
+            return View(result);
+        }
+        public IActionResult SubscriberCreate()
+        {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SubscriberCreate(Subscriber sub)
+        {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            if (ModelState.IsValid)
+            {
+                subscriber.TAdd(sub);
+                TempData["EklemeSonuc"] = 1;
+                return RedirectToAction("AboutUs");
+            }
+            return View();
+        }
+
+        public IActionResult GetSubscriber(int id)
+        {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            var x = subscriber.TGet(id);
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            return View(x);
+        }
+        [HttpPost]
+        public IActionResult SubscriberEdit(Subscriber sub)
+        {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            var x = subscriber.TGet(sub.Id);
+            if (ModelState.IsValid)
+            {
+                x.SubscriberMail = sub.SubscriberMail;
+                subscriber.TUpdate(x);
+                TempData["GüncellemeSonuc"] = 1;
+                return RedirectToAction("Subscriber");
+            }
+            return View();
+
+        }
+        public IActionResult SubscriberDelete(int id)
+        {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            var x = subscriber.TGet(id);
+            if (x == null)
+            {
+                return NotFound();
+            }
+            subscriber.TDelete(x);
+            return RedirectToAction("Subscriber");
+        }
+        #endregion
 
     }
 }

@@ -5,21 +5,59 @@
 }
     @{
         int adet= Convert.ToInt16(TempData["SubscriberCount"]); 
+    int EklemeSonuc = Convert.ToInt16(TempData["EklemeSonuc"]);
+    int GüncellemeSonuc = Convert.ToInt16(TempData["GüncellemeSonuc"]);
     }
     @if(adet==0){ 
         <div class="alert alert-warning" role="alert"> <h6>Abone yok</h6></div>
+    <a asp-controller="Admin" asp-action="SubscriberCreate" class="btn btn-success mx-2">Hemen Ekle</a>
     }
-
+@if (EklemeSonuc == 1)
+{
+    <div class="alert alert-dismissible alert-success">
+      
+        <strong>Ekleme Başarılı!</strong> <p> Hakkımızda Başarılı Bir şekilde Eklendi</p>
+    </div>
+}
+@if (GüncellemeSonuc == 1)
+{
+    <div class="alert alert-dismissible alert-success">
+        <strong>Güncelleme Başarılı!</strong> <p> Hakkımızda Başarılı Bir Şekilde Güncellendi</p>
+    </div>
+}
+<div class="card-header">
+    Aboneler
+</div>
 @foreach (var item in Model)
 {
-      <div class="card-header">
-        Aboneler
-      </div>
+     
       <div class="card-body">
 
         <p class="card-text">@item.SubscriberMail</p> 
         <br>
-        <a asp-controller="Admin" asp-action="AboutUsEdit" asp-route-id="@item.Id" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
-        <a asp-controller="Admin" asp-action="AboutUsDelete" asp-route-id="@item.Id" class="btn btn-danger mx-2">Sil</a>
+        <a asp-controller="Admin" asp-action="GetSubscriber" asp-route-id="@item.Id" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
+        <a asp-controller="Admin" asp-action="SubscriberDelete" asp-route-id="@item.Id" class="btn btn-danger mx-2">Sil</a>
       </div>
 }
+<script>
+    function deneme(id) {
+        swal({
+            title: "Emin misiniz?",
+            text: "Abone bilgisini silmek için emin misiniz?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.replace('/Admin/SubscriberDelete/' + id),
+                        swal("Poof! Abone Silindi!", {
+                            icon: "success",
+                        });
+                }
+            });
+    }
+
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+

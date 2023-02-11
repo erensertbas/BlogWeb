@@ -1,0 +1,19 @@
+﻿@model BlogWeb.DL.Models.Subscriber
+@{
+    ViewData["Title"] = "SubscriberCreate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-6">
+    <h4>Abone Bilgisi Ekle</h4> <br />
+    @using (Html.BeginForm("SubscriberCreate", "Admin", FormMethod.Post))
+    {
+
+        @Html.TextBoxFor(x => x.SubscriberMail, new {placeholder="Mail Adresi" , @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.SubscriberMail, "", new { @class = "text-danger" })
+
+        <br />
+
+        <button class="btn btn-success">Ekle</button>
+    }
+</div>

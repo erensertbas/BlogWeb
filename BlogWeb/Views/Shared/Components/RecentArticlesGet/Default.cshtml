@@ -7,13 +7,13 @@
         <div class="single-post-list">
             <div class="thumb">
                 <img class="card-img rounded-0" src="~/images/@item.ImageUrl" alt="">
-                <ul class="thumb-info">
+                <ul class="thumb-info" style="max-width:none">
                     @{
                         Context c = new Context();
-                        var result1 = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();                  
-                    }                 
-                    <li><a href="">@result1.CategoryName</a></li>
-                    <li><a href="">@item.Date.ToShortDateString()</a></li>
+                        var result1 = c.User.Where(x => x.UserId == @item.UserId).FirstOrDefault();                  
+                    }
+                    <li><a>@result1.FirstName @result1.LastName </a></li>
+                    <li><a>@item.Date.ToShortDateString()</a></li>
                 </ul>
             </div>
             <div class="details mt-20">

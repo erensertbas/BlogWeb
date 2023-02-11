@@ -1,6 +1,6 @@
-﻿@model BlogWeb.DL.Models.AboutUs
+﻿@model BlogWeb.DL.Models.Subscriber
 @{
-    ViewData["Title"] = "Hakkımızda Ekle";
+    ViewData["Title"] = "GetSubscriber";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -19,14 +19,15 @@
 
 </head>
 
-@using (Html.BeginForm("AboutUsCreate", "Admin", FormMethod.Post))
+@using (Html.BeginForm("SubscriberEdit", "Admin", FormMethod.Post))
 {
-    <h4>Hakkımızda Ekle</h4>
-    @Html.TextAreaFor(m => m.Text,10,40, new { @class = "form-control textarea",  })
-    @Html.ValidationMessageFor(x => x.Text, "", new { @class = "text-danger" })
+    <input asp-for="Id" hidden />
+    <h4>Abone Düzenle</h4>
+    @Html.TextAreaFor(m => m.SubscriberMail,10,40, new { @class = "form-control textarea",  })
+    @Html.ValidationMessageFor(x => x.SubscriberMail, "", new { @class = "text-danger" })
     <br />
-
-    <button class="btn btn-success">Ekle</button>
+    <button type="submit" class="btn btn-warning">Düzenle</button>
+    <a asp-controller="Admin" asp-action="Subscriber" class="btn btn-secondary">Geri Dön</a>
 }
 
 <script>
@@ -38,6 +39,4 @@
 </script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
 

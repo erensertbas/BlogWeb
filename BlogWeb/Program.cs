@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Web.Mvc;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -56,7 +57,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.MapDefaultControllerRoute();
 app.UseRouting();
 app.UseSession();  // burasý
 app.UseAuthentication();// eklendi 
@@ -95,9 +96,18 @@ app.UseAuthorization();
 //   defaults: new { controller = "Admin", action = "Index", id = UrlParameter.Optional });
 
 //app.MapControllerRoute(
+//    name: "Profil",
+//    pattern: "Profilim",
+//   defaults: new { controller = "Admin", action = "Profil", id = UrlParameter.Optional });
+
+//app.MapControllerRoute(
 //    name: "Blogs",
 //    pattern: "Makaleler",
 //   defaults: new { controller = "Admin", action = "Blogs", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "BlogDetail",
+//    pattern: "{MakaleDetay}/{id}",
+//   defaults: new { controller = "Admin", action = "BlogDetail", id = UrlParameter.Optional });
 
 //app.MapControllerRoute(
 //    name: "BlogCreate",
@@ -113,6 +123,14 @@ app.UseAuthorization();
 //    name: "BlogDelete",
 //    pattern: "{MakaleSil}/{id}",
 //   defaults: new { controller = "Admin", action = "BlogDelete", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "ApproveBlogList",
+//    pattern: "MakaleOnayListesi",
+//   defaults: new { controller = "Admin", action = "ApproveBlogList", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+//    name: "ApproveBlog",
+//    pattern: "{MakaleOnay}/{id}",
+//   defaults: new { controller = "Admin", action = "ApproveBlog", id = UrlParameter.Optional });
 
 //app.MapControllerRoute(
 //    name: "AboutUs",
@@ -139,7 +157,7 @@ app.UseAuthorization();
 //   defaults: new { controller = "Admin", action = "AboutUsDelete", id = UrlParameter.Optional });
 
 //app.MapControllerRoute(
-//    name: "YoneticiKategori",
+//    name: "Category",
 //    pattern: "YoneticiKategori",
 //   defaults: new { controller = "Admin", action = "Category", id = UrlParameter.Optional });
 
@@ -158,9 +176,27 @@ app.UseAuthorization();
 //    pattern: "{KategoriDuzenle}/{id}",
 //   defaults: new { controller = "Admin", action = "GetCategory", id = UrlParameter.Optional });
 
+//app.MapControllerRoute(
+//    name: "Contact",
+//    pattern: "YoneticiIletisim",
+//   defaults: new { controller = "Admin", action = "Contact", id = UrlParameter.Optional });
+
+//app.MapControllerRoute(
+//    name: "ContactCreate",
+//    pattern: "IletisimOlustur",
+//   defaults: new { controller = "Admin", action = "ContactCreate", id = UrlParameter.Optional });
+
+//app.MapControllerRoute(
+//    name: "ContactDelete",
+//    pattern: "{IletisimSi}l/{id}",
+//   defaults: new { controller = "Admin", action = "ContactDelete", id = UrlParameter.Optional });
+
+//app.MapControllerRoute(
+//    name: "GetContact",
+//    pattern: "{IletisimDuzenle}/{id}",
+//   defaults: new { controller = "Admin", action = "GetContact", id = UrlParameter.Optional });
+
 #endregion
-
-
 
 app.UseEndpoints(endpoints =>
 {
