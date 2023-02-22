@@ -1,4 +1,8 @@
-﻿@model List<BlogWeb.DL.Models.Category>
+﻿@using BlogWeb.DL.Models
+@using BlogWeb.PL.Models
+@*@model List<BlogWeb.DL.Models.Category>*@
+
+@model PaginatedList<BlogWeb.DL.Models.Blog>
 @{
     ViewData["Title"] = "Anasayfa";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,8 +24,8 @@
             </div>
         </div>
     </section>
-      @await Component.InvokeAsync("LastPostGet")
-  
+    @await Component.InvokeAsync("LastPostGet")
+
 
 
     <section class="blog-post-area section-margin mt-4">
@@ -29,7 +33,103 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                    @await Component.InvokeAsync("BlogGet")
+                    @*   @await Component.InvokeAsync("BlogGet")*@
+                    @*  Bloglar burada listelenmeli!*@
+
+
+
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="single-recent-blog-post">
+                            <div class="thumb">
+                                <a href="~/MakaleDetay/@item.BlogId"> <img class="img-fluid" src="~/images/@item.ImageUrl"> </a>
+                                <ul class="thumb-info">
+                                    <li>
+                                        <a>
+                                            <i class="ti-user"></i>
+                                            @{
+                                                Context c = new Context();
+                                                var result1 = c.User.Where(x => x.UserId == @item.UserId).FirstOrDefault();
+                                            }
+                                            @result1.FirstName @result1.LastName
+
+                                        </a>
+                                    </li>
+                                    <li><a><i class="ti-notepad"></i>@item.Date.ToShortDateString()</a></li>
+                                    <li>
+                                        <a href="~/Home/HomeCategory/@item.CategoryId">
+                                            <i class="ti-themify-favicon"></i>
+                                            @{
+
+                                                var result = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();
+                                            }
+                                            @result.CategoryName
+
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="details mt-20">
+                                <a href="~/MakaleDetay/@item.BlogId">
+                                    <h3>
+                                        @item.BlogTitle
+                                    </h3>
+                                </a>
+
+                                @if (item.Text.Length > 500)
+                                {
+                                    <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text.Substring(0, 500) + " ..." + "  "))</p>
+                                }
+                                else
+                                {
+                                    <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Text))</p>
+                                }
+
+                                <a class="button" href="~/Home/BlogDetail/@item.BlogId">Daha Fazla<i class="ti-arrow-right"></i></a>
+                            </div>
+                        </div>
+
+                    }
+
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+@*
+                    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn default @prevDisabled">Previous</a>
+                    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn default @nextDisabled">Next</a>
+
+*@
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <nav class="blog-pagination justify-content-center d-flex">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex-1)" class="page-link @prevDisabled">
+                                             <span aria-hidden="true">
+                                                
+                                                <i class="ti-angle-left"></i> Önceki
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li class="page-item">
+                                        <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex+1)" class="page-link @nextDisabled">
+                                             <span aria-hidden="true">
+                                                Sonraki
+                                                <i class="ti-angle-right"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+
+
+
 
                 </div>
 
@@ -41,7 +141,7 @@
                         </div>
                         <!--Category-->
                         @await Component.InvokeAsync("CategoryGet")
-                        @await Component.InvokeAsync("SubscriberGet")
+                        @*  @await Component.InvokeAsync("SubscriberGet")*@
                     </div>
                 </div>
             </div>

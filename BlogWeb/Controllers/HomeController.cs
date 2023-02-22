@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using System.Web.WebPages;
+using BlogWeb.PL.Models;
 
 namespace BlogWeb.PL.Controllers
 {
@@ -37,9 +38,14 @@ namespace BlogWeb.PL.Controllers
         UserRepository user = new UserRepository();
 
 
-        public IActionResult Index()
+        public IActionResult Index(int? pageNumber)
         {
-            return View();
+
+            int pageSize = 5;
+
+            var result = PaginatedList<Blog>.Create(c.Blog.Distinct().OrderByDescending(d => d.Date).Where(x => x.Status == true).ToList(), pageNumber ?? 1, pageSize);
+
+            return View(result);
         }
 
         #region home
@@ -320,76 +326,77 @@ namespace BlogWeb.PL.Controllers
         [HttpPost]
         public IActionResult ForgotMyPassword(UserModel model)
         {
-            if (model.Email!= null)
+            if (model.Email != null)
             {
-                var email = user.TList().Where(x=>x.Email==model.Email).Count();
-                if (email==0)
+                var email = user.TList().Where(x => x.Email == model.Email).Count();
+                if (email == 0)
                 {
                     TempData["Message"] = "Bu emaile ait kullanıcı bulunamadı";
                 }
-                else { 
-                var kontrol = user.TList(X => X.Email == model.Email).FirstOrDefault();
-                if (kontrol.Email == model.Email)
-                {
-                    Random rastgele = new Random();
-                    string newPassword = null;
-
-                    //İki büyük harf üretme
-                    for (int i = 1; i <= 2; i++)
-                    {
-                        int sayi1 = rastgele.Next(65, 91);
-                        newPassword = newPassword + ((char)sayi1);
-                    }
-                    //İki küçük harf üretme
-                    for (int i = 1; i <= 2; i++)
-                    {
-                        int sayi1 = rastgele.Next(97, 123);
-                        newPassword = newPassword + ((char)sayi1);
-                    }
-                    //İki sayı üretme
-                    for (int i = 1; i <= 2; i++)
-                    {
-                        int sayi1 = rastgele.Next(48, 58);
-                        newPassword = newPassword + ((char)sayi1);
-                    }
-                    //iki sembol üretme
-                    for (int i = 1; i <= 2; i++)
-                    {
-                        int sayi1 = rastgele.Next(35, 39);
-                        newPassword = newPassword + ((char)sayi1);
-                    }
-
-                    MailMessage mailMessage = new MailMessage();
-                    mailMessage.To.Add(model.Email);
-                    mailMessage.From = new MailAddress("cutopya@gmail.com");
-                    mailMessage.Subject = "Şifre Yenileme Talebi Hakkında";
-                    mailMessage.Body = "Sayın " + kontrol.FirstName + " " + kontrol.LastName + " Cütopya uygulaması üzerinden \n"  + DateTime.Now.ToString() + " tarihinde göndermiş olduğunuz şifre değiştirme talebinize istinaden oluşturulan yeni şifreniz aşağıda belirtilmiştir \n " + "Yeni Şifreniz : " + newPassword+ " Sisteme giriş yaptıktan sonra, lütfen şifrenizi değiştiriniz";
-                    mailMessage.IsBodyHtml = true;
-
-                    SmtpClient smtp = new SmtpClient();
-                    smtp.Credentials = new NetworkCredential("cutopya@gmail.com", "dkjvwhkwxanvpkwq");
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.Port = 587;
-                    smtp.EnableSsl = true;
-                    smtp.Send(mailMessage);
-
-                    var x = user.TGet(kontrol.UserId);
-                   
-                    x.Email = kontrol.Email;
-                    x.FirstName = kontrol.FirstName;
-                    x.LastName = kontrol.LastName;
-                    x.Password = newPassword.ToString();
-                    x.RoleId = kontrol.RoleId;
-                    x._Role = kontrol._Role;
-                    user.TUpdate(x);
-                    TempData["Message"] = "Yeni şifreniz mail adresinize başarıyla gönderilmiştir.";
-
-                  
-                }
                 else
                 {
-                    TempData["Message"] = "Mail adresiniz uyuşmuyor kontrol ediniz.";
-                }
+                    var kontrol = user.TList(X => X.Email == model.Email).FirstOrDefault();
+                    if (kontrol.Email == model.Email)
+                    {
+                        Random rastgele = new Random();
+                        string newPassword = null;
+
+                        //İki büyük harf üretme
+                        for (int i = 1; i <= 2; i++)
+                        {
+                            int sayi1 = rastgele.Next(65, 91);
+                            newPassword = newPassword + ((char)sayi1);
+                        }
+                        //İki küçük harf üretme
+                        for (int i = 1; i <= 2; i++)
+                        {
+                            int sayi1 = rastgele.Next(97, 123);
+                            newPassword = newPassword + ((char)sayi1);
+                        }
+                        //İki sayı üretme
+                        for (int i = 1; i <= 2; i++)
+                        {
+                            int sayi1 = rastgele.Next(48, 58);
+                            newPassword = newPassword + ((char)sayi1);
+                        }
+                        //iki sembol üretme
+                        for (int i = 1; i <= 2; i++)
+                        {
+                            int sayi1 = rastgele.Next(35, 39);
+                            newPassword = newPassword + ((char)sayi1);
+                        }
+
+                        MailMessage mailMessage = new MailMessage();
+                        mailMessage.To.Add(model.Email);
+                        mailMessage.From = new MailAddress("cutopya@gmail.com");
+                        mailMessage.Subject = "Şifre Yenileme Talebi Hakkında";
+                        mailMessage.Body = "Sayın " + kontrol.FirstName + " " + kontrol.LastName + " Cütopya uygulaması üzerinden \n" + DateTime.Now.ToString() + " tarihinde göndermiş olduğunuz şifre değiştirme talebinize istinaden oluşturulan yeni şifreniz aşağıda belirtilmiştir \n " + "Yeni Şifreniz : " + newPassword + " Sisteme giriş yaptıktan sonra, lütfen şifrenizi değiştiriniz";
+                        mailMessage.IsBodyHtml = true;
+
+                        SmtpClient smtp = new SmtpClient();
+                        smtp.Credentials = new NetworkCredential("cutopya@gmail.com", "dkjvwhkwxanvpkwq");
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.EnableSsl = true;
+                        smtp.Send(mailMessage);
+
+                        var x = user.TGet(kontrol.UserId);
+
+                        x.Email = kontrol.Email;
+                        x.FirstName = kontrol.FirstName;
+                        x.LastName = kontrol.LastName;
+                        x.Password = newPassword.ToString();
+                        x.RoleId = kontrol.RoleId;
+                        x._Role = kontrol._Role;
+                        user.TUpdate(x);
+                        TempData["Message"] = "Yeni şifreniz mail adresinize başarıyla gönderilmiştir.";
+
+
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Mail adresiniz uyuşmuyor kontrol ediniz.";
+                    }
                 }
             }
             else
