@@ -169,7 +169,7 @@ namespace BlogWeb.PL.Controllers
                 bl.Text = b.Text;
                 bl.Status = b.Status;
                 bl.Date = b.Date;
-                bl.UserId = 1;
+                bl.UserId = userId;
                 bl.CategoryId = b.CategoryId;
 
                 TempData["EklemeSonuc"] = 1;
