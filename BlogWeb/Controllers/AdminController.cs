@@ -200,6 +200,7 @@ namespace BlogWeb.PL.Controllers
             ViewBag.user = degerler;
 
             var x = blog.TGet(bg.BlogId);
+           
             //if (ModelState.IsValid)
             //{
             //    x.Text = ct.Text;
