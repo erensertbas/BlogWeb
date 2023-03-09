@@ -107,23 +107,6 @@ namespace BlogWeb.PL.Controllers
             return View(result);
         }
 
-        //public ActionResult HomeCategory(int id)
-        //{
-        //    var cat = category.TGet(id).CategoryName;
-        //    TempData["Kategori"] = cat;
-
-        //    var result = c.Blog.Where(x => x.CategoryId == id).ToList();
-        //    // var result = c.Blog.Distinct().OrderByDescending(d => d.Date);
-        //    if (result.Count() > 0)
-        //    {
-        //        return View(result.Distinct().OrderByDescending(d => d.Date));
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
-
-
-
 
         [HttpGet]
         public IActionResult Contact()
@@ -182,14 +165,6 @@ namespace BlogWeb.PL.Controllers
         [AllowAnonymous]
         public IActionResult SignIn()
         {
-            //ClaimsPrincipal claimUser = HttpContext.User;
-
-            //if (claimUser.Identity.IsAuthenticated)
-            //{
-            //    //var result = HttpContext.Session.GetInt32("_UserToken").Value;
-            //    //HttpContext.Session.SetInt32("UserID", result);
-            //    return RedirectToAction("Index", "Admin");
-            //}
             return View();
         }
 
@@ -246,6 +221,10 @@ namespace BlogWeb.PL.Controllers
                     return RedirectToAction("Index", "Home"); // user ındex
                 }
 
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Mail adresiniz veya şifreniz hatalı!";
             }
 
             //else
