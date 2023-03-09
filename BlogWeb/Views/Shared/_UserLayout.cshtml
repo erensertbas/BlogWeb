@@ -61,24 +61,26 @@
 
     <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
         <div class="logo d-flex justify-content-between">
-            <a href="~/Home/Index"><h3>Anasayfa</h3></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
             </div>
         </div>
         <ul id="sidebar_menu">
+            <li class="mm-active" ><a href="~/Home/Index">Anasayfa</a></li>
+
             <li class="mm-active">
                 <a class="has-arrow" aria-expanded="false">
-                    <div class="icon_menu">
-                    </div>
                     <span>Makaleler</span>
                 </a>
                 <ul>
                     <li><a href="~/User/Blogs">Makalelerim</a></li>
                     <li><a href="~/User/BlogCreate">Makale Yayınla</a></li>
                 </ul>
+
             </li>
         </ul>
+
+
     </nav>
 
     <section class="main_content dashboard_part large_header_bg">
@@ -115,7 +117,7 @@
             @RenderBody()
         </div>
 
-     
+
     </section>
 
     <div id="back-top" style="display: none;">
