@@ -108,6 +108,34 @@ namespace BlogWeb.PL.Controllers
 
         #region Blog
 
+        public IActionResult AllBlogs()
+        {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+
+            IEnumerable<Blog> _blog = context.Blog.Include(x => x._Category);
+            TempData["BlogCount"] = _blog.Count();
+
+            return View(_blog);
+        }
+        public IActionResult AllBlogDelete(int id) // view yok
+        {
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
+
+            var x = blog.TGet(id);
+            if (x == null)
+            {
+                return NotFound();
+            }
+            blog.TDelete(x);
+            return RedirectToAction("AllBlogs");
+        }
+
+
         public IActionResult Blogs()
         {
             int userId = Convert.ToInt16(GetCookie("userId"));

@@ -49,6 +49,30 @@ namespace BlogWeb.PL.Controllers
         }
 
         #region home
+        public ActionResult HomeCategory(int id, int? pageNumber)
+        {
+            int pageSize = 2;
+
+
+            var cat = category.TGet(id).CategoryName;
+            TempData["Kategori"] = cat;
+
+            var result = c.Blog.Where(x => x.CategoryId == id).ToList();
+
+            if (result.Count() > 0)
+            {
+                //var result1 = result.Distinct().OrderByDescending(d => d.Date);
+
+                var result1 = PaginatedList<Blog>.Create(c.Blog.Distinct().OrderByDescending(d => d.Date).Where(x => x.Status == true && x.CategoryId == id).ToList(), pageNumber ?? 1, pageSize);
+
+
+                return View(result1);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -83,20 +107,22 @@ namespace BlogWeb.PL.Controllers
             return View(result);
         }
 
-        public ActionResult HomeCategory(int id)
-        {
-            var cat = category.TGet(id).CategoryName;
-            TempData["Kategori"] = cat;
+        //public ActionResult HomeCategory(int id)
+        //{
+        //    var cat = category.TGet(id).CategoryName;
+        //    TempData["Kategori"] = cat;
 
-            var result = c.Blog.Where(x => x.CategoryId == id).ToList();
-            // var result = c.Blog.Distinct().OrderByDescending(d => d.Date);
-            if (result.Count() > 0)
-            {
-                return View(result.Distinct().OrderByDescending(d => d.Date));
-            }
+        //    var result = c.Blog.Where(x => x.CategoryId == id).ToList();
+        //    // var result = c.Blog.Distinct().OrderByDescending(d => d.Date);
+        //    if (result.Count() > 0)
+        //    {
+        //        return View(result.Distinct().OrderByDescending(d => d.Date));
+        //    }
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
+
+
 
 
         [HttpGet]
@@ -152,6 +178,8 @@ namespace BlogWeb.PL.Controllers
 
 
         #region Login Register LogOut
+
+        [AllowAnonymous]
         public IActionResult SignIn()
         {
             //ClaimsPrincipal claimUser = HttpContext.User;
@@ -178,9 +206,11 @@ namespace BlogWeb.PL.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SignIn(UserModel model)
         {
             Context c = new Context();
+
             var dataValue = c.User.FirstOrDefault(x => x.Email == model.Email && x.Password == model.Password);
             if (dataValue != null)
             {
@@ -195,11 +225,11 @@ namespace BlogWeb.PL.Controllers
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(userIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
 
-                    //HttpContext.Session.SetInt32("_UserToken", dataValue.UserId);
+                    HttpContext.Session.SetInt32("_UserToken", dataValue.UserId);
 
                     SetCookie("userId", dataValue.UserId.ToString());
 
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Index", "Home"); // admin ındex
                 }
                 else
                 {
@@ -211,17 +241,18 @@ namespace BlogWeb.PL.Controllers
                     var userIdentity = new ClaimsIdentity(claims, "a");
                     ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(userIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
-                    // HttpContext.Session.SetInt32("_UserToken", dataValue.UserId);
+                    HttpContext.Session.SetInt32("_UserToken", dataValue.UserId);
                     SetCookie("userId", dataValue.UserId.ToString());
-                    return RedirectToAction("Index", "User");
+                    return RedirectToAction("Index", "Home"); // user ındex
                 }
 
             }
-            else
-            {
-                TempData["ErrorMessage"] = "Kullanıcı email ya da şifre girmediniz lütfen kontrol ediniz.";
 
-            }
+            //else
+            //{
+            //    TempData["ErrorMessage"] = "Kullanıcı email ya da şifre girmediniz lütfen kontrol ediniz.";
+
+            //}
             return View();
 
 
