@@ -1,7 +1,7 @@
 ﻿@using BlogWeb.DL.Models
 @model IEnumerable<BlogWeb.DL.Models.Blog>
 @{
-    ViewData["Title"] = "Blogs";
+    ViewData["Title"] = "Makalelerim";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
@@ -23,10 +23,8 @@
         <tr>
             <th scope="col">Kapak Resmi</th>
             <th scope="col">Başlık</th>
-            <th scope="col">İçerik</th>
-            <th scope="col">Kategori</th>
-
             <th scope="col">Tarih</th>
+            <th scope="col">Durum</th>
             <th scope="col">İşlem</th>
         </tr>
     </thead>
@@ -35,30 +33,27 @@
 
         <tbody>
             <tr class="table-secondary">
-                <th scope="row"><img class="card-img-top" style="max-height:100px; max-width:100px;" src="~/images/@item.ImageUrl"></th>
+                <td scope="row"><img class="card-img-top" style="max-height:100px; max-width:100px;" src="~/images/@item.ImageUrl"></td>
                 <td>@item.BlogTitle</td>
-                @if (item.Text.Length > 50)
+
+
+                <td>@item.Date.ToShortDateString()</td>
+                @if (item.Status == false)
                 {
-                    <th scope="row">@Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text.Substring(0, 47) + " ..." + "  ")) </th>
+                    <td>
+                        Onay Bekliyor
+                    </td>
                 }
                 else
                 {
-                    <th scope="row">@Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Text))</th>
+                    <td>
+                        Yayında
+                    </td>
                 }
                 <td>
-                    
-                    @{
-                        Context c = new Context();
-                        var result = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();
-                    }
-                    @result.CategoryName
-
-                </td>
-                <td>@item.Date.ToShortDateString()</td>
-                <td>
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                        <a class="btn btn-info" href="~/User/BlogDetail/@item.BlogId">Detay</a>
-                        <a class="btn btn-warning" href="~/User/GetBlog/@item.BlogId">Güncelle</a>
+                        <a class="btn btn-info" href="~/User/BlogDetail/@item.BlogId">Detay</a>  &nbsp;
+                        <a class="btn btn-warning" href="~/User/GetBlog/@item.BlogId">Güncelle</a>  &nbsp;
                         <a class="btn btn-danger" onclick="deneme(@item.BlogId)">Sil</a>
                     </div>
                 </td>

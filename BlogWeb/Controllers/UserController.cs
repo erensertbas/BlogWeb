@@ -38,8 +38,10 @@ namespace BlogWeb.PL.Controllers
             ViewBag.user = degerler;
             ViewBag.userId = userId;
 
-            var userBlog = blog.TList(x => x.UserId == userId);
+            var userBlog = blog.TList(x => x.UserId == userId).Where(x=>x.Status==true);
+            var userBlogOnayBekleyen = blog.TList(x => x.UserId == userId).Where(x=>x.Status==false).Count();
             ViewBag.userBlogCount = userBlog.Count();
+            ViewBag.BlogOnayBekleyen = userBlogOnayBekleyen;
             return View(userBlog);
         }
         public IActionResult Blogs()

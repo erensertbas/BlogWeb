@@ -21,7 +21,7 @@ namespace BlogWeb.BL.Repository.IRepository
         {
             return c.Set<T>().Include(p).ToList();
         }
-        public List<T> TList(Expression<Func<T, bool>> filter)//arama filtreleme
+        public List<T> TList(Expression<Func<T, bool>> filter) //arama filtreleme
         {
 
             return c.Set<T>().Where(filter).ToList();

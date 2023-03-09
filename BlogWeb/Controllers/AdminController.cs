@@ -55,6 +55,13 @@ namespace BlogWeb.PL.Controllers
             IEnumerable<UserModel> users = user.TList();
             int TotalUser = users.Count();
             ViewBag.totalUser = TotalUser;
+
+
+            var OnayBekleyen = blog.TList().Where(x => x.Status == false).Count();
+            ViewBag.onayBekleyen = OnayBekleyen;
+
+
+
             return View();
         }
    
