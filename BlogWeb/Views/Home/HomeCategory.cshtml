@@ -1,4 +1,7 @@
-﻿@using BlogWeb.PL.Models
+﻿@using BlogWeb.DL.Models
+@using BlogWeb.PL.Models
+
+
 @*@model IEnumerable<BlogWeb.DL.Models.Blog>
 *@
 @model PaginatedList<BlogWeb.DL.Models.Blog>
@@ -35,8 +38,27 @@
                             <div class="thumb">
                                 <img class="card-img rounded-0" src="~/images/@item.ImageUrl">
                                 <ul class="thumb-info">
-                                    <li><a><i class="ti-user"></i>@item.UserId</a></li>
-                                    <li><a><i class="ti-themify-favicon"></i>@item.CategoryId</a></li>
+                                    <li>
+                                        <a>
+                                            <i class="ti-user"></i>
+                                            @{
+                                                Context c = new Context();
+                                                var result = c.User.Where(x => x.UserId == @item.UserId).FirstOrDefault();
+                                            }
+                                            @result.FirstName @result.LastName
+
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <i class="ti-themify-favicon"></i>
+                                            @{
+                                                var result1 = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();
+                                            }
+                                            @result1.CategoryName
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="details mt-20">

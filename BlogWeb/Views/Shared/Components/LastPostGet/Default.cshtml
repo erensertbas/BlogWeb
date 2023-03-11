@@ -12,16 +12,13 @@
                     </div>
                     <div class="blog__slide__content">
                         <a class="blog__slide__label" href="~/Home/HomeCategory/@item.CategoryId">
-
                             @{
                                 Context c = new Context();
                                 var result1 = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();
                             }
-                            @result1.CategoryName 
-
-                          
+                            @result1.CategoryName   
                         </a>
-                        <h3><a href="~/Home/BlogDetail/@item.BlogId">@item.BlogTitle</a></h3>
+                        <h3><a href="/Makale-Detay/@item.BlogId">@item.BlogTitle</a></h3>
                         <p>@item.Date.ToShortDateString()</p>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSession();
 
-builder.Services.AddMvc(config=>
+builder.Services.AddMvc(config =>
 {
     var policy = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
@@ -25,7 +25,7 @@ builder.Services.AddMvc(config=>
 
 });
 
- builder.Services.AddMvc(); //eklendi izinsiz yönlendirme olmasýn diye
+builder.Services.AddMvc(); //eklendi izinsiz yönlendirme olmasýn diye
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
 {
     x.Cookie.Name = "NetCoreMvc.Auth";
@@ -67,25 +67,33 @@ app.UseAuthorization();
 
 #region HomeController
 
-//app.MapControllerRoute(
-//     name: "Anasayfa",
-//     pattern: "Anasayfa",
-//    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+app.MapControllerRoute(
+     name: "Anasayfa",
+     pattern: "Anasayfa",
+    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
 
-//app.MapControllerRoute(
-//     name: "Contact",
-//     pattern: "Iletisim",
-//    defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional });
+app.MapControllerRoute(
+     name: "Iletisim",
+     pattern: "Iletisim",
+    defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional });
 
-//app.MapControllerRoute(
-//     name: "About",
-//     pattern: "Hakkimizda",
-//    defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional });
+app.MapControllerRoute(
+     name: "Hakkimizda",
+     pattern: "Hakkimizda",
+    defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional });
 
-//app.MapControllerRoute(
-//     name: "BlogDetail",
-//     pattern: "{Makale-Detay}/{id}",
-//    defaults: new { controller = "Home", action = "BlogDetail", id = UrlParameter.Optional });
+app.MapControllerRoute(
+     name: "MakaleDetay",
+     pattern: "{Makale-Detay}/{id}",
+    defaults: new { controller = "Home", action = "MakaleDetay", id = UrlParameter.Optional });
+
+
+    app.MapControllerRoute(
+     name: "HomeCategory",
+     pattern: "{Makale-Kategori}/{id}",
+    defaults: new { controller = "Home", action = "HomeCategory", id = UrlParameter.Optional });
+
+
 
 #endregion
 
@@ -200,20 +208,21 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    //app.MapControllerRoute(
-    // name: "default",
-    // pattern: "default",
-    //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
-
-    // endpoints.MapControllerRoute(
-    //   name: "areas",
-    //   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    // );
-
-
     app.MapControllerRoute(
-   name: "default",
-   pattern: "{controller=Home}/{action=Index}/{id?}");
+     name: "Anasayfa",
+     pattern: "Anasayfa", // url ismi
+    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Anasayfa}/{id?}"
+    );
+
+
+   // app.MapControllerRoute(
+   //name: "default",
+   //pattern: "{controller=Home}/{action=Anasayfa}/{id?}");
+
 });
 
 app.Run();

@@ -37,7 +37,7 @@ namespace BlogWeb.PL.Controllers
         FirebaseAuthProvider auth;
         UserRepository user = new UserRepository();
 
-
+        //[Route("Anasayfa")]
         public IActionResult Index(int? pageNumber)
         {
 
@@ -53,7 +53,6 @@ namespace BlogWeb.PL.Controllers
         {
             int pageSize = 2;
 
-
             var cat = category.TGet(id).CategoryName;
             TempData["Kategori"] = cat;
 
@@ -61,7 +60,6 @@ namespace BlogWeb.PL.Controllers
 
             if (result.Count() > 0)
             {
-                //var result1 = result.Distinct().OrderByDescending(d => d.Date);
 
                 var result1 = PaginatedList<Blog>.Create(c.Blog.Distinct().OrderByDescending(d => d.Date).Where(x => x.Status == true && x.CategoryId == id).ToList(), pageNumber ?? 1, pageSize);
 
@@ -97,18 +95,23 @@ namespace BlogWeb.PL.Controllers
             }
             return View();
         }
-        public IActionResult BlogDetail(int id)
-        {
-            var result = blog.TGet(id);
-            var categoryName = category.TGet(result.CategoryId).CategoryName;
-            var userName = user.TGet(result.UserId);
-            ViewBag.userName = userName.FirstName + userName.LastName;
-            ViewBag.categoryName = categoryName;
-            return View(result);
-        }
+
+
+        ////[Route("{MakaleDetay}/{id}")]
+        //public IActionResult MakaleDetay(int id)
+        //{
+        //    var result = blog.TGet(id);
+        //    var categoryName = category.TGet(result.CategoryId).CategoryName;
+        //    var userName = user.TGet(result.UserId);
+        //    ViewBag.userName = userName.FirstName + userName.LastName;
+        //    ViewBag.categoryName = categoryName;
+        //    return View(result);
+
+        //}
 
 
         [HttpGet]
+        //[Route("Iletisim")]
         public IActionResult Contact()
         {
             IEnumerable<Contact> _contact = contact.TList();
@@ -146,6 +149,9 @@ namespace BlogWeb.PL.Controllers
             //}
             return View();
         }
+
+        //[Route("Hakkimizda")]
+
         public IActionResult About()
         {
             IEnumerable<AboutUs> aboutus = aboutUs.TList();
@@ -163,6 +169,7 @@ namespace BlogWeb.PL.Controllers
         #region Login Register LogOut
 
         [AllowAnonymous]
+
         public IActionResult SignIn()
         {
             return View();

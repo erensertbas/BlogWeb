@@ -41,11 +41,11 @@
                 <td>@item.BlogTitle</td>
                
                 <td>
-                    @{
+                 @*   @{
                         Context c = new Context();
                         var result = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();
                     }
-                    @result.CategoryName
+                    @result.CategoryName*@
 
                 </td>
                 <td>@item.Date.ToShortDateString()</td>

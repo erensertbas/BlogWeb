@@ -263,7 +263,6 @@ namespace BlogWeb.PL.Controllers
             int userId = Convert.ToInt16(GetCookie("userId"));
             var degerler = user.TGet(userId);
             ViewBag.user = degerler;
-
             var userBlog = blog.TList(x => x.Status == false);
             return View(userBlog);
         }
