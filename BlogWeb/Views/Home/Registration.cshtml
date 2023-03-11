@@ -34,8 +34,9 @@
                     <span class="login100-form-title p-b-26">
                         Kayıt Ol
                     </span>
+
                     <span class="login100-form-title p-b-48">
-                        <i class="zmdi zmdi-font"></i>
+                        <img src="~/images/logo.png" alt="" style="max-height:100px">
                     </span>
 
                     <div class="wrap-input100 validate-input">
@@ -43,14 +44,14 @@
                         <span asp-validation-for="FirstName" class="focus-input100" data-placeholder="İsim"></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" >
+                    <div class="wrap-input100 validate-input">
                         <input class="input100" asp-for="LastName" type="text">
-                       <span asp-validation-for="LastName" class="focus-input100" data-placeholder="Soyisim"></span>
+                        <span asp-validation-for="LastName" class="focus-input100" data-placeholder="Soyisim"></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" >
+                    <div class="wrap-input100 validate-input">
                         <input class="input100" asp-for="Email" type="email">
-                         <span asp-validation-for="Email" class="focus-input100" data-placeholder="Mail Adresi"></span>
+                        <span asp-validation-for="Email" class="focus-input100" data-placeholder="Mail Adresi"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
@@ -75,14 +76,14 @@
                             Hesabın var mı?
                         </span>
 
-                        <a href="~/Home/SignIn"> Hemen giriş yap</a>
+                        <a href="/GirisYap"> Hemen giriş yap</a>
 
 
                     </div>
 
                     <div class="text-center p-t-55">
 
-                        <a href="~/Home/Index"> Anasayfaya Dön </a>
+                        <a href="/Anasayfa"> Anasayfaya Dön </a>
 
                     </div>
 
@@ -145,7 +146,7 @@
                     </div>
                     <br />
                     <!-- Email input -->
-                   
+
 
                     <!-- Email input -->
                     <div class="form-outline mb-4">

@@ -88,10 +88,29 @@ app.MapControllerRoute(
     defaults: new { controller = "Home", action = "MakaleDetay", id = UrlParameter.Optional });
 
 
-    app.MapControllerRoute(
-     name: "HomeCategory",
-     pattern: "{Makale-Kategori}/{id}",
-    defaults: new { controller = "Home", action = "HomeCategory", id = UrlParameter.Optional });
+app.MapControllerRoute(
+ name: "HomeCategory",
+ pattern: "{Makale-Kategori}/{id}",
+defaults: new { controller = "Home", action = "HomeCategory", id = UrlParameter.Optional });
+
+
+
+app.MapControllerRoute(
+ name: "SignIn",
+ pattern: "GirisYap",
+defaults: new { controller = "Home", action = "SignIn", id = UrlParameter.Optional });
+
+app.MapControllerRoute(
+ name: "Registration",
+ pattern: "KayýtOl",
+defaults: new { controller = "Home", action = "Registration", id = UrlParameter.Optional });
+
+app.MapControllerRoute(
+ name: "ForgotMyPassword",
+ pattern: "SifremiUnuttum",
+defaults: new { controller = "Home", action = "ForgotMyPassword", id = UrlParameter.Optional });
+
+
 
 
 
@@ -219,9 +238,9 @@ app.UseEndpoints(endpoints =>
     );
 
 
-   // app.MapControllerRoute(
-   //name: "default",
-   //pattern: "{controller=Home}/{action=Anasayfa}/{id?}");
+    // app.MapControllerRoute(
+    //name: "default",
+    //pattern: "{controller=Home}/{action=Anasayfa}/{id?}");
 
 });
 

@@ -344,7 +344,6 @@ namespace BlogWeb.PL.Controllers
                         user.TUpdate(x);
                         TempData["Message"] = "Yeni şifreniz mail adresinize başarıyla gönderilmiştir.";
 
-
                     }
                     else
                     {
@@ -356,8 +355,6 @@ namespace BlogWeb.PL.Controllers
             {
                 TempData["Message"] = "Lütfen email adresinizi giriniz.";
             }
-
-
             return View();
         }
         #endregion
