@@ -10,6 +10,13 @@
 
     <link rel="stylesheet" href="~/sensive/vendors/bootstrap%2c_bootstrap.min.css%2bfontawesome%2c_css%2c_all.min.css%2bthemify-icons%2c_themify-icons.css%2blinericon%2c_style.css%2bowl-carousel%2c_owl.theme.default.min.css" />
     <link rel="stylesheet" href="~/sensive/css/A.style.css.pagespeed.cf.aJGzVhjFcT.css">
+    <style>
+        @@media  (max-width: 991px) {
+            .header_area .navbar {
+               background:#dee2e6;
+            }
+        }
+    </style>
     <script nonce="93b4cf69-a2c3-4644-8d2b-0e0f02390963">(function(w, d) { !function(Z, _, ba, bb) { Z.zarazData = Z.zarazData || {}; Z.zarazData.executed = []; Z.zaraz = { deferred: [], listeners: [] }; Z.zaraz.q = []; Z.zaraz._f = function(bc) { return function() { var bd = Array.prototype.slice.call(arguments); Z.zaraz.q.push({ m: bc, a: bd }) } }; for (const be of ["track", "set", "debug"]) Z.zaraz[be] = Z.zaraz._f(be); Z.zaraz.init = () => { var bf = _.getElementsByTagName(bb)[0], bg = _.createElement(bb), bh = _.getElementsByTagName("title")[0]; bh && (Z.zarazData.t = _.getElementsByTagName("title")[0].text); Z.zarazData.x = Math.random(); Z.zarazData.w = Z.screen.width; Z.zarazData.h = Z.screen.height; Z.zarazData.j = Z.innerHeight; Z.zarazData.e = Z.innerWidth; Z.zarazData.l = Z.location.href; Z.zarazData.r = _.referrer; Z.zarazData.k = Z.screen.colorDepth; Z.zarazData.n = _.characterSet; Z.zarazData.o = (new Date).getTimezoneOffset(); Z.zarazData.q = []; for (; Z.zaraz.q.length;) { const bl = Z.zaraz.q.shift(); Z.zarazData.q.push(bl) } bg.defer = !0; for (const bm of [localStorage, sessionStorage]) Object.keys(bm || {}).filter((bo => bo.startsWith("_zaraz_"))).forEach((bn => { try { Z.zarazData["z_" + bn.slice(7)] = JSON.parse(bm.getItem(bn)) } catch { Z.zarazData["z_" + bn.slice(7)] = bm.getItem(bn) } })); bg.referrerPolicy = "origin"; bg.src = "~/sensive/../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(Z.zarazData))); bf.parentNode.insertBefore(bg, bf) };["complete", "interactive"].includes(_.readyState) ? zaraz.init() : Z.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, 0, "script"); })(window, document);</script>
 </head>
 <body>
@@ -19,7 +26,7 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container box_1620">
 
-                    <a class="navbar-brand logo_h" href="/Anasayfa"><img src="~/images/logo.png" alt="" style="max-height:80px"></a>
+                    <a class="navbar-brand logo_h" href="/Anasayfa"><img src="~/images/logo1.png" alt="" style="max-height:90px"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -54,7 +61,7 @@
                                     else
                                     {
                                         <li class="nav-item"><a class="nav-link" href="/GirisYap">Giriş Yap</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/KayıtOl">Kayıt Ol</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/KayitOl">Kayıt Ol</a></li>
                                     }
 
                                 </ul>

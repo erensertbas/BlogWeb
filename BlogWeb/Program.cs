@@ -83,14 +83,14 @@ app.MapControllerRoute(
     defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional });
 
 app.MapControllerRoute(
-     name: "MakaleDetay",
-     pattern: "{Makale-Detay}/{id}",
-    defaults: new { controller = "Home", action = "MakaleDetay", id = UrlParameter.Optional });
+     name: "BlogDetail",
+     pattern: "{MakaleDetay}/{id}",
+    defaults: new { controller = "Home", action = "BlogDetail", id = UrlParameter.Optional });
 
 
 app.MapControllerRoute(
  name: "HomeCategory",
- pattern: "{Makale-Kategori}/{id}",
+ pattern: "{MakaleKategori}/{id}",
 defaults: new { controller = "Home", action = "HomeCategory", id = UrlParameter.Optional });
 
 
@@ -100,15 +100,15 @@ app.MapControllerRoute(
  pattern: "GirisYap",
 defaults: new { controller = "Home", action = "SignIn", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
- name: "Registration",
- pattern: "KayýtOl",
-defaults: new { controller = "Home", action = "Registration", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+// name: "Registration",
+// pattern: "KayitOl",
+//defaults: new { controller = "Home", action = "Registration", id = UrlParameter.Optional });
 
-app.MapControllerRoute(
- name: "ForgotMyPassword",
- pattern: "SifremiUnuttum",
-defaults: new { controller = "Home", action = "ForgotMyPassword", id = UrlParameter.Optional });
+//app.MapControllerRoute(
+// name: "ForgotMyPassword",
+// pattern: "SifremiUnuttum",
+//defaults: new { controller = "Home", action = "ForgotMyPassword", id = UrlParameter.Optional });
 
 
 

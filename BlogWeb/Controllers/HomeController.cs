@@ -36,7 +36,12 @@ namespace BlogWeb.PL.Controllers
 
         FirebaseAuthProvider auth;
         UserRepository user = new UserRepository();
-
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+            auth = new FirebaseAuthProvider(
+                           new FirebaseConfig("AIzaSyA0qXMD0sg1OMh-KYkL60vzauVTcLy60aA"));
+        }
         //[Route("Anasayfa")]
         public IActionResult Index(int? pageNumber)
         {
@@ -49,7 +54,7 @@ namespace BlogWeb.PL.Controllers
         }
 
         #region home
-        public ActionResult HomeCategory(int id, int? pageNumber)
+        public IActionResult HomeCategory(int id, int? pageNumber)
         {
             int pageSize = 2;
 
@@ -70,16 +75,6 @@ namespace BlogWeb.PL.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-            auth = new FirebaseAuthProvider(
-                           new FirebaseConfig("AIzaSyA0qXMD0sg1OMh-KYkL60vzauVTcLy60aA"));
-        }
-
-
         public IActionResult SubscriberAdd()
         {
             return View();
@@ -97,17 +92,18 @@ namespace BlogWeb.PL.Controllers
         }
 
 
-        ////[Route("{MakaleDetay}/{id}")]
-        //public IActionResult MakaleDetay(int id)
-        //{
-        //    var result = blog.TGet(id);
-        //    var categoryName = category.TGet(result.CategoryId).CategoryName;
-        //    var userName = user.TGet(result.UserId);
-        //    ViewBag.userName = userName.FirstName + userName.LastName;
-        //    ViewBag.categoryName = categoryName;
-        //    return View(result);
+       
 
-        //}
+        public IActionResult BlogDetail(int id)
+        {
+            var result = blog.TGet(id);
+            var categoryName = category.TGet(result.CategoryId).CategoryName;
+            var userName = user.TGet(result.UserId);
+            ViewBag.userName = userName.FirstName + userName.LastName;
+            ViewBag.categoryName = categoryName;
+            return View(result);
+
+        }
 
 
         [HttpGet]
