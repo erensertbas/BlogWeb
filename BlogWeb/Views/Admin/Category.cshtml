@@ -49,7 +49,7 @@
                     <td class="col-md-8 "> &nbsp; @item.CategoryName</td>
                     <td class="col-md-4">
                         <div class="btn-group">
-                            <a asp-controller="Admin" asp-action="GetCategory" asp-route-id="@item.CategoryId" class="btn btn-warning mx-2">Düzenle</a>
+                            <a href="/KategoriDuzenle/@item.CategoryId" class="btn btn-warning mx-2">Düzenle</a>
                             <a onclick="deneme(@item.CategoryId)" class="btn btn-danger">Sil</a>
                         </div>
                     </td>
@@ -60,7 +60,7 @@
 }
 
 
-<a asp-controller="Admin" asp-action="CategoryCreate" class="btn btn-success" style="color:white; border-radius:2px;">Hemen Ekle</a>
+<a href="/KategoriOlustur" class="btn btn-success" style="color:white; border-radius:2px;">Hemen Ekle</a>
 
 <script>
     function deneme(id) {
@@ -73,7 +73,7 @@
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    window.location.replace('/Admin/CategoryDelete/' + id),
+                    window.location.replace('/KategoriSil/' + id),
                         swal("Poof! Kategori Silindi!", {
                             icon: "success",
                         });

@@ -1,6 +1,6 @@
 ﻿@model BlogWeb.DL.Models.Subscriber
 @{
-    ViewData["Title"] = "GetSubscriber";
+    ViewData["Title"] = "Abone";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -27,12 +27,12 @@
     @Html.ValidationMessageFor(x => x.SubscriberMail, "", new { @class = "text-danger" })
     <br />
     <button type="submit" class="btn btn-warning">Düzenle</button>
-    <a asp-controller="Admin" asp-action="Subscriber" class="btn btn-secondary">Geri Dön</a>
+    <a href="/AboneListesi" class="btn btn-secondary">Geri Dön</a>
 }
 
 <script>
     $('.textarea').summernote({
-        placeholder: 'Hakkımızda Giriniz.',
+        placeholder: 'Abone Giriniz.',
         tabsize: 2,
         height: 100
     });

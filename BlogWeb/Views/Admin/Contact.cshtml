@@ -15,7 +15,7 @@
         <h4 class="alert-heading">Uyarı!</h4>
         <p class="mb-0" style="color:black;">Henüz İletişim Bilgisi Eklemediniz.</p>
     </div>
-    <a asp-controller="Admin" asp-action="ContactCreate" class="btn btn-success mx-2">Hemen Ekle</a>
+    <a href="/IletisimOlustur" class="btn btn-success mx-2">Hemen Ekle</a>
 }
 
 
@@ -58,7 +58,7 @@
                     <p class="card-text">@item.EmailAddress</p>
                     <p class="card-text">@item.Phone</p>
                     <br>
-                    <a asp-controller="Admin" asp-action="GetContact" asp-route-id="@item.Id" class="btn btn-warning ">Düzenle</a>
+                    <a href="IletisimDuzenle/@item.Id" class="btn btn-warning ">Düzenle</a>
                     <a onclick="deneme(@item.Id)" class="btn btn-danger mx-2">Sil</a>
                 </div>
             </div>
@@ -84,7 +84,7 @@
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    window.location.replace('/Admin/ContactDelete/' + id),
+                    window.location.replace('/IletisimSil/' + id),
                         swal("Poof! İletişim Bilgileri Silindi!", {
                             icon: "success",
                         });

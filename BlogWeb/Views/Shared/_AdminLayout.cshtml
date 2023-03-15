@@ -61,26 +61,26 @@
 
     <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
         <div class="logo d-flex justify-content-between">
-            <a href="~/Admin/index-2.html"><img src="~/images/logo1.png" alt="" style="max-height:100px;"></a>
+            <a href="~/Yonetici"><img src="~/images/logo1.png" alt="" style="max-height:100px;"></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
             </div>
         </div>
         <ul id="sidebar_menu">
-            <li class="mm-active" ><a href="~/Home/Index">Anasayfa</a></li>
+            <li class="mm-active" ><a href="~/Anasayfa">Anasayfa</a></li>
 
 
-              <li class="mm-active" ><a href="~/Admin/Index">Panel</a></li>
+              <li class="mm-active" ><a href="~/Yonetici">Panel</a></li>
 
             <li class="mm-active">
                 <a class="has-arrow" aria-expanded="false">
                     <span>Makaleler</span>
                 </a>
                 <ul>
-                    <li><a href="/Admin/AllBlogs">Tüm Makaleler</a></li>
-                    <li><a href="/Admin/ApproveBlogList">Onay Bekleyenler</a></li>
-                    <li><a href="/Makaleler">Makalelerim</a></li>
-                    <li><a href="/MakaleOlustur">Makale Yayınla</a></li>
+                    <li><a href="~/Makaleler">Tüm Makaleler</a></li>
+                    <li><a href="~/MakaleOnayListesi">Onay Bekleyenler</a></li>
+                    <li><a href="~/Makalelerim">Makalelerim</a></li>
+                    <li><a href="~/MakaleOlustur">Makale Yayınla</a></li>
 
                 </ul>
             </li>
@@ -100,7 +100,7 @@
                     <li><a href="/YoneticiIletisim">İletişim</a></li>
                 </ul>
                 <ul>
-                    <li><a asp-controller="Admin" asp-action="Subscriber">Aboneler</a></li>
+                    <li><a href="/AboneListesi">Aboneler</a></li>
                 </ul>
             </li>
 
@@ -122,14 +122,14 @@
                         <div class="header_right d-flex justify-content-between align-items-center">
 
                             <div class="profile_info">
-                                <img src="~/Images/user.png" alt="#">
+                                <img src="~/Images/user1.png" alt="#">
                                 <div class="profile_info_iner">
                                     <div class="profile_author_name">
                                         <p>Admin</p>
                                     </div>
                                     <div class="profile_info_details">
-                                        <a href="~/Admin/Profil/@ViewBag.user.UserId">Profilim </a>
-                                        <a href="~/Home/LogOut">Log Out </a>
+                                        <a href="~/Profilim/@ViewBag.user.UserId">Profilim </a>
+                                        <a href="~/CikisYap">Çıkış Yap </a>
                                     </div>
                                 </div>
                             </div>

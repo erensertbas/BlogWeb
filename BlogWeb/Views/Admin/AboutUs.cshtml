@@ -15,7 +15,7 @@
         <p class="mb-0" style="color:black;">Henüz Hakkımızda Eklemediniz.</p>
     </div>
 
-    <a asp-controller="Admin" asp-action="AboutUsCreate" class="btn btn-success mx-2">Hemen Ekle</a>
+    <a href="/HakkimizdaOlustur"  class="btn btn-success mx-2">Hemen Ekle</a>
 }
 
 
@@ -57,7 +57,7 @@
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    window.location.replace('/Admin/AboutUsDelete/' + id),
+                    window.location.replace('/HakkimizdaSil/' + id),
                         swal("Poof! Hakkımızda Silindi!", {
                             icon: "success",
                         });

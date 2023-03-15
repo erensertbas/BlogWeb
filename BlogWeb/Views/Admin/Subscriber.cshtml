@@ -9,25 +9,22 @@
     int GüncellemeSonuc = Convert.ToInt16(TempData["GüncellemeSonuc"]);
     }
     @if(adet==0){ 
-        <div class="alert alert-warning" role="alert"> <h6>Abone yok</h6></div>
-    <a asp-controller="Admin" asp-action="SubscriberCreate" class="btn btn-success mx-2">Hemen Ekle</a>
+        <div class="alert alert-info" role="alert"> <h6>Abone yok</h6></div>
+    <a href="/AboneEkle" class="btn btn-success mx-2">Hemen Ekle</a>
     }
 @if (EklemeSonuc == 1)
 {
     <div class="alert alert-dismissible alert-success">
       
-        <strong>Ekleme Başarılı!</strong> <p> Hakkımızda Başarılı Bir şekilde Eklendi</p>
+        <strong>Ekleme Başarılı!</strong> <p> Abone Başarılı Bir şekilde Eklendi</p>
     </div>
 }
 @if (GüncellemeSonuc == 1)
 {
     <div class="alert alert-dismissible alert-success">
-        <strong>Güncelleme Başarılı!</strong> <p> Hakkımızda Başarılı Bir Şekilde Güncellendi</p>
+        <strong>Güncelleme Başarılı!</strong> <p> Abone Başarılı Bir Şekilde Güncellendi</p>
     </div>
 }
-<div class="card-header">
-    Aboneler
-</div>
 @foreach (var item in Model)
 {
      
@@ -35,8 +32,8 @@
 
         <p class="card-text">@item.SubscriberMail</p> 
         <br>
-        <a asp-controller="Admin" asp-action="GetSubscriber" asp-route-id="@item.Id" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
-        <a asp-controller="Admin" asp-action="SubscriberDelete" asp-route-id="@item.Id" class="btn btn-danger mx-2">Sil</a>
+        <a href="/AboneDuzenle/@item.Id" class="btn btn-primary mx-2">Düzenle</a> &nbsp;  / &nbsp;
+        <a href="/AboneSil/@item.Id" class="btn btn-danger mx-2">Sil</a>
       </div>
 }
 <script>
@@ -50,7 +47,7 @@
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    window.location.replace('/Admin/SubscriberDelete/' + id),
+                    window.location.replace('/AboneSil/' + id),
                         swal("Poof! Abone Silindi!", {
                             icon: "success",
                         });

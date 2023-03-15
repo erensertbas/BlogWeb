@@ -67,6 +67,7 @@ namespace BlogWeb.PL.Controllers
    
         #region Profil 
         [HttpGet]
+     
         public IActionResult Profil(int id)
         {
             int userId = Convert.ToInt16(GetCookie("userId"));
@@ -139,7 +140,7 @@ namespace BlogWeb.PL.Controllers
                 return NotFound();
             }
             blog.TDelete(x);
-            return RedirectToAction("AllBlogs");
+            return Redirect("/Makaleler");
         }
 
 
@@ -155,6 +156,7 @@ namespace BlogWeb.PL.Controllers
 
             return View(_blog);
         }
+       
         public IActionResult BlogDetail(int id)
         {
             int userId = Convert.ToInt16(GetCookie("userId"));
@@ -209,7 +211,7 @@ namespace BlogWeb.PL.Controllers
 
                 TempData["EklemeSonuc"] = 1;
                 blog.TAdd(bl);
-                return RedirectToAction("Blogs");
+                return Redirect("/Makalelerim");
             }
 
             return View();
@@ -256,7 +258,7 @@ namespace BlogWeb.PL.Controllers
                 return NotFound();
             }
             blog.TDelete(x);
-            return RedirectToAction("Blogs");
+            return Redirect("/Makalelerim");
         }
         public IActionResult ApproveBlogList()
         {
@@ -283,7 +285,7 @@ namespace BlogWeb.PL.Controllers
             x.Status = true;
             blog.TUpdate(x);
             TempData["OnaylamaSonuc"] = 1;
-            return RedirectToAction("ApproveBlogList");
+            return Redirect("/MakaleOnayListesi");
 
         }
         #endregion
@@ -319,7 +321,8 @@ namespace BlogWeb.PL.Controllers
             {
                 aboutUs.TAdd(ct);
                 TempData["EklemeSonuc"] = 1;
-                return RedirectToAction("AboutUs");
+                return Redirect("/YoneticiHakkimizda");
+
             }
             return View();
         }
@@ -349,7 +352,7 @@ namespace BlogWeb.PL.Controllers
                 x.Text = ct.Text;
                 aboutUs.TUpdate(x);
                 TempData["GüncellemeSonuc"] = 1;
-                return RedirectToAction("AboutUs");
+                return Redirect("/YoneticiHakkimizda");
             }
             return View();
         }
@@ -365,7 +368,7 @@ namespace BlogWeb.PL.Controllers
                 return NotFound();
             }
             aboutUs.TDelete(x);
-            return RedirectToAction("AboutUs");
+            return Redirect("/YoneticiHakkimizda");
         }
         #endregion
 
@@ -401,7 +404,7 @@ namespace BlogWeb.PL.Controllers
             {
                 contact.TAdd(ct);
                 TempData["EklemeSonuc"] = 1;
-                return RedirectToAction("Contact");
+                return Redirect("/YoneticiIletisim");
             }
             return View();
         }
@@ -433,7 +436,7 @@ namespace BlogWeb.PL.Controllers
                 x.Phone = ct.Phone;
                 contact.TUpdate(x);
                 TempData["GüncellemeSonuc"] = 1;
-                return RedirectToAction("Contact");
+                return Redirect("/YoneticiIletisim");
             }
             return View();
         }
@@ -449,7 +452,7 @@ namespace BlogWeb.PL.Controllers
                 return NotFound();
             }
             contact.TDelete(x);
-            return RedirectToAction("Contact");
+            return Redirect("/YoneticiIletisim");
         }
 
 
@@ -488,7 +491,8 @@ namespace BlogWeb.PL.Controllers
             {
                 category.TAdd(ca);
                 TempData["EklemeSonuc"] = 1;
-                return RedirectToAction("Category");
+                return Redirect("/YoneticiKategori");
+
             }
             return View();
         }
@@ -504,7 +508,9 @@ namespace BlogWeb.PL.Controllers
                 return NotFound();
             }
             category.TDelete(x);
-            return RedirectToAction("Category");
+            return Redirect("/YoneticiKategori");
+
+            
         }
 
         public IActionResult GetCategory(int id)
@@ -535,7 +541,7 @@ namespace BlogWeb.PL.Controllers
                 x.CategoryId = cat.CategoryId;
                 category.TUpdate(x);
                 TempData["GüncellemeSonuc"] = 1;
-                return RedirectToAction("Category");
+                return Redirect("/YoneticiKategori");
             }
             return View();
         }
@@ -573,7 +579,7 @@ namespace BlogWeb.PL.Controllers
             {
                 subscriber.TAdd(sub);
                 TempData["EklemeSonuc"] = 1;
-                return RedirectToAction("AboutUs");
+                return Redirect("/AboneListesi");
             }
             return View();
         }
@@ -604,7 +610,7 @@ namespace BlogWeb.PL.Controllers
                 x.SubscriberMail = sub.SubscriberMail;
                 subscriber.TUpdate(x);
                 TempData["GüncellemeSonuc"] = 1;
-                return RedirectToAction("Subscriber");
+                return Redirect("/AboneListesi");
             }
             return View();
 
@@ -621,7 +627,7 @@ namespace BlogWeb.PL.Controllers
                 return NotFound();
             }
             subscriber.TDelete(x);
-            return RedirectToAction("Subscriber");
+            return Redirect("/AboneListesi");
         }
         #endregion
 

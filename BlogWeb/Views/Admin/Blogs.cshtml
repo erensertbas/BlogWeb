@@ -46,8 +46,8 @@
                 <td>@item.Date.ToShortDateString()</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                        <a class="btn btn-info" href="~/Admin/BlogDetail/@item.BlogId">Detay</a> &nbsp;
-                        <a class="btn btn-warning" href="~/Admin/GetBlog/@item.BlogId">Güncelle</a> &nbsp;
+                        <a class="btn btn-info" href="~/AdminMakaleDetay/@item.BlogId">Detay</a> &nbsp;
+                        <a class="btn btn-warning" href="~/MakaleDuzenle/@item.BlogId">Güncelle</a> &nbsp;
                         <a class="btn btn-danger" onclick="deneme(@item.BlogId)">Sil</a>
                     </div>
                 </td>
@@ -68,7 +68,7 @@
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    window.location.replace('/Admin/BlogDelete/' + id),
+                    window.location.replace('/MakaleSil/' + id),
                         swal("Poof! Makale Silindi!", {
                             icon: "success",
                         });
