@@ -23,7 +23,7 @@
                 </li>
                 <li><a><i class="ti-notepad"></i>@item.Date.ToShortDateString()</a></li>
                 <li>
-                    <a href="~/Home/HomeCategory/@item.CategoryId">
+                    <a href="~/MakaleKategori/@item.CategoryId">
                         <i class="ti-themify-favicon"></i>
                         @{
                          
@@ -51,7 +51,7 @@
                 <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Text))</p>
             }
 
-            <a class="button" href="~/Home/BlogDetail/@item.BlogId">Daha Fazla<i class="ti-arrow-right"></i></a>
+            <a class="button" href="~/MakaleDetay/@item.BlogId">Daha Fazla<i class="ti-arrow-right"></i></a>
         </div>
     </div>
 

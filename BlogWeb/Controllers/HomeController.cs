@@ -72,7 +72,7 @@ namespace BlogWeb.PL.Controllers
                 return View(result1);
             }
 
-            return RedirectToAction("Index");
+            return Redirect("/Anasayfa");
         }
 
         public IActionResult SubscriberAdd()
@@ -86,7 +86,7 @@ namespace BlogWeb.PL.Controllers
             {
                 subscriber.TAdd(sub);
                 TempData["EklemeSonuc"] = 1;
-                return RedirectToAction("Index");
+                return Redirect("/Anasayfa");
             }
             return View();
         }
@@ -207,7 +207,7 @@ namespace BlogWeb.PL.Controllers
 
                     SetCookie("userId", dataValue.UserId.ToString());
 
-                    return RedirectToAction("Index", "Home"); // admin ındex
+                    return Redirect("/Yonetici"); // admin ındex
                 }
                 else
                 {
@@ -221,7 +221,7 @@ namespace BlogWeb.PL.Controllers
                     await HttpContext.SignInAsync(claimsPrincipal);
                     HttpContext.Session.SetInt32("_UserToken", dataValue.UserId);
                     SetCookie("userId", dataValue.UserId.ToString());
-                    return RedirectToAction("Index", "Home"); // user ındex
+                    return Redirect("/Yazar"); // user ındex
                 }
 
             }
@@ -248,7 +248,7 @@ namespace BlogWeb.PL.Controllers
                 var a = await auth.CreateUserWithEmailAndPasswordAsync(Model.Email, Model.Password, Model.FirstName, true);
                 TempData["MailOnay"] = "Lütfen Mail Adresinizi Onaylayınız";
                 user.TAdd(Model);
-                return RedirectToAction("SignIn");
+                return Redirect("/GirisYap");
             }
             catch (Exception ex)
             {
@@ -266,7 +266,7 @@ namespace BlogWeb.PL.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("_UserToken");
-            return RedirectToAction("Index", "Home");
+            return Redirect("/Anasayfa");
         }
         public IActionResult ForgotMyPassword()
         {

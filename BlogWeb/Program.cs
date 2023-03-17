@@ -257,6 +257,43 @@ app.MapControllerRoute(
 
 #endregion
 
+#region UserController
+app.MapControllerRoute(
+    name: "Index",
+    pattern: "Yazar",
+   defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional });
+
+app.MapControllerRoute(
+    name: "Blogs",
+    pattern: "YazarMakalelerim",
+   defaults: new { controller = "User", action = "Blogs", id = UrlParameter.Optional });
+
+app.MapControllerRoute(
+    name: "BlogCreate",
+    pattern: "YazarMakaleOlustur",
+   defaults: new { controller = "User", action = "BlogCreate", id = UrlParameter.Optional });
+
+app.MapControllerRoute(
+    name: "BlogDetail",
+    pattern: "YazarMakaleDetay/{id}",
+   defaults: new { controller = "User", action = "BlogDetail" });
+
+app.MapControllerRoute(
+    name: "GetBlog",
+    pattern: "YazarMakaleDuzenle/{id}",
+   defaults: new { controller = "User", action = "GetBlog", id = UrlParameter.Optional });
+
+app.MapControllerRoute(
+    name: "BlogDelete",
+    pattern: "YazarMakaleSil/{id}",
+   defaults: new { controller = "User", action = "BlogDelete", id = UrlParameter.Optional });
+app.MapControllerRoute(
+    name: "Profil",
+    pattern: "YazarProfilim/{id}",
+   defaults: new { controller = "User", action = "Profil" });
+
+#endregion
+
 app.UseEndpoints(endpoints =>
 {
     app.MapControllerRoute(

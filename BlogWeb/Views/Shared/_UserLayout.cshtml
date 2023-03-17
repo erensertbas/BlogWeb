@@ -67,18 +67,18 @@
             </div>
         </div>
         <ul id="sidebar_menu">
-            <li class="mm-active" ><a href="~/Home/Index">Anasayfa</a></li>
+            <li class="mm-active" ><a href="~/Anasayfa">Anasayfa</a></li>
            
             
-            <li class="mm-active" ><a href="~/User/Index">Panel</a></li>
+            <li class="mm-active" ><a href="~/Yazar">Panel</a></li>
 
             <li class="mm-active">
                 <a class="has-arrow" aria-expanded="false">
                     <span>Makaleler</span>
                 </a>
                 <ul>
-                    <li><a href="~/User/Blogs">Makalelerim</a></li>
-                    <li><a href="~/User/BlogCreate">Makale Yayınla</a></li>
+                    <li><a href="~/YazarMakalelerim">Makalelerim</a></li>
+                    <li><a href="~/YazarMakaleOlustur">Makale Yayınla</a></li>
                 </ul>
 
             </li>
@@ -104,11 +104,11 @@
                                 <img src="~/images/user1.png" alt="#">
                                 <div class="profile_info_iner">
                                     <div class="profile_author_name">
-                                        <p>@ViewBag.user.FirstName @ViewBag.user.LastName </p>
+                                        <p>Yazar</p>
                                     </div>
                                     <div class="profile_info_details">
-                                        <a href="~/User/Profil/@ViewBag.userId">Profilim </a>
-                                        <a href="~/User/LogOut">Çıkış Yap</a>
+                                        <a href="~/YazarProfilim/@ViewBag.userId">Profilim </a>
+                                        <a href="~/CikisYap">Çıkış Yap</a>
                                     </div>
                                 </div>
                             </div>

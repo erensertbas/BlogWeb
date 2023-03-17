@@ -54,12 +54,11 @@
                 <div class="widget-wrap">
                     <div class="single-sidebar-widget popular-post-widget">
                         <h4 class="single-sidebar-widget__title">Son Makaleler</h4>
-                        <@await Component.InvokeAsync("RecentArticlesGet")
+                        @await Component.InvokeAsync("RecentArticlesGet")
                     </div>
-
-
+                    <!--Category-->
                     @await Component.InvokeAsync("CategoryGet")
-
+                  
                 </div>
             </div>
         </div>

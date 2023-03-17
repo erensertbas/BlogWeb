@@ -107,7 +107,8 @@ namespace BlogWeb.PL.Controllers
 
                 TempData["EklemeSonuc"] = 1;
                 blog.TAdd(bl);
-                return RedirectToAction("Blogs");
+                return Redirect("/YazarMakalelerim");
+
             }
 
             return View();
@@ -181,9 +182,10 @@ namespace BlogWeb.PL.Controllers
 
             //        blog.TUpdate(x);
             //        TempData["GüncellemeSonuc"] = 1;
-            //        return RedirectToAction("Blogs");
+            //     return Redirect("/YazarMakalelerim");
+
             //    }
-                return View();
+            return View();
             }
        
             public IActionResult BlogDelete(int id) // view yok
@@ -198,7 +200,7 @@ namespace BlogWeb.PL.Controllers
                     return NotFound();
                 }
                 blog.TDelete(x);
-                return RedirectToAction("Blogs");
+            return Redirect("/YazarMakalelerim");
             }
 
             public IActionResult Profil(int id)
@@ -240,13 +242,13 @@ namespace BlogWeb.PL.Controllers
                 }
                 return View();
             }
-            public async Task<IActionResult> LogOut()
-            {
-                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                Response.Cookies.Delete("userId");
+            //public async Task<IActionResult> LogOut()
+            //{
+            //    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            //    Response.Cookies.Delete("userId");
 
-                return RedirectToAction("Index", "Home");
-            }
+            //    return Redirect("/Anasayfa");
+            //}
 
         }
     }

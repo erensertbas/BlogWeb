@@ -4,7 +4,13 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-
+<style>
+    @@media (max-width: 991px) {
+        h3 {
+            font-size:21px;
+        }
+    }
+</style>
 <div class="row">
     <h3>Hoşgeldin @ViewBag.user.FirstName</h3>
     <div class="col-md-4">

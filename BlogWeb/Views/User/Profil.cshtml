@@ -15,7 +15,20 @@
         <strong>Güncelleme Başarılı!</strong> <p>Kullanıcı Başarılı Bir Şekilde Güncellendi </p>
     </div>
 }
-<h1>@ViewBag.user.FirstName Profil</h1>
+<style>
+    @@media (max-width:991px){
+    .font{
+        text-decoration-line:underline;
+        text-align:center;
+    }
+    }
+
+    @@media (max-width:991px){ .btnn {
+       margin-left:60px;
+    }
+    }
+</style>
+<h1 class="font">Profil Bilgileri</h1>
 
 <form method="post" asp-action="ProfilEdit" asp-controller="User">
     <div class="p-3 mt-4">
@@ -40,11 +53,11 @@
             </div>
             <div class="mb-3">
                 <input asp-for="Password" id="password" value="@ViewBag.user.Password" type="password" class="form-control" />
-                <label>Şifreyi Göster</label> <i class="fa fa-eye-slash" onclick="SifreGoster()"></i>
+                <label style="margin-top:15px;">Şifreyi Göster</label> <i style="margin-top:15px"; class="fa fa-eye-slash" onclick="SifreGoster()"></i>
                 <span asp-validation-for="Password" class="text-danger"></span>
 
             </div>
-            <button type="submit" class="btn btn-warning">Profil Güncelle</button>
+            <button type="submit" class="btn btn-warning btnn ">Profil Güncelle</button>
 
         </div>
 
