@@ -12,7 +12,6 @@ namespace BlogWeb.PL.ViewComponents
         {
 
             //subscriber.TAdd(sub);
-         
             return View();
         }
     }

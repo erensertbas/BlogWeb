@@ -36,8 +36,8 @@
                     <div class="col-md-6">
                         <div class="single-recent-blog-post card-view">
                             <div class="thumb">
-                                <img class="card-img rounded-0" src="~/images/@item.ImageUrl">
-                                <ul class="thumb-info">
+                                <img class="card-img rounded-0" src="~/images/@item.ImageUrl" style="max-height:200px;">
+                                <ul class="thumb-info" style="max-height:300px;">
                                     <li>
                                         <a>
                                             <i class="ti-user"></i>
@@ -67,9 +67,10 @@
                                         @item.BlogTitle
                                     </h3>
                                 </a>
+
                                 @if (item.Text.Length > 200)
                                 {
-                                    @* @(item.Text.Substring(0, 247) + "..." + "  ")*@
+
                                     <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text.Substring(0, 197) + " ..." + "  "))</p>
                                 }
                                 else

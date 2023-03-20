@@ -50,12 +50,12 @@
                                     {
                                         if (User.IsInRole("Admin"))
                                         {
-                                            <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Admin">Panele Git</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="/Yonetici">Panele Git</a></li>
 
                                         }
                                         if (User.IsInRole("User"))
                                         {
-                                            <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="User">Panele Git</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="/Yazar">Panele Git</a></li>
                                         }
                                     }
                                     else

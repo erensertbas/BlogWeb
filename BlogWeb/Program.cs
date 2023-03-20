@@ -31,7 +31,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     x.Cookie.Name = "NetCoreMvc.Auth";
     x.AccessDeniedPath = "/User/Index";
     x.LoginPath = "/Login/SignIn";
-
+  
     
 });
 
