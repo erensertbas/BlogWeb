@@ -155,36 +155,42 @@ namespace BlogWeb.PL.Controllers
         [HttpPost]
         public IActionResult BlogEdit(BlogEkle bg) //view yok
         {
-            //int userId = Convert.ToInt16(GetCookie("userId"));
-            //var degerler = user.TGet(userId);
-            //ViewBag.user = degerler;
+            int userId = Convert.ToInt16(GetCookie("userId"));
+            var degerler = user.TGet(userId);
+            ViewBag.user = degerler;
 
-            //var x = blog.TGet(bg.UserId);
             //Blog bl = new Blog();
-            //bl.UserId = userId;
-            //if (ModelState.IsValid)
+            var blogKontrol = c.Blog.Where(x => x.UserId == userId).FirstOrDefault();
+
+            //if (b.ImageUrl==null)
             //{
-            //    if (bg.ImageUrl != null)
-            //    {
-            //        var extension = Path.GetExtension(bg.ImageUrl.FileName);
-            //        var newImageName = Guid.NewGuid() + extension;
-            //        var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", newImageName);
-            //        var stream = new FileStream(location, FileMode.Create);
-            //        bg.ImageUrl.CopyTo(stream);
-            //        bl.ImageUrl = newImageName;
+            //    b.ImageUrl = blogKontrol.ImageUrl;
+            //}
 
-            //        x.Text = bg.Text;
-            //        x.BlogTitle = bg.BlogTitle;
-            //        x.Status = false;
-            //        x.Date = bg.Date;
-            //        x._Category = bg._Category;
-            //        x.CategoryId = bg.CategoryId;
 
-            //        blog.TUpdate(x);
-            //        TempData["GüncellemeSonuc"] = 1;
-            //     return Redirect("/YazarMakalelerim");
+            if (ModelState.IsValid)
+            {
+                if (bg.ImageUrl != null)
+                {
+                    var extension = Path.GetExtension(bg.ImageUrl.FileName);
+                    var newImageName = Guid.NewGuid() + extension;
+                    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", newImageName);
+                    var stream = new FileStream(location, FileMode.Create);
+                    bg.ImageUrl.CopyTo(stream);
+                    blogKontrol.ImageUrl = newImageName;
+                }
 
-            //    }
+                blogKontrol.BlogTitle = bg.BlogTitle;
+                blogKontrol.Text = bg.Text;
+                blogKontrol.Status = bg.Status;
+                blogKontrol.Date = bg.Date;
+                blogKontrol.UserId = userId;
+                blogKontrol.CategoryId = bg.CategoryId;
+
+                TempData["GuncellemeSonuc"] = 1;
+                blog.TUpdate(blogKontrol);
+                return Redirect("/Makalelerim");
+            }
             return View();
             }
        
