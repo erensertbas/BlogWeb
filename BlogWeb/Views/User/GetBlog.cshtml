@@ -37,43 +37,23 @@
                 <span asp-validation-for="Text" class="text-danger"></span> <br />
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Makale Kapak Resmi Seçiniz</label>
-                        <input type="file" name="ImageUrl" asp-for="ImageUrl" value="@ViewBag.getBlog.ImageUrl" accept="image/*" class="form-control" />
-                    </div>
-                </div>
-                <div class="col-md-4">
 
+                <input asp-for="ImageUrl" hidden />
+                <input asp-for="Date" hidden />
 
+                <div class="col-md-4">
                     <label class="control-label">Makale Kategori Seçiniz</label>
                     <select asp-for="CategoryId" asp-items="@ViewBag.v" class="form-select">
                         <option disabled selected value="@ViewBag.getCategory.CategoryName"></option>
                     </select>
                     <span asp-validation-for="CategoryId" class="text-danger"></span>
-
-
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Makale Tarih Giriniz</label>
-                        <input asp-for="Date" value="@ViewBag.getBlog.Date" class="form-control" />
-                        <span asp-validation-for="Date" class="text-danger"></span>
-                    </div>
-                </div>
-          @*      <div class="col-md-4">
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            Durum <input class="form-check-input" asp-for="Status" />
-
-                        </label>
-                    </div>
-                </div>*@
 
             </div>
+            <br />
 
             <div class="form-group">
-                <input type="submit" value="Paylaş" class="btn btn-success" />
+                <input type="submit" value="Güncelle" class="btn btn-success" />
             </div>
         </form>
     </div>

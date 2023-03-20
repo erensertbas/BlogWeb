@@ -19,58 +19,58 @@
     </div>
 }
 
+<div class="table-responsive-lg">
+    <table class="table table-hover">
 
-<table class="table table-hover">
-
-    <thead>
-        <tr>
-            <th scope="col">Kapak Resmi</th>
-            <th scope="col">Başlık</th>
-            <th scope="col">Kategori</th>
-            <th scope="col">Tarih</th>
-            <th scope="col">Durum</th>
-            <th scope="col">İşlem</th>
-        </tr>
-    </thead>
-    @foreach (var item in Model)
-    {
-
-        <tbody>
-            <tr class="table-secondary">
-                <th scope="row"><img class="card-img-top" style="max-height:100px; max-width:100px;" src="~/images/@item.ImageUrl"></th>
-                <td>@item.BlogTitle</td>
-               
-                <td>
-                 @*   @{
-                        Context c = new Context();
-                        var result = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();
-                    }
-                    @result.CategoryName*@
-
-                </td>
-                <td>@item.Date.ToShortDateString()</td>
-                <td>
-                    @if (item.Status == false)
-                    {
-                        <p> Onay Bekliyor</p>
-                    }
-                    else
-                    {
-                        <p> Onaylandı</p>
-                    }
-                </td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                        <a class="btn btn-info" href="~/Admin/BlogDetail/@item.BlogId">Detay</a> &nbsp;
-                        <a class="btn btn-warning" onclick="onayla(@item.BlogId)">Onayla</a>
-                         
-                    </div>
-                </td>
+        <thead>
+            <tr>
+                <th scope="col">Kapak Resmi</th>
+                <th scope="col">Başlık</th>
+                <th scope="col">Kategori</th>
+                <th scope="col">Tarih</th>
+                <th scope="col">Durum</th>
+                <th scope="col">İşlem</th>
             </tr>
-        </tbody>
-    }
-</table>
+        </thead>
+        @foreach (var item in Model)
+        {
 
+            <tbody>
+                <tr class="table-secondary">
+                    <th scope="row"><img class="card-img-top" style="max-height:100px; max-width:100px;" src="~/images/@item.ImageUrl"></th>
+                    <td>@item.BlogTitle</td>
+
+                    <td>
+                        @{
+                            Context c = new Context();
+                            var result = c.Category.Where(x => x.CategoryId == @item.CategoryId).FirstOrDefault();
+                        }
+                        @result.CategoryName
+
+                    </td>
+                    <td>@item.Date.ToShortDateString()</td>
+                    <td>
+                        @if (item.Status == false)
+                        {
+                            <p> Onay Bekliyor</p>
+                        }
+                        else
+                        {
+                            <p> Onaylandı</p>
+                        }
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <a class="btn btn-info" href="~/Admin/BlogDetail/@item.BlogId">Detay</a> &nbsp;
+                            <a class="btn btn-warning" onclick="onayla(@item.BlogId)">Onayla</a>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
 
 <script>
     function deneme(id) {
@@ -91,7 +91,7 @@
             });
     }
 
-     function onayla(id) {
+    function onayla(id) {
         swal({
             title: "Emin misiniz?",
             text: "Makaleyi yayınını onaylamak için emin misiniz?",
