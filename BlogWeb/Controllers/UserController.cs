@@ -153,32 +153,26 @@ namespace BlogWeb.PL.Controllers
             return View(x);
         }
         [HttpPost]
-        public IActionResult BlogEdit(BlogEkle bg) //view yok
+        public IActionResult BlogEdit(BlogUpdate bg) //view yok
         {
             int userId = Convert.ToInt16(GetCookie("userId"));
             var degerler = user.TGet(userId);
             ViewBag.user = degerler;
 
-            //Blog bl = new Blog();
-            var blogKontrol = c.Blog.Where(x => x.UserId == userId).FirstOrDefault();
-
-            //if (b.ImageUrl==null)
-            //{
-            //    b.ImageUrl = blogKontrol.ImageUrl;
-            //}
-
+            var blogKontrol = c.Blog.Where(x => x.BlogId == bg.BlogId).FirstOrDefault();
+            bg.UserId = userId;
 
             if (ModelState.IsValid)
             {
-                if (bg.ImageUrl != null)
-                {
-                    var extension = Path.GetExtension(bg.ImageUrl.FileName);
-                    var newImageName = Guid.NewGuid() + extension;
-                    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", newImageName);
-                    var stream = new FileStream(location, FileMode.Create);
-                    bg.ImageUrl.CopyTo(stream);
-                    blogKontrol.ImageUrl = newImageName;
-                }
+                //if (bg.ImageUrl != null)
+                //{
+                //    var extension = Path.GetExtension(bg.ImageUrl.FileName);
+                //    var newImageName = Guid.NewGuid() + extension;
+                //    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", newImageName);
+                //    var stream = new FileStream(location, FileMode.Create);
+                //    bg.ImageUrl.CopyTo(stream);
+                //    blogKontrol.ImageUrl = newImageName;
+                //}
 
                 blogKontrol.BlogTitle = bg.BlogTitle;
                 blogKontrol.Text = bg.Text;
@@ -186,6 +180,7 @@ namespace BlogWeb.PL.Controllers
                 blogKontrol.Date = bg.Date;
                 blogKontrol.UserId = userId;
                 blogKontrol.CategoryId = bg.CategoryId;
+                blogKontrol.ImageUrl = bg.ImageUrl;
 
                 TempData["GuncellemeSonuc"] = 1;
                 blog.TUpdate(blogKontrol);

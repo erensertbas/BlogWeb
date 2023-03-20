@@ -238,45 +238,29 @@ namespace BlogWeb.PL.Controllers
             return View(x);
         }
         [HttpPost]
-        public IActionResult BlogEdit(BlogEkle b) //view yok
+        public IActionResult BlogEdit(BlogUpdate bg) //view yok
         {
             int userId = Convert.ToInt16(GetCookie("userId"));
             var degerler = user.TGet(userId);
             ViewBag.user = degerler;
 
-            //Blog bl = new Blog();
-            var blogKontrol = context.Blog.Where(x => x.UserId == userId).FirstOrDefault();
-
-            //if (b.ImageUrl==null)
-            //{
-            //    b.ImageUrl = blogKontrol.ImageUrl;
-            //}
-
+            var blogKontrol = context.Blog.Where(x => x.BlogId == bg.BlogId).FirstOrDefault();
+            bg.UserId = userId;
 
             if (ModelState.IsValid)
             {
-                if (b.ImageUrl != null)
-                {
-                    var extension = Path.GetExtension(b.ImageUrl.FileName);
-                    var newImageName = Guid.NewGuid() + extension;
-                    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", newImageName);
-                    var stream = new FileStream(location, FileMode.Create);
-                    b.ImageUrl.CopyTo(stream);
-                    blogKontrol.ImageUrl = newImageName;
-                }
-
-                blogKontrol.BlogTitle = b.BlogTitle;
-                blogKontrol.Text = b.Text;
-                blogKontrol.Status = b.Status;
-                blogKontrol.Date = b.Date;
+                blogKontrol.BlogTitle = bg.BlogTitle;
+                blogKontrol.Text = bg.Text;
+                blogKontrol.Status = bg.Status;
+                blogKontrol.Date = bg.Date;
                 blogKontrol.UserId = userId;
-                blogKontrol.CategoryId = b.CategoryId;
+                blogKontrol.CategoryId = bg.CategoryId;
+                blogKontrol.ImageUrl = bg.ImageUrl;
 
                 TempData["GuncellemeSonuc"] = 1;
                 blog.TUpdate(blogKontrol);
                 return Redirect("/Makalelerim");
             }
-
             return View();
         }
         public IActionResult BlogDelete(int id) // view yok
