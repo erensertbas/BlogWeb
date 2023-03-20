@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria&family=Open+Sans:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
 
 
     <style>
@@ -20,6 +21,8 @@
             font-family: 'Alexandria', sans-serif;
         }
     </style>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/>
+
 
 
     <link rel="stylesheet" href="~/css/bootstrap.css" />  @*eklendi*@
@@ -61,16 +64,16 @@
 
     <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
         <div class="logo d-flex justify-content-between">
-             <a href=""><img src="~/images/logo1.png" alt="" style="max-height:100px;"></a>
+            <a href=""><img src="~/images/logo1.png" alt="" style="max-height:100px;"></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
             </div>
         </div>
         <ul id="sidebar_menu">
-            <li class="mm-active" ><a href="~/Anasayfa">Anasayfa</a></li>
-           
-            
-            <li class="mm-active" ><a href="~/Yazar">Panel</a></li>
+            <li class="mm-active"><a href="~/Anasayfa">Anasayfa</a></li>
+
+
+            <li class="mm-active"><a href="~/Yazar">Panel</a></li>
 
             <li class="mm-active">
                 <a class="has-arrow" aria-expanded="false">
@@ -129,6 +132,13 @@
             <i class="ti-angle-up"></i>
         </a>
     </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js">  </script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"> </script>
+
 
     <script src="~/Admin/js/jquery1-3.4.1.min.js"></script>
 

@@ -16,51 +16,60 @@
         <strong>Ekleme Başarılı!</strong> <p> Makale Başarılı Bir şekilde Yayınlandı!</p>
     </div>
 }
+@*table table-hover*@
 
-<table class="table table-hover">
+<div class="table-responsive-lg">
 
-    <thead>
-        <tr>
-            <th scope="col">Kapak Resmi</th>
-            <th scope="col">Başlık</th>
-            <th scope="col">Tarih</th>
-            <th scope="col">Durum</th>
-            <th scope="col">İşlem</th>
-        </tr>
-    </thead>
-    @foreach (var item in Model)
-    {
+    <table class="table table-hover">
 
-        <tbody>
-            <tr class="table-secondary">
-                <td scope="row"><img class="card-img-top" style="max-height:100px; max-width:100px;" src="~/images/@item.ImageUrl"></td>
-                <td>@item.BlogTitle</td>
-
-
-                <td>@item.Date.ToShortDateString()</td>
-                @if (item.Status == false)
-                {
-                    <td>
-                        Onay Bekliyor
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        Yayında
-                    </td>
-                }
-                <td>
-                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                        <a class="btn btn-info" href="~/YazarMakaleDetay/@item.BlogId">Detay</a>  &nbsp;
-                        <a class="btn btn-warning" href="~/YazarMakaleDuzenle/@item.BlogId">Güncelle</a>  &nbsp;
-                        <a class="btn btn-danger" onclick="deneme(@item.BlogId)">Sil</a>
-                    </div>
-                </td>
+        <thead>
+            <tr>
+                <th scope="col">Kapak Resmi</th>
+                <th scope="col">Başlık</th>
+                <th scope="col">Tarih</th>
+                <th scope="col">Durum</th>
+                <th scope="col">İşlem</th>
             </tr>
-        </tbody>
-    }
-</table>
+        </thead>
+        @foreach (var item in Model)
+        {
+
+            <tbody>
+                <tr class="table-secondary">
+                    <td scope="row"><img class="card-img-top" style="max-height:100px; max-width:100px;" src="~/images/@item.ImageUrl"></td>
+                    <td>@item.BlogTitle</td>
+
+
+                    <td>@item.Date.ToShortDateString()</td>
+                    @if (item.Status == false)
+                    {
+                        <td>
+                            Onay Bekliyor
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Yayında
+                        </td>
+                    }
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <a class="btn btn-info" href="~/YazarMakaleDetay/@item.BlogId">Detay</a>  &nbsp;
+                            <a class="btn btn-warning" href="~/YazarMakaleDuzenle/@item.BlogId">Güncelle</a>  &nbsp;
+                            <a class="btn btn-danger" onclick="deneme(@item.BlogId)">Sil</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+
+
+</div>
+
+
+
 
 
 <script>
