@@ -5,12 +5,19 @@
 }
 @{
     int EklemeSonuc = Convert.ToInt16(TempData["EklemeSonuc"]);
+    int GuncellemeSonuc = Convert.ToInt16(TempData["GuncellemeSonuc"]);
 }
 
 @if (EklemeSonuc == 1)
 {
     <div class="alert alert-dismissible alert-success">
         <strong>Ekleme Başarılı!</strong> <p> Makale Başarılı Bir şekilde Yayınlandı!</p>
+    </div>
+}
+@if (GuncellemeSonuc == 1)
+{
+    <div class="alert alert-dismissible alert-success">
+        <strong>Güncelleme Başarılı!</strong> <p> Makale Başarılı Bir şekilde Güncellendi!</p>
     </div>
 }
 

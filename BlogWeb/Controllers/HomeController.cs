@@ -280,7 +280,7 @@ namespace BlogWeb.PL.Controllers
                 var email = user.TList().Where(x => x.Email == model.Email).Count();
                 if (email == 0)
                 {
-                    TempData["Message"] = "Bu emaile ait kullanıcı bulunamadı";
+                    TempData["Message"] = "Mail adresinizi lütfen kontrol ediniz.";
                 }
                 else
                 {
@@ -343,7 +343,7 @@ namespace BlogWeb.PL.Controllers
                     }
                     else
                     {
-                        TempData["Message"] = "Mail adresiniz uyuşmuyor kontrol ediniz.";
+                        TempData["Message"] = "Mail adresinizi lütfen kontrol ediniz.";
                     }
                 }
             }
@@ -351,7 +351,7 @@ namespace BlogWeb.PL.Controllers
             {
                 TempData["Message"] = "Lütfen email adresinizi giriniz.";
             }
-            return View();
+            return Redirect("/SifremiUnuttum");
         }
         #endregion
 

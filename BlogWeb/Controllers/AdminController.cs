@@ -222,6 +222,14 @@ namespace BlogWeb.PL.Controllers
             var degerler = user.TGet(userId);
             ViewBag.user = degerler;
 
+            List<SelectListItem> values = (from y in context.Category.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text = y.CategoryName,
+                                               Value = y.CategoryId.ToString(),
+                                           }).ToList();
+            ViewBag.v = values;
+
             var x = blog.TGet(id);
             if (id == null || id == 0)
             {
@@ -230,20 +238,45 @@ namespace BlogWeb.PL.Controllers
             return View(x);
         }
         [HttpPost]
-        public IActionResult BlogEdit(Blog bg) //view yok
+        public IActionResult BlogEdit(BlogEkle b) //view yok
         {
             int userId = Convert.ToInt16(GetCookie("userId"));
             var degerler = user.TGet(userId);
             ViewBag.user = degerler;
 
-            var x = blog.TGet(bg.BlogId);
-           
-            //if (ModelState.IsValid)
+            //Blog bl = new Blog();
+            var blogKontrol = context.Blog.Where(x => x.UserId == userId).FirstOrDefault();
+
+            //if (b.ImageUrl==null)
             //{
-            //    x.Text = ct.Text;
-            //    aboutUs.TUpdate(x);
-            //    return RedirectToAction("AboutUs");
+            //    b.ImageUrl = blogKontrol.ImageUrl;
             //}
+
+
+            if (ModelState.IsValid)
+            {
+                if (b.ImageUrl != null)
+                {
+                    var extension = Path.GetExtension(b.ImageUrl.FileName);
+                    var newImageName = Guid.NewGuid() + extension;
+                    var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", newImageName);
+                    var stream = new FileStream(location, FileMode.Create);
+                    b.ImageUrl.CopyTo(stream);
+                    blogKontrol.ImageUrl = newImageName;
+                }
+
+                blogKontrol.BlogTitle = b.BlogTitle;
+                blogKontrol.Text = b.Text;
+                blogKontrol.Status = b.Status;
+                blogKontrol.Date = b.Date;
+                blogKontrol.UserId = userId;
+                blogKontrol.CategoryId = b.CategoryId;
+
+                TempData["GuncellemeSonuc"] = 1;
+                blog.TUpdate(blogKontrol);
+                return Redirect("/Makalelerim");
+            }
+
             return View();
         }
         public IActionResult BlogDelete(int id) // view yok
