@@ -584,37 +584,37 @@ namespace BlogWeb.PL.Controllers
             return View();
         }
 
-        public IActionResult GetSubscriber(int id)
-        {
-            int userId = Convert.ToInt16(GetCookie("userId"));
-            var degerler = user.TGet(userId);
-            ViewBag.user = degerler;
+        //public IActionResult GetSubscriber(int id)
+        //{
+        //    int userId = Convert.ToInt16(GetCookie("userId"));
+        //    var degerler = user.TGet(userId);
+        //    ViewBag.user = degerler;
 
-            var x = subscriber.TGet(id);
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            return View(x);
-        }
-        [HttpPost]
-        public IActionResult SubscriberEdit(Subscriber sub)
-        {
-            int userId = Convert.ToInt16(GetCookie("userId"));
-            var degerler = user.TGet(userId);
-            ViewBag.user = degerler;
+        //    var x = subscriber.TGet(id);
+        //    if (id == null || id == 0)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(x);
+        //}
+        //[HttpPost]
+        //public IActionResult SubscriberEdit(Subscriber sub)
+        //{
+        //    int userId = Convert.ToInt16(GetCookie("userId"));
+        //    var degerler = user.TGet(userId);
+        //    ViewBag.user = degerler;
 
-            var x = subscriber.TGet(sub.Id);
-            if (ModelState.IsValid)
-            {
-                x.SubscriberMail = sub.SubscriberMail;
-                subscriber.TUpdate(x);
-                TempData["GüncellemeSonuc"] = 1;
-                return Redirect("/AboneListesi");
-            }
-            return View();
+        //    var x = subscriber.TGet(sub.Id);
+        //    if (ModelState.IsValid)
+        //    {
+        //        x.SubscriberMail = sub.SubscriberMail;
+        //        subscriber.TUpdate(x);
+        //        TempData["GüncellemeSonuc"] = 1;
+        //        return Redirect("/AboneListesi");
+        //    }
+        //    return View();
 
-        }
+        //}
         public IActionResult SubscriberDelete(int id)
         {
             int userId = Convert.ToInt16(GetCookie("userId"));
