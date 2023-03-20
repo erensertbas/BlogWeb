@@ -31,6 +31,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     x.Cookie.Name = "NetCoreMvc.Auth";
     x.AccessDeniedPath = "/User/Index";
     x.LoginPath = "/Login/SignIn";
+
+    
 });
 
 //builder.Services.AddSession(options =>
@@ -61,7 +63,7 @@ app.MapDefaultControllerRoute();
 app.UseRouting();
 app.UseSession();  // burasý
 app.UseAuthentication();// eklendi 
-
+app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1","?code={0}");
 
 app.UseAuthorization();
 
